@@ -23,7 +23,7 @@ public class StableFrame extends JFrame
 
     public StableFrame() {
         super("MyStable");
-        setMinimumSize(new Dimension(400, 400));
+        setMinimumSize(new Dimension(200, 200));
 
         mainFrame = this;
 
@@ -203,12 +203,8 @@ public class StableFrame extends JFrame
         return tabbedPane;
     }
 
-
     private JPanel addClientAndHorsePanel(){
-        JPanel panel = new JPanel();
-        panel.add(new JTextArea("Main page")).setFont(new Font("Verdana", Font.PLAIN, 24));
-
-        return panel;
+        return new ClientAndHorsePanel();
     }
 
     public static void main(String args[])
