@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import net.miginfocom.swing.MigLayout;
 
@@ -18,22 +19,31 @@ import net.miginfocom.swing.MigLayout;
 public class StableFrame extends JFrame
 
 {
-    public StableFrame()
-    {
+    JFrame mainFrame;
+
+    public StableFrame() {
         super("MyStable");
+        setMinimumSize(new Dimension(400, 400));
+
+        mainFrame = this;
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        setLayout(new MigLayout("nogrid, debug"));
+        //setLayout(new MigLayout("nogrid, debug"));
+        setLayout(new MigLayout("wrap"));
 
-        JMenuBar jMenuBar = new JMenuBar();
-        JMenu jMenu = new JMenu("Menu");
-        JMenuItem jMenuItem = new JMenuItem("Test");
-        jMenuBar.add(jMenu);
-        jMenu.add(jMenuItem);
-        this.add(jMenuBar);
+        //add menubar to the frame
+        setJMenuBar(new MainMenu());
+        setVisible(true);
+
+        add(addClientAndHorsePanel());
+        pack();
+        setLocationRelativeTo(null);
+    }
 
 
+
+     private void createTest(){
 
         String cc = "";
         add(createButton(null), cc);
@@ -191,6 +201,20 @@ public class StableFrame extends JFrame
         tabbedPane.addTab("tab1", new JLabel("tab1"));
         tabbedPane.addTab("tab2", new JLabel("tab2"));
         return tabbedPane;
+    }
+
+
+    private JPanel addClientAndHorsePanel(){
+        JPanel panel = new JPanel();
+        panel.add(new JTextArea("Test1"));
+        panel.add(new JTextArea("Test2"));
+        panel.add(new JTextArea("Test3"));
+        panel.add(new JTextArea("Test4"));
+        panel.add(new JTextArea("Test5"));
+        panel.add(new JTextArea("Test6"));
+        panel.add(new JTextArea("Test7"));
+
+        return panel;
     }
 
     public static void main(String args[])
