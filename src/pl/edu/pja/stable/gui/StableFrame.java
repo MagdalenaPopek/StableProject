@@ -206,13 +206,7 @@ public class StableFrame extends JFrame
 
     private JPanel addClientAndHorsePanel(){
         JPanel panel = new JPanel();
-        panel.add(new JTextArea("Test1"));
-        panel.add(new JTextArea("Test2"));
-        panel.add(new JTextArea("Test3"));
-        panel.add(new JTextArea("Test4"));
-        panel.add(new JTextArea("Test5"));
-        panel.add(new JTextArea("Test6"));
-        panel.add(new JTextArea("Test7"));
+        panel.add(new JTextArea("Main page")).setFont(new Font("Verdana", Font.PLAIN, 24));
 
         return panel;
     }

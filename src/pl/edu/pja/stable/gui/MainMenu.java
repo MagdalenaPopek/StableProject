@@ -21,9 +21,21 @@ public class MainMenu extends JMenuBar{
         final JMenu aboutMenu = new JMenu("About");
 
         //create menu items
-        JMenuItem newMenuItem = new JMenuItem("New");
-        newMenuItem.setMnemonic(KeyEvent.VK_N);
-        newMenuItem.setActionCommand("New");
+        JMenu newMenu = new JMenu("New");
+        newMenu.setMnemonic(KeyEvent.VK_N);
+        //newMenu.setActionCommand("New");
+
+        JMenuItem existingUserMI = new JMenuItem("Existing user");
+        JMenu newUserMI = new JMenu("New user");
+        JMenuItem withHorseMI = new JMenuItem("With Horse");
+        newMenu.setActionCommand("?");
+        JMenuItem noHorseMI = new JMenuItem("Without Horse");
+        newMenu.setActionCommand("?");
+        newMenu.add(existingUserMI);
+        newMenu.add(newUserMI);
+        newUserMI.add(withHorseMI);
+        newUserMI.add(noHorseMI);
+
 
         JMenuItem openMenuItem = new JMenuItem("Open");
         openMenuItem.setActionCommand("Open");
@@ -45,7 +57,7 @@ public class MainMenu extends JMenuBar{
 
         MainMenu.MenuItemListener menuItemListener = new MainMenu.MenuItemListener();
 
-        newMenuItem.addActionListener(menuItemListener);
+        newMenu.addActionListener(menuItemListener);
         openMenuItem.addActionListener(menuItemListener);
         saveMenuItem.addActionListener(menuItemListener);
         exitMenuItem.addActionListener(menuItemListener);
@@ -67,7 +79,7 @@ public class MainMenu extends JMenuBar{
         });
 
         //add menu items to menus
-        fileMenu.add(newMenuItem);
+        fileMenu.add(newMenu);
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);
         fileMenu.addSeparator();
