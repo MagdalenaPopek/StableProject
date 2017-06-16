@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="miglayout-examples-5.1-20170615.220135-803">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/miglayout-examples-5.1-20170615.220135-803.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/miglayout-swing-5.1-20170615.220047-805.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/miglayout-examples-5.1-20170615.220135-803-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/miglayout-swing-5.1-20170615.220047-805-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/miglayout-examples-5.1-20170615.220135-803-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
