@@ -1,7 +1,9 @@
 package pl.edu.pja.stable.daoimpl.hibernate;
 
 import org.hibernate.Session;
+import pl.edu.pja.stable.dao.IClientDao;
 import pl.edu.pja.stable.dao.IEmployeeDao;
+import pl.edu.pja.stable.entity.Client;
 import pl.edu.pja.stable.entity.Employee;
 import pl.edu.pja.stable.managers.HibernateSessionManager;
 
@@ -12,59 +14,59 @@ import java.util.List;
 /**
  * Created by magdalena.popek on 2017-06-08.
  */
-public class HbnEmployeeDao implements IEmployeeDao{
+public class HbnClientDao implements IClientDao{
 
 
     Session session = HibernateSessionManager.getSession();
 
-    public HbnEmployeeDao() {}
+    public HbnClientDao(){}
 
-    public List <Employee> findByName(String name) {
+    public List <Client> findByName(String name) {
         Query query = session.createQuery("from Employee e where e.name like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
     }
 
     @Override
-    public List <Employee> findByString(String searchColumnName, String searchText) {
+    public List <Client> findByString(String searchColumnName, String searchText) {
         Query query = session.createQuery("from Employee e where e."+searchColumnName
                                                                                     +" like '"+searchText+"' ");
         return query.getResultList();
     }
 
     @Override
-    public List <Employee> findByDate(String searchColumnName, Date searchText) {
+    public List <Client> findByDate(String searchColumnName, Date searchText) {
         Query query = session.createQuery("from Employee e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
     }
 
     @Override
-    public List <Employee> findByInteger(String searchColumnName, Integer searchText) {
+    public List <Client> findByInteger(String searchColumnName, Integer searchText) {
         Query query = session.createQuery("from Employee e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
     }
 
     @Override
-    public List <Employee> findByBoolean(String searchColumnName, Boolean searchText) {
+    public List <Client> findByBoolean(String searchColumnName, Boolean searchText) {
         Query query = session.createQuery("from Employee e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
     }
 
     @Override
-    public List<Employee> getAll() {
-        return session.createQuery("from employee ", Employee.class).getResultList();
+    public List<Client> getAll() {
+        return session.createQuery("from client ", Client.class).getResultList();
     }
 
     @Override
-    public void addEntity(Employee entity) {
+    public void addEntity(Client entity) {
         session.saveOrUpdate(entity);
     }
 
     @Override
-    public void deleteEntity(Employee entity) {
+    public void deleteEntity(Client entity) {
 
     }
 }

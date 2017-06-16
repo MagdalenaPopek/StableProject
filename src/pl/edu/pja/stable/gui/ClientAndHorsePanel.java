@@ -1,13 +1,19 @@
 package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
+import pl.edu.pja.stable.entity.Client;
+import pl.edu.pja.stable.services.dao.ClientAndHorseService;
 
 import javax.swing.*;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by artur.popek on 2017-06-16.
  */
 public class ClientAndHorsePanel extends JPanel{
+
+    ClientAndHorseService service = new ClientAndHorseService();
 
 
     public ClientAndHorsePanel() {
@@ -48,6 +54,13 @@ public class ClientAndHorsePanel extends JPanel{
 
         JComboBox<String> clients = new JComboBox<>();
         clients.addItem("Nowy");
+
+//        List<Client> list = service.getAllClients();
+//
+//        for (Client client: list){
+//            clients.addItem(client.getName()+" "+client.getSurname());
+//        }
+
         clients.addItem("Klient 1");
         clients.addItem("Klient 2");
         clients.addItem("Klient 3");
