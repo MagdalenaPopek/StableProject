@@ -33,6 +33,6 @@
         <mapping class="pl.edu.pja.stable.entity.Stall"/>
         <mapping class="pl.edu.pja.stable.entity.Stable"/>
         <mapping class="pl.edu.pja.stable.entity.Horse"/>
-
+        <mapping class="pl.edu.pja.stable.entity.Instructor"/>
     </session-factory>
 </hibernate-configuration>

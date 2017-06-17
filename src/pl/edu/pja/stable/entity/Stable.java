@@ -40,7 +40,7 @@ public class Stable {
      * Dyrektor stajni
      */
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "director_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="employee_id_fk"))
+    @JoinColumn(name = "director_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="director_id_fk"))
     private Employee director;
 
     public String getStableName() {

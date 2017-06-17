@@ -8,7 +8,13 @@ import java.util.Set;
 @Table(name = "owner")
 public class Owner extends Person {
 
-
+    @Id
+    @GeneratedValue(generator = "owner_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="owner_id_seq", sequenceName="owner_id_seq", allocationSize = 1)
+    /**
+     * Numer (id) właściciela
+     */
+    private int id;
 
     @Column(name = "percentage")
     private double percentage = 10;

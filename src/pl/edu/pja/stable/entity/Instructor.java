@@ -9,18 +9,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "INSTRUCTOR")
-public class Instructor extends Person {
+public class Instructor {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(generator = "instructor_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="instructor_id_seq", sequenceName="instructor_id_seq", allocationSize = 1)
+    /**
+     * Numer (id) instruktora
+     */
     private int id;
 
     /**
      * Numer odznaki
      */
-    @Column(name = "odznaka_number")
-    private String odznakaNumber;
+    @Column(name = "ridingcard_number")
+    private String ridingCardNumber;
 
 
     /**
@@ -29,12 +32,43 @@ public class Instructor extends Person {
     @Column(name = "permission_number")
     private String permissionNumber;
 
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="employee_id_fk"))
     /**
-     * Premia od ilości jazd
+     * Referencja do pracowników
      */
-    @Column(name = "lesson_bonus")
-    private double lessonBonus = 10;
+    private Employee employee;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRidingCardNumber() {
+        return ridingCardNumber;
+    }
+
+    public void setRidingCardNumber(String ridingCardNumber) {
+        this.ridingCardNumber = ridingCardNumber;
+    }
+
+    public String getPermissionNumber() {
+        return permissionNumber;
+    }
+
+    public void setPermissionNumber(String permissionNumber) {
+        this.permissionNumber = permissionNumber;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }
 

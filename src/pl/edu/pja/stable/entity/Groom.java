@@ -9,35 +9,37 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "GROOM")
-public class Groom extends Employee {
+public class Groom {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(generator = "groom_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="groom_id_seq", sequenceName="groom_id_seq", allocationSize = 1)
+    /**
+     * Numer (id) stajennego
+     */
     private int id;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="employee_id_fk"))
     /**
-     * Premia od ilości wykonanych zadań
+     * Referencja do pracowników
      */
+    private Employee employee;
 
-    private double tasksBonus = 20;
-
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
 
-    public double getTasksBonus() {
-        return tasksBonus;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setTasksBonus(double tasksBonus) {
-        this.tasksBonus = tasksBonus;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
 

@@ -4,6 +4,7 @@ import pl.edu.pja.stable.dao.IClientDao;
 import pl.edu.pja.stable.dao.IEmployeeDao;
 import pl.edu.pja.stable.daoimpl.hibernate.HbnClientDao;
 import pl.edu.pja.stable.daoimpl.hibernate.HbnEmployeeDao;
+import pl.edu.pja.stable.daoimpl.hibernate.HbnGenDao;
 import pl.edu.pja.stable.entity.Client;
 import pl.edu.pja.stable.entity.Employee;
 
