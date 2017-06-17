@@ -2,6 +2,7 @@ package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pja.stable.entity.Client;
+import pl.edu.pja.stable.model.ClientComboBoxModel;
 import pl.edu.pja.stable.services.dao.ClientAndHorseService;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by artur.popek on 2017-06-16.
+ * Created by magdalena.popek on 2017-06-16.
  */
 public class ClientAndHorsePanel extends JPanel{
 
@@ -31,7 +32,6 @@ public class ClientAndHorsePanel extends JPanel{
         JTextField birthdateTextField = new JTextField(columnSize);
         JTextField phoneTextField = new JTextField(columnSize);
 
-
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
         this.setLayout(layout);
 
@@ -45,12 +45,16 @@ public class ClientAndHorsePanel extends JPanel{
                 if(e.getItem().equals("Nowy"))
                 {
                     nameTextField.setText("");
+                    nameTextField.setEnabled(true);
                     surnameTextField.setText("");
+                    surnameTextField.setEnabled(true);
                     return;
                 }
                 System.out.println(e.getItem().toString());
                 nameTextField.setText(e.getItem().toString().split(" ")[0]);
+                nameTextField.setEnabled(false);
                 surnameTextField.setText(e.getItem().toString().split(" ")[1]);
+                surnameTextField.setEnabled(false);
             }
         });
 
@@ -85,14 +89,18 @@ public class ClientAndHorsePanel extends JPanel{
 
     private JComboBox<String> chooseClientComboBox(){
 
-        JComboBox<String> clients = new JComboBox<>();
-        clients.addItem("Nowy");
+        //JComboBox<String> clients = new JComboBox<>();
+        //clients.addItem("Nowy");
 
         List<Client> list = service.getAllClients();
 
-        for (Client client: list){
-            clients.addItem(client.getName()+" "+client.getSurname());
-        }
+        ClientComboBoxModel clientComboBoxModel = new ClientComboBoxModel(list);
+
+        JComboBox<String> clients = new JComboBox<>(clientComboBoxModel);
+
+//        for (Client client: list){
+//            clients.addItem(client.getName()+" "+client.getSurname());
+//        }
 
         return clients;
     }

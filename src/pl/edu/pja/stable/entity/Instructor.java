@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "INSTRUCTOR")
-public class Instructor extends Employee {
+public class Instructor extends Person {
 
     @Id
     @GeneratedValue

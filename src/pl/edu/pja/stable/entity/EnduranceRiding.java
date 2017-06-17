@@ -1,5 +1,8 @@
 package pl.edu.pja.stable.entity;
 
+import pl.edu.pja.stable.entityutils.CompetitionLevel;
+import pl.edu.pja.stable.entityutils.CompetitionType;
+
 import java.util.Date;
 
 /**
