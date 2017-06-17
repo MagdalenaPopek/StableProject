@@ -5,6 +5,10 @@ import pl.edu.pja.stable.entity.Client;
 import pl.edu.pja.stable.services.dao.ClientAndHorseService;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,17 +23,38 @@ public class ClientAndHorsePanel extends JPanel{
     public ClientAndHorsePanel() {
         super();
 
-        MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
-        this.setLayout(layout);
-
-        this.add(new JLabel("Wybierz klienta"), "");
-        this.add(chooseClientComboBox(), "wrap 32");
+        JComboBox<String> chooseClientComboBox;
 
         int columnSize = 32;
         JTextField nameTextField = new JTextField(columnSize);
         JTextField surnameTextField = new JTextField(columnSize);
         JTextField birthdateTextField = new JTextField(columnSize);
         JTextField phoneTextField = new JTextField(columnSize);
+
+
+        MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
+        this.setLayout(layout);
+
+        this.add(new JLabel("Wybierz klienta"), "");
+        chooseClientComboBox = chooseClientComboBox();
+        this.add(chooseClientComboBox, "wrap 32");
+
+        chooseClientComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getItem().equals("Nowy"))
+                {
+                    nameTextField.setText("");
+                    surnameTextField.setText("");
+                    return;
+                }
+                System.out.println(e.getItem().toString());
+                nameTextField.setText(e.getItem().toString().split(" ")[0]);
+                surnameTextField.setText(e.getItem().toString().split(" ")[1]);
+            }
+        });
+
+
 
         this.add(new JLabel("Imię:"), "");
         this.add(nameTextField, "wrap");
@@ -43,6 +68,14 @@ public class ClientAndHorsePanel extends JPanel{
         JPanel buttonPanel = new JPanel();
         JButton jButtonCommit = new JButton("Zatwierdź");
         JButton jButtonExit = new JButton("Wyjdź");
+
+        jButtonExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
         buttonPanel.add(jButtonCommit);
         buttonPanel.add(jButtonExit);
 
@@ -55,15 +88,11 @@ public class ClientAndHorsePanel extends JPanel{
         JComboBox<String> clients = new JComboBox<>();
         clients.addItem("Nowy");
 
-//        List<Client> list = service.getAllClients();
-//
-//        for (Client client: list){
-//            clients.addItem(client.getName()+" "+client.getSurname());
-//        }
+        List<Client> list = service.getAllClients();
 
-        clients.addItem("Klient 1");
-        clients.addItem("Klient 2");
-        clients.addItem("Klient 3");
+        for (Client client: list){
+            clients.addItem(client.getName()+" "+client.getSurname());
+        }
 
         return clients;
     }

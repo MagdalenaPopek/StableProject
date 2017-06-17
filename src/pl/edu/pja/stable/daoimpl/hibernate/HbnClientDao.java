@@ -1,6 +1,7 @@
 package pl.edu.pja.stable.daoimpl.hibernate;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pl.edu.pja.stable.dao.IClientDao;
 import pl.edu.pja.stable.dao.IEmployeeDao;
 import pl.edu.pja.stable.entity.Client;
@@ -57,16 +58,23 @@ public class HbnClientDao implements IClientDao{
 
     @Override
     public List<Client> getAll() {
-        return session.createQuery("from client ", Client.class).getResultList();
+        return session.createQuery("from Client").list();
     }
 
     @Override
     public void addEntity(Client entity) {
+        Transaction t = session.beginTransaction();
         session.saveOrUpdate(entity);
+        t.commit();
     }
 
     @Override
     public void deleteEntity(Client entity) {
+
+    }
+
+    @Override
+    public void updateEntity(Client entity) {
 
     }
 }

@@ -22,5 +22,5 @@ public interface IEntityDao <T> {
 
     void deleteEntity(T entity);
 
-    //void updateEntity(T entity);
+    void updateEntity(T entity);
 }

@@ -1,6 +1,7 @@
 package pl.edu.pja.stable.daoimpl.hibernate;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pl.edu.pja.stable.dao.IEmployeeDao;
 import pl.edu.pja.stable.entity.Employee;
 import pl.edu.pja.stable.managers.HibernateSessionManager;
@@ -60,11 +61,18 @@ public class HbnEmployeeDao implements IEmployeeDao{
 
     @Override
     public void addEntity(Employee entity) {
+        Transaction t = session.beginTransaction();
         session.saveOrUpdate(entity);
+        t.commit();
     }
 
     @Override
     public void deleteEntity(Employee entity) {
+
+    }
+
+    @Override
+    public void updateEntity(Employee entity) {
 
     }
 }
