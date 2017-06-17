@@ -3,6 +3,7 @@ package pl.edu.pja.stable.entity;
 import pl.edu.pja.stable.entityutils.CompetitionLevel;
 import pl.edu.pja.stable.entityutils.CompetitionType;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -10,49 +11,33 @@ import java.util.Date;
  */
 public class EnduranceRiding extends Competition {
 
+    @Id
+    @GeneratedValue(generator = "endrid_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="endrid_id_seq", sequenceName="endrid_id_seq", allocationSize = 1)
+    /**
+     * Numer (id) rajdu długodystansowego
+     */
+    private int id;
+
+    @Column(name = "distance", nullable = false)
     /**
      * Distance
      */
     private double distance;
 
-    public EnduranceRiding(String compName, CompetitionLevel competitionLevel, Date date, double price, double distance) {
-        super(compName, competitionLevel, date, price);
-        this.distance = distance;
+    public int getId() {
+        return id;
     }
 
-    public EnduranceRiding(String compName, CompetitionLevel competitionLevel, Date date, int maxContestantNumber, double distance) {
-        super(compName, competitionLevel, date, maxContestantNumber);
-        this.distance = distance;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
-    }
-
-    @Override
-    public void setPrize(double prize) {
-        super.setPrize(prize + prize * distance / 12);
-    }
-
-    @Override
-    public String toString() {
-        if (getCompetitionType() == CompetitionType.Ogolnopolskie) {
-            return "Ogólnopolski rajd konny " +
-                    getCompName() +
-                    ", klasa " + getCompetitionLevel() +
-                    ", data " + getDate() +
-                    ", wpisowe " + getPrice() +
-                    ", liczba przeszkód " + distance;
-        } else
-            return "Regionalny rajd konny " +
-                    getCompName() +
-                    ", klasa " + getCompetitionLevel() +
-                    ", data " + getDate() +
-                    ", maksymalna liczba zawodników " + getMaxContestantNumber() +
-                    ", liczba przeszkód " + distance;
     }
 }

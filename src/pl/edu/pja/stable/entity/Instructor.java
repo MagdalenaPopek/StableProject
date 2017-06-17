@@ -36,38 +36,5 @@ public class Instructor extends Person {
     @Column(name = "lesson_bonus")
     private double lessonBonus = 10;
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getOdznakaNumber() {
-        return odznakaNumber;
-    }
-
-    public void setOdznakaNumber(String odznakaNumber) {
-        this.odznakaNumber = odznakaNumber;
-    }
-
-    public String getPermissionNumber() {
-        return permissionNumber;
-    }
-
-    public void setPermissionNumber(String permissionNumber) {
-        this.permissionNumber = permissionNumber;
-    }
-
-    public double getLessonBonus() {
-        return lessonBonus;
-    }
-
-    public void setLessonBonus(double lessonBonus) {
-        this.lessonBonus = lessonBonus;
-    }
 }
 

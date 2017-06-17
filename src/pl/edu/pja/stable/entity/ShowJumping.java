@@ -3,6 +3,7 @@ package pl.edu.pja.stable.entity;
 import pl.edu.pja.stable.entityutils.CompetitionLevel;
 import pl.edu.pja.stable.entityutils.CompetitionType;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -10,19 +11,26 @@ import java.util.Date;
  */
 public class ShowJumping extends Competition {
 
+    @Id
+    @GeneratedValue(generator = "jump_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="jump_id_seq", sequenceName="jump_id_seq", allocationSize = 1)
+    /**
+     * Numer (id) zawodów w skokach przez przeszkody
+     */
+    private int id;
+
+    @Column(name = "numberOfObstacles", nullable = false)
     /**
      * Liczba przeszkód
      */
     private int numberOfObstacles;
 
-    public ShowJumping(String compName, CompetitionLevel competitionLevel, Date date, double price, int numberOfObstacles) {
-        super(compName, competitionLevel, date, price);
-        this.numberOfObstacles = numberOfObstacles;
+    public int getId() {
+        return id;
     }
 
-    public ShowJumping(String compName, CompetitionLevel competitionLevel, Date date, int maxContestantNumber, int numberOfObstacles) {
-        super(compName, competitionLevel, date, maxContestantNumber);
-        this.numberOfObstacles = numberOfObstacles;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getNumberOfObstacles() {
@@ -31,28 +39,5 @@ public class ShowJumping extends Competition {
 
     public void setNumberOfObstacles(int numberOfObstacles) {
         this.numberOfObstacles = numberOfObstacles;
-    }
-
-    @Override
-    public void setPrize(double prize) {
-        super.setPrize(prize + prize * numberOfObstacles / 10);
-    }
-
-    @Override
-    public String toString() {
-        if (getCompetitionType() == CompetitionType.Ogolnopolskie) {
-            return "Zawody ogólnopolskie w skokach " +
-                    getCompName() +
-                    ", klasa " + getCompetitionLevel() +
-                    ", data " + getDate() +
-                    ", wpisowe " + getPrice() +
-                    ", liczba przeszkód " + numberOfObstacles;
-        } else
-            return "Zawody regionalne w skokach " +
-                    getCompName() +
-                    ", klasa " + getCompetitionLevel() +
-                    ", data " + getDate() +
-                    ", maksymalna liczba zawodników " + getMaxContestantNumber() +
-                    ", liczba przeszkód " + numberOfObstacles;
     }
 }

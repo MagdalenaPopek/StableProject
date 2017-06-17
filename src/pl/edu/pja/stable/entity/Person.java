@@ -15,18 +15,10 @@ import java.util.List;
 @MappedSuperclass
 public class Person {
 
-    /**
-     * Numer (id) użytkownika
-     */
-    @Id
-    @GeneratedValue(generator = "person_id_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name="person_id_seq", sequenceName="person_id_seq", allocationSize = 1)
-    private int id;
-
+    @Column(name = "name", nullable = false)
     /**
      * Imię
      */
-    @Column(name = "name", nullable = false)
     private String name;
 
     /**
@@ -46,15 +38,6 @@ public class Person {
      */
     @Column(name = "phone_number")
     private String phoneNumber;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
