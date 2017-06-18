@@ -1,4 +1,4 @@
-package pl.edu.pja.stable.managers;
+package pl.edu.pja.stable.daoimpl.hibernate;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

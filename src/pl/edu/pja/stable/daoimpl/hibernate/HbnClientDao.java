@@ -3,10 +3,7 @@ package pl.edu.pja.stable.daoimpl.hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pl.edu.pja.stable.dao.IClientDao;
-import pl.edu.pja.stable.dao.IEmployeeDao;
 import pl.edu.pja.stable.entity.Client;
-import pl.edu.pja.stable.entity.Employee;
-import pl.edu.pja.stable.managers.HibernateSessionManager;
 
 import javax.persistence.Query;
 import java.util.Date;
@@ -23,7 +20,7 @@ public class HbnClientDao implements IClientDao{
     public HbnClientDao(){}
 
     public List <Client> findByName(String name) {
-        Query query = session.createQuery("from Employee e where e.name like ':name' ");
+        Query query = session.createQuery("from Client e where e.name like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
     }

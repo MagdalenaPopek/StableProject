@@ -17,5 +17,4 @@ public class Client extends Person{
      * Numer (id) klienta
      */
     private int id;
-
 }

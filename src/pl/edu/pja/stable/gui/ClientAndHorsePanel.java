@@ -10,16 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 /**
  * Created by magdalena.popek on 2017-06-16.
  */
-public class ClientAndHorsePanel extends JPanel{
+public class ClientAndHorsePanel extends JPanel {
 
     ClientAndHorseService service = new ClientAndHorseService();
-
+    ClientComboBoxModel clientComboBoxModel;
 
     public ClientAndHorsePanel() {
         super();
@@ -42,22 +43,31 @@ public class ClientAndHorsePanel extends JPanel{
         chooseClientComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if(e.getItem().equals("Nowy"))
-                {
+                if (e.getItem().equals("Nowy")) {
                     nameTextField.setText("");
                     nameTextField.setEnabled(true);
                     surnameTextField.setText("");
                     surnameTextField.setEnabled(true);
+                    birthdateTextField.setText("");
+                    birthdateTextField.setEnabled(true);
+                    phoneTextField.setText("");
+                    phoneTextField.setEnabled(true);
                     return;
                 }
-                System.out.println(e.getItem().toString());
-                nameTextField.setText(e.getItem().toString().split(" ")[0]);
+
+                //System.out.println(e.getItem().toString());
+                Client c = clientComboBoxModel.getSelectedClient();
+                nameTextField.setText(c.getName());
                 nameTextField.setEnabled(false);
-                surnameTextField.setText(e.getItem().toString().split(" ")[1]);
+                surnameTextField.setText(c.getSurname());
                 surnameTextField.setEnabled(false);
+                birthdateTextField.setText((c.getBirthDate() == null ) ? "" : c.getBirthDate().toString());
+                birthdateTextField.setEnabled(false);
+                phoneTextField.setText(c.getPhoneNumber());
+                phoneTextField.setEnabled(false);
+
             }
         });
-
 
 
         this.add(new JLabel("Imię:"), "");
@@ -80,6 +90,25 @@ public class ClientAndHorsePanel extends JPanel{
             }
         });
 
+        jButtonCommit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(chooseClientComboBox.getSelectedItem().equals("Nowy")) {
+                    System.out.println("Dodaję nowego klienta...");
+                    Client c = new Client();
+                    c.setName(nameTextField.getText());
+                    c.setSurname(surnameTextField.getText());
+                    c.setBirthDate(new Date());
+                    c.setPhoneNumber(phoneTextField.getText());
+                    service.saveClient(c);
+
+                    clientComboBoxModel.addClient(c);
+                    chooseClientComboBox.updateUI();
+                    chooseClientComboBox.setSelectedIndex(chooseClientComboBox.getItemCount()-1);
+                }
+            }
+        });
+
         buttonPanel.add(jButtonCommit);
         buttonPanel.add(jButtonExit);
 
@@ -87,21 +116,9 @@ public class ClientAndHorsePanel extends JPanel{
         this.add(buttonPanel);
     }
 
-    private JComboBox<String> chooseClientComboBox(){
-
-        //JComboBox<String> clients = new JComboBox<>();
-        //clients.addItem("Nowy");
-
-        List<Client> list = service.getAllClients();
-
-        ClientComboBoxModel clientComboBoxModel = new ClientComboBoxModel(list);
-
+    private JComboBox<String> chooseClientComboBox() {
+        clientComboBoxModel = new ClientComboBoxModel(service.getAllClients());
         JComboBox<String> clients = new JComboBox<>(clientComboBoxModel);
-
-//        for (Client client: list){
-//            clients.addItem(client.getName()+" "+client.getSurname());
-//        }
-
         return clients;
     }
 }

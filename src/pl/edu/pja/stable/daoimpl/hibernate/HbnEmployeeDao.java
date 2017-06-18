@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pl.edu.pja.stable.dao.IEmployeeDao;
 import pl.edu.pja.stable.entity.Employee;
-import pl.edu.pja.stable.managers.HibernateSessionManager;
 
 import javax.persistence.Query;
 import java.util.Date;
