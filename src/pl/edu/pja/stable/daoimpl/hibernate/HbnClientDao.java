@@ -27,28 +27,28 @@ public class HbnClientDao implements IClientDao{
 
     @Override
     public List <Client> findByString(String searchColumnName, String searchText) {
-        Query query = session.createQuery("from Employee e where e."+searchColumnName
+        Query query = session.createQuery("from Client e where e."+searchColumnName
                                                                                     +" like '"+searchText+"' ");
         return query.getResultList();
     }
 
     @Override
     public List <Client> findByDate(String searchColumnName, Date searchText) {
-        Query query = session.createQuery("from Employee e where e."+searchColumnName
+        Query query = session.createQuery("from Client e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
     }
 
     @Override
     public List <Client> findByInteger(String searchColumnName, Integer searchText) {
-        Query query = session.createQuery("from Employee e where e."+searchColumnName
+        Query query = session.createQuery("from Client e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
     }
 
     @Override
     public List <Client> findByBoolean(String searchColumnName, Boolean searchText) {
-        Query query = session.createQuery("from Employee e where e."+searchColumnName
+        Query query = session.createQuery("from Client e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
     }
