@@ -1,17 +1,17 @@
 package pl.edu.pja.stable.services.dao;
 
-import pl.edu.pja.stable.entity.Client;
+import pl.edu.pja.stable.entity.Owner;
 import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.managers.SessionManager;
 
 import java.util.List;
 
 /**
- * Created by Magdalena on 2017-06-16.
+ * Created by Magdalena on 2017-06-20.
  */
-public class ClientAndHorseService {
+public class OwnerAndHorseService {
 
-    public ClientAndHorseService() {
+    public OwnerAndHorseService() {
     }
 
     /**
@@ -19,16 +19,16 @@ public class ClientAndHorseService {
      *
      * @return List<Client>
      */
-    public List<Client> getAllClients() {
-        return SessionManager.getClientDao().getAll();
+    public List<Owner> getAllClients() {
+        return SessionManager.getOwnerDao().getAll();
     }
 
-    public void saveClient(Client c) {
-        SessionManager.getClientDao().addEntity(c);
+    public void saveOwner(Owner o) {
+        SessionManager.getOwnerDao().addEntity(o);
     }
 
     /**
-     * Zwraca listę koni
+     * Zwraca listę koni danego właściciela
      *
      * @return List<Horse>
      */
@@ -39,5 +39,4 @@ public class ClientAndHorseService {
     public void saveHorse(Horse h) {
         SessionManager.getHorseDao().addEntity(h);
     }
-
 }

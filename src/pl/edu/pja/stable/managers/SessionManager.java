@@ -1,9 +1,7 @@
 package pl.edu.pja.stable.managers;
 
-import pl.edu.pja.stable.dao.IClientDao;
-import pl.edu.pja.stable.dao.IEmployeeDao;
-import pl.edu.pja.stable.daoimpl.hibernate.HbnClientDao;
-import pl.edu.pja.stable.daoimpl.hibernate.HbnEmployeeDao;
+import pl.edu.pja.stable.dao.*;
+import pl.edu.pja.stable.daoimpl.hibernate.*;
 
 /**
  * Created by Magdalena on 2017-06-18.
@@ -11,15 +9,64 @@ import pl.edu.pja.stable.daoimpl.hibernate.HbnEmployeeDao;
 public class SessionManager {
 
     private static IClientDao clientDao = (IClientDao) new HbnClientDao();
+//    private static ICompetitionDao competitionDao = (ICompetitionDao) new HbnCompetitionDao();
     private static IEmployeeDao employeeDao = (IEmployeeDao) new HbnEmployeeDao();
+    private static IEnduranceRidingDao enduranceRidingDao = (IEnduranceRidingDao) new HbnEnduranceRidingDao();
+    private static IGroomDao groomDao = (IGroomDao) new HbnGroomDao();
+    private static IHorseDao horseDao = (IHorseDao) new HbnHorseDao();
+    private static IInstructorDao instructorDao = (IInstructorDao) new HbnInstructorDao();
+    private static IOwnerDao ownerDao = (IOwnerDao) new HbnOwnerDao();
+    private static IRidingSchoolDao ridingSchoolDao = (IRidingSchoolDao) new HbnRidingSchoolDao();
+    private static IShowJumpingDao showJumpingDao = (IShowJumpingDao) new HbnShowJumpingDao();
+    private static IStableDao stableDao = (IStableDao) new HbnStableDao();
+    private static IStallDao stallDao = (IStallDao) new HbnStallDao();
 
 
     public static IClientDao getClientDao() {
         return clientDao;
     }
 
+ /*   public static ICompetitionDao getCompetitionDao() {
+        return competitionDao;
+    }*/
+
     public static IEmployeeDao getEmployeeDao() {
         return employeeDao;
     }
 
+    public static IEnduranceRidingDao getEnduranceRidingDao() {
+        return enduranceRidingDao;
+    }
+
+    public static IGroomDao getGroomDao() {
+        return groomDao;
+    }
+
+    public static IHorseDao getHorseDao() {
+        return horseDao;
+    }
+
+    public static IInstructorDao getInstructorDao() {
+        return instructorDao;
+    }
+
+    public static IOwnerDao getOwnerDao() {
+        return ownerDao;
+    }
+
+    public static IRidingSchoolDao getRidingSchoolDao() {
+        return ridingSchoolDao;
+    }
+
+    public static IShowJumpingDao getShowJumpingDao() {
+        return showJumpingDao;
+    }
+
+    public static IStableDao getStableDao() {
+        return stableDao;
+    }
+
+    public static IStallDao getStallDao() {
+        return stallDao;
+    }
 }
