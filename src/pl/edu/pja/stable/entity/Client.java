@@ -5,6 +5,8 @@ package pl.edu.pja.stable.entity;
  */
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -17,4 +19,7 @@ public class Client extends Person{
      * Numer (id) klienta
      */
     private int id;
+
+    @ManyToOne
+    private Set<Contestant> contestants = new HashSet<>();
 }

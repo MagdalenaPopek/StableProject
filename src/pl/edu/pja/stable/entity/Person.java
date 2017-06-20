@@ -30,8 +30,8 @@ public class Person {
     /**
      * Data urodzenia
      */
-    @Column(name = "birth_date")
-    private Date birthDate;
+//    @Column(name = "birth_date")
+//    private Date birthDate;
 
     /**
      * Numer telefonu
@@ -55,13 +55,13 @@ public class Person {
         this.surname = surname;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
+//    public Date getBirthDate() {
+//        return birthDate;
+//    }
+//
+//    public void setBirthDate(Date birthDate) {
+//        this.birthDate = birthDate;
+//    }
 
     public String getPhoneNumber() {
         return phoneNumber;

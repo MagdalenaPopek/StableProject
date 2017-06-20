@@ -48,8 +48,8 @@ public class ClientAndHorsePanel extends JPanel {
                     nameTextField.setEnabled(true);
                     surnameTextField.setText("");
                     surnameTextField.setEnabled(true);
-                    birthdateTextField.setText("");
-                    birthdateTextField.setEnabled(true);
+//                    birthdateTextField.setText("");
+//                    birthdateTextField.setEnabled(true);
                     phoneTextField.setText("");
                     phoneTextField.setEnabled(true);
                     return;
@@ -61,8 +61,8 @@ public class ClientAndHorsePanel extends JPanel {
                 nameTextField.setEnabled(false);
                 surnameTextField.setText(c.getSurname());
                 surnameTextField.setEnabled(false);
-                birthdateTextField.setText((c.getBirthDate() == null ) ? "" : c.getBirthDate().toString());
-                birthdateTextField.setEnabled(false);
+//                birthdateTextField.setText((c.getBirthDate() == null ) ? "" : c.getBirthDate().toString());
+//                birthdateTextField.setEnabled(false);
                 phoneTextField.setText(c.getPhoneNumber());
                 phoneTextField.setEnabled(false);
 
@@ -74,8 +74,8 @@ public class ClientAndHorsePanel extends JPanel {
         this.add(nameTextField, "wrap");
         this.add(new JLabel("Nazwisko:"), "");
         this.add(surnameTextField, "wrap");
-        this.add(new JLabel("Data urodzenia:"), "");
-        this.add(birthdateTextField, "wrap");
+//        this.add(new JLabel("Data urodzenia:"), "");
+//        this.add(birthdateTextField, "wrap");
         this.add(new JLabel("Nr telefonu:"), "");
         this.add(phoneTextField, "wrap 32");
 
@@ -98,7 +98,7 @@ public class ClientAndHorsePanel extends JPanel {
                     Client c = new Client();
                     c.setName(nameTextField.getText());
                     c.setSurname(surnameTextField.getText());
-                    c.setBirthDate(new Date());
+//                    c.setBirthDate(new Date());
                     c.setPhoneNumber(phoneTextField.getText());
                     service.saveClient(c);
 

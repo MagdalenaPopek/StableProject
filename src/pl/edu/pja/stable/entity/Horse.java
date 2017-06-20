@@ -43,7 +43,7 @@ public class Horse {
     /**
      * Właściciel
      */
-    @OneToOne
+    @ManyToOne
     //@JoinColumn(name = "id", nullable = false)
     @JoinColumn(name = "owner_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="owner_id_fk"))
     private Owner owner;
