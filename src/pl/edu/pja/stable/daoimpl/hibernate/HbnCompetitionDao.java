@@ -20,8 +20,8 @@ public abstract class HbnCompetitionDao implements ICompetitionDao {
     public HbnCompetitionDao(){}
 
     public List<Competition> findByName(String compName) {
-        Query query = session.createQuery("from Competition c where c.compName like ':compName' ");
-        query.setParameter("compName", compName);
+        Query query = session.createQuery("from Competition c where c.compName like ':comp_name' ");
+        query.setParameter("comp_name", compName);
         return query.getResultList();
     }
 

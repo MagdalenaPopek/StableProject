@@ -15,25 +15,25 @@ public abstract class Competition {
     /**
      * Nazwa
      */
-    @Column(name = "compName", nullable = false)
+    @Column(name = "comp_name", nullable = false)
     private String compName;
 
     /**
      * Klasa
      */
-    @Column(name = "competitonLevel", nullable = false)
+    @Column(name = "competiton_level", nullable = false)
     private CompetitionLevel competitionLevel;
 
     /**
      * Data
      */
-    @Column(name = "date", nullable = false)
-    private Date date;
+//    @Column(name = "date", nullable = false)
+//    private Date date;
 
     /**
      * Rodzaj zawodow
      */
-    @Column(name = "competitionType", nullable = false)
+    @Column(name = "competition_type", nullable = false)
     private CompetitionType competitionType;
 
     /**
@@ -58,13 +58,13 @@ public abstract class Competition {
         this.competitionLevel = competitionLevel;
     }
 
-    public Date getDate() {
+/*    public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
-    }
+    }*/
 
     public CompetitionType getCompetitionType() {
         return competitionType;

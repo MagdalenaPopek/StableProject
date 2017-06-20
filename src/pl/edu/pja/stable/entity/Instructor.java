@@ -8,15 +8,15 @@ import javax.persistence.*;
  * Created by Magdalena on 2017-04-23.
  */
 @Entity
-@Table(name = "INSTRUCTOR")
+@Table(name = "instructor")
 public class Instructor {
 
-    @Id
-    @GeneratedValue(generator = "instructor_id_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name="instructor_id_seq", sequenceName="instructor_id_seq", allocationSize = 1)
     /**
      * Numer (id) instruktora
      */
+    @Id
+    @GeneratedValue(generator = "instructor_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="instructor_id_seq", sequenceName="instructor_id_seq", allocationSize = 1)
     private int id;
 
     /**
@@ -24,7 +24,6 @@ public class Instructor {
      */
     @Column(name = "ridingcard_number")
     private String ridingCardNumber;
-
 
     /**
      * Numer uprawnień
@@ -34,6 +33,7 @@ public class Instructor {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="employee_id_fk"))
+
     /**
      * Referencja do pracowników
      */

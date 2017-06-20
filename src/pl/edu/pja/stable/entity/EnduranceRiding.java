@@ -9,6 +9,8 @@ import java.util.Date;
 /**
  * Created by Magdalena on 2017-04-26.
  */
+@Entity
+@Table(name = "endurance_riding")
 public class EnduranceRiding extends Competition {
 
     @Id
@@ -19,11 +21,17 @@ public class EnduranceRiding extends Competition {
      */
     private int id;
 
-    @Column(name = "distance", nullable = false)
     /**
      * Distance
      */
+    @Column(name = "distance", nullable = false)
     private double distance;
+
+    /**
+     * Referencja do zawodów
+     * @return Competition
+     */
+    private Competition competition;
 
     public int getId() {
         return id;
@@ -39,5 +47,13 @@ public class EnduranceRiding extends Competition {
 
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    public Competition getCompetition() {
+        return competition;
+    }
+
+    public void setCompetition(Competition competition) {
+        this.competition = competition;
     }
 }

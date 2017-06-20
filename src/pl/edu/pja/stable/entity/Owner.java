@@ -38,7 +38,6 @@ public class Owner extends Person { //Client?
     @JoinColumn(name="ID") // join column is in table for Order
     private Set<Horse> horses = new HashSet<Horse>(0);
 
-
     public double getPercentage() {
         return percentage;
     }

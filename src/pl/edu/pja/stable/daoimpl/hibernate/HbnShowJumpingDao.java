@@ -19,8 +19,8 @@ public class HbnShowJumpingDao implements IShowJumpingDao {
     public HbnShowJumpingDao(){}
 
     public List<ShowJumping> findByName(String compName) {
-        Query query = session.createQuery("from ShowJumping c where c.compName like ':compName' ");
-        query.setParameter("compName", compName);
+        Query query = session.createQuery("from ShowJumping c where c.compName like ':comp_name' ");
+        query.setParameter("comp_name", compName);
         return query.getResultList();
     }
 

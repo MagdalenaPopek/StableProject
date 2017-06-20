@@ -1,12 +1,13 @@
 package pl.edu.pja.stable.entity;
 
+import pl.edu.pja.stable.entityutils.HorseGender;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "horse",
-        uniqueConstraints = @UniqueConstraint(columnNames = "passport_nr", name = "passport_nr_unq")
-)
+        uniqueConstraints = @UniqueConstraint(columnNames = "passport_nr", name = "passport_nr_unq"))
 public class Horse {
 
     /**
@@ -26,8 +27,8 @@ public class Horse {
     /**
      * Data urodzenia
      */
-    @Column(name = "birth_date")
-    private Date birthDate;
+//    @Column(name = "birth_date")
+//    private Date birthDate;
 
     /**
      * Numer paszportu
@@ -38,12 +39,13 @@ public class Horse {
     /**
      * Płeć
      */
-    private String gender;
+    @Column(name = "gender")
+    private HorseGender gender;
 
     /**
      * Właściciel
      */
-    @ManyToOne
+    //@ManyToOne
     //@JoinColumn(name = "id", nullable = false)
     @JoinColumn(name = "owner_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="owner_id_fk"))
     private Owner owner;
@@ -57,14 +59,12 @@ public class Horse {
 
     //private Boolean isShowHorse;
 
-
-
-    public Horse(String name, Date birthDate, String passportNumber, String gender) {
-        this.name = name;
-        this.birthDate = birthDate;
-        this.passportNumber = passportNumber;
-        this.gender = gender;
-    }
+    /**
+     * Szkółka jeździecka
+     */
+    @OneToMany(mappedBy = "ridingSchool")
+    @JoinColumn(name="ridingSchool_id",foreignKey=@ForeignKey(name="ridingSchool_id_fk"))
+    private RidingSchool ridingSchool;
 
     public String getName() {
         return name;
@@ -74,13 +74,13 @@ public class Horse {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    /*public Date getBirthDate() {
         return birthDate;
     }
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }
+    }*/
 
     public String getPassportNumber() {
         return passportNumber;
@@ -90,11 +90,11 @@ public class Horse {
         this.passportNumber = passportNumber;
     }
 
-    public String getGender() {
+    public HorseGender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(HorseGender gender) {
         this.gender = gender;
     }
 

@@ -13,7 +13,6 @@ import java.util.Vector;
 @Table(name="stable")
 public class Stable {
 
-
     /**
      * Numer (id)
      */
@@ -21,20 +20,18 @@ public class Stable {
     @GeneratedValue(generator = "stable_id_seq", strategy = GenerationType.AUTO)
     @SequenceGenerator(name="stable_id_seq", sequenceName="stable_id_seq", allocationSize = 1)
     private int id;
+
     /**
      * Nazwa
      */
+    @Column(name = "stable_name")
     private String stableName;
 
     /**
      * Adres
      */
+    @Column(name = "stable_address")
     private String stableAddress;
-
-    /**
-     * NIP
-     */
-    private String nip;
 
     /**
      * Dyrektor stajni
@@ -57,14 +54,6 @@ public class Stable {
 
     public void setStableAddress(String stableAddress) {
         this.stableAddress = stableAddress;
-    }
-
-    public String getNip() {
-        return nip;
-    }
-
-    public void setNip(String nip) {
-        this.nip = nip;
     }
 
     public Employee getDirector() {

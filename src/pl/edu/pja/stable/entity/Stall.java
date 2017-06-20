@@ -37,4 +37,35 @@ public class Stall {
     @Column(name = "area")
     private double area;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getStallNumber() {
+        return stallNumber;
+    }
+
+    public void setStallNumber(int stallNumber) {
+        this.stallNumber = stallNumber;
+    }
+
+    public Stable getStable() {
+        return stable;
+    }
+
+    public void setStable(Stable stable) {
+        this.stable = stable;
+    }
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+    }
 }

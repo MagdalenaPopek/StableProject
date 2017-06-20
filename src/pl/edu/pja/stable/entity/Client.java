@@ -22,4 +22,20 @@ public class Client extends Person{
 
     @ManyToOne
     private Set<Contestant> contestants = new HashSet<>();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Set<Contestant> getContestants() {
+        return contestants;
+    }
+
+    public void setContestants(Set<Contestant> contestants) {
+        this.contestants = contestants;
+    }
 }

@@ -19,8 +19,8 @@ public class HbnEnduranceRidingDao implements IEnduranceRidingDao {
     public HbnEnduranceRidingDao(){}
 
     public List<EnduranceRiding> findByName(String compName) {
-        Query query = session.createQuery("from EnduranceRiding c where c.compName like ':compName' ");
-        query.setParameter("compName", compName);
+        Query query = session.createQuery("from EnduranceRiding c where c.compName like ':comp_name' ");
+        query.setParameter("comp_name", compName);
         return query.getResultList();
     }
 
