@@ -5,7 +5,7 @@ import pl.edu.pja.stable.managers.StableManager;
 import javax.swing.*;
 
 /**
- * Created by magdalena.popek on 2017-06-07.
+ * Created by Magdalena on 2017-06-07.
  */
 public class Main {
 

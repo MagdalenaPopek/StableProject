@@ -15,7 +15,7 @@ import net.miginfocom.swing.MigLayout;
 
 
 /**
- * Created by artur.popek on 2017-06-16.
+ * Created by Magdalena on 2017-06-16.
  */
 public class StableFrame extends JFrame
 {

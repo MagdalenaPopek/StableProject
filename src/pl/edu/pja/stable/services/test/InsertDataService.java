@@ -10,7 +10,7 @@ import pl.edu.pja.stable.entity.Employee;
 import java.util.Date;
 
 /**
- * Created by magdalena.popek on 2017-06-07.
+ * Created by Magdalena on 2017-06-07.
  */
 
 public class InsertDataService {

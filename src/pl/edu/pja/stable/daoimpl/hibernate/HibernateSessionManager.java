@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Created by magdalena.popek on 2017-06-08.
+ * Created by Magdalena on 2017-06-08.
  */
 public class HibernateSessionManager {
 

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * Created by artur.popek on 2017-06-16.
+ * Created by Magdalena on 2017-06-16.
  */
 public class MainMenu extends JMenuBar{
 

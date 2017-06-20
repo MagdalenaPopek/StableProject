@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by magdalena.popek on 2017-06-08.
+ * Created by Magdalena on 2017-06-08.
  */
 public interface IEntityDao <T> {
 

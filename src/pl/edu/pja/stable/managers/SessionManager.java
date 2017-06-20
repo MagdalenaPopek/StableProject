@@ -6,7 +6,7 @@ import pl.edu.pja.stable.daoimpl.hibernate.HbnClientDao;
 import pl.edu.pja.stable.daoimpl.hibernate.HbnEmployeeDao;
 
 /**
- * Created by artur.popek on 2017-06-18.
+ * Created by Magdalena on 2017-06-18.
  */
 public class SessionManager {
 

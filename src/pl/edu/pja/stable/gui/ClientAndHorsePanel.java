@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by magdalena.popek on 2017-06-16.
+ * Created by Magdalena on 2017-06-16.
  */
 public class ClientAndHorsePanel extends JPanel {
 
