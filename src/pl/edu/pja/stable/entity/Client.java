@@ -21,8 +21,7 @@ public class Client extends Person{
      */
     private int id;
 
-    @OneToMany
-    @JoinColumn(name = "contestant_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "contestant_id_fk"))
+    @OneToMany(mappedBy = "client")
     private List<Contestant> contestants;
 
     public int getId() {
