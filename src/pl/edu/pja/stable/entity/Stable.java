@@ -1,10 +1,7 @@
 package pl.edu.pja.stable.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by Magdalena Popek on 2017-04-21.
@@ -44,8 +41,8 @@ public class Stable {
     /**
      * Boksy
      */
-    @OneToMany(mappedBy = "stalls")
-    private Set<Stall> stalls = new HashSet<>();
+    @OneToMany(mappedBy = "stable")
+    private List<Stall> stalls;
 
     public int getId() {
         return id;
@@ -79,11 +76,11 @@ public class Stable {
         this.director = director;
     }
 
-    public Set<Stall> getStalls() {
+    public List<Stall> getStalls() {
         return stalls;
     }
 
-    public void setStalls(Set<Stall> stalls) {
+    public void setStalls(List<Stall> stalls) {
         this.stalls = stalls;
     }
 }

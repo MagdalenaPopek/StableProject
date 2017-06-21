@@ -27,7 +27,7 @@ public class Stall {
     /**
      * Stajnia, w której boks jest
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "stable_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="stable_id_fk"))
     private Stable stable;
 

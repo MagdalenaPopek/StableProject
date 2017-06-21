@@ -17,11 +17,14 @@ import java.util.Date;
  */
 public class ClientPanel extends JPanel {
 
+    JFrame mainFrame;
     ClientService service = new ClientService();
     ClientComboBoxModel clientComboBoxModel;
 
-    public ClientPanel() {
+    public ClientPanel(JFrame mainFrame) {
         super();
+
+        this.mainFrame = mainFrame;
 
         JComboBox<String> chooseClientComboBox;
 
@@ -84,7 +87,8 @@ public class ClientPanel extends JPanel {
         jButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+               mainFrame.setContentPane(new AboutPanel());
+               mainFrame.pack();
             }
         });
 
@@ -96,7 +100,6 @@ public class ClientPanel extends JPanel {
                     Client c = new Client();
                     c.setName(nameTextField.getText());
                     c.setSurname(surnameTextField.getText());
-//                    c.setBirthDate(new Date());
                     c.setPhoneNumber(phoneTextField.getText());
                     service.saveClient(c);
 

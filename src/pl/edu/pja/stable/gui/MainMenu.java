@@ -1,21 +1,21 @@
 package pl.edu.pja.stable.gui;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Magdalena on 2017-06-16.
  */
-public class MainMenu extends JMenuBar{
+public class MainMenu extends JMenuBar {
 
-    JMenuBar menuBar;
+    JFrame mainFrame;
 
-
-    public MainMenu(){
+    public MainMenu(JFrame mainFrame) {
         super();
 
-        menuBar = this;
-        //create menus
+        this.mainFrame = mainFrame;
+
         JMenu dictionaryMenu = new JMenu("Słowniki");
         JMenu competitionMenu = new JMenu("Zawody");
         final JMenu aboutMenu = new JMenu("O programie");
@@ -34,7 +34,8 @@ public class MainMenu extends JMenuBar{
         clientsMnu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Klienci MNU");
+                mainFrame.setContentPane(new ClientPanel(mainFrame));
+                mainFrame.pack();
             }
         });
 
@@ -46,11 +47,5 @@ public class MainMenu extends JMenuBar{
         this.add(dictionaryMenu);
         this.add(competitionMenu);
         this.add(aboutMenu);
-    }
-
-    class MenuItemListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            // TODO
-        }
     }
 }

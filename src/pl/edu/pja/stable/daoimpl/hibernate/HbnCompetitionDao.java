@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Magdalena on 2017-06-19.
  */
-public abstract class HbnCompetitionDao implements ICompetitionDao {
+public class HbnCompetitionDao implements ICompetitionDao {
 
     Session session = HibernateSessionManager.getSession();
 
