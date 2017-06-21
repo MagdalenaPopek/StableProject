@@ -1,6 +1,7 @@
 package pl.edu.pja.stable.entity;
 
 import pl.edu.pja.stable.entityutils.CompetitionLevel;
+import pl.edu.pja.stable.entityutils.CompetitionCategory;
 import pl.edu.pja.stable.entityutils.CompetitionType;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 public abstract class Competition {
 
     /**
-     * Numer (id) zawodów w skokach przez przeszkody
+     * Numer (id) zawodów
      */
     @Id
     @GeneratedValue(generator = "competition_id_seq", strategy = GenerationType.AUTO)
@@ -26,7 +27,7 @@ public abstract class Competition {
     private String compName;
 
     /**
-     * Klasa
+     * Klasa zawidów
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "comp_level", nullable = false)
@@ -39,17 +40,24 @@ public abstract class Competition {
 //    private Date date;
 
     /**
-     * Rodzaj zawodow
+     * Kategoria zawodow
      */
     @Enumerated(EnumType.STRING)
-    @Column(name = "comp_type", nullable = false)
-    private CompetitionType competitionType;
+    @Column(name = "comp_category", nullable = false)
+    private CompetitionCategory competitionCategory;
 
     /**
      * Nagroda
      */
     @Column(name = "prize")
     private double prize;
+
+    /**
+     * Rodzaj zawodow (skoki przez przeszkody, rajd długodystansowy)
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(name = "comp_type", nullable = false)
+    private CompetitionType competitionType;
 
     /**
      * Liczba przeszkód
@@ -63,6 +71,14 @@ public abstract class Competition {
     @Column(name = "distance", nullable = false)
     private double distance;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getCompName() {
         return compName;
     }
@@ -72,26 +88,19 @@ public abstract class Competition {
     }
 
     public CompetitionLevel getCompetitionLevel() {
-        return competitionLevel; }
+        return competitionLevel;
+    }
 
     public void setCompetitionLevel(CompetitionLevel competitionLevel) {
         this.competitionLevel = competitionLevel;
     }
 
-/*    public Date getDate() {
-        return date;
+    public CompetitionCategory getCompetitionCategory() {
+        return competitionCategory;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }*/
-
-    public CompetitionType getCompetitionType() {
-        return competitionType;
-    }
-
-    public void setCompetitionType(CompetitionType competitionType) {
-        this.competitionType = competitionType;
+    public void setCompetitionCategory(CompetitionCategory competitionCategory) {
+        this.competitionCategory = competitionCategory;
     }
 
     public double getPrize() {
@@ -100,6 +109,14 @@ public abstract class Competition {
 
     public void setPrize(double prize) {
         this.prize = prize;
+    }
+
+    public CompetitionType getCompetitionType() {
+        return competitionType;
+    }
+
+    public void setCompetitionType(CompetitionType competitionType) {
+        this.competitionType = competitionType;
     }
 
     public int getNumberOfObstacles() {

@@ -10,12 +10,12 @@ import java.util.List;
 @Table(name = "contestant")
 public class Contestant {
 
-    @Id
-    @GeneratedValue(generator = "contestant_id_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name="contestant_id_seq", sequenceName="contestant_id_seq", allocationSize = 1)
     /**
      * Numer (id)
      */
+    @Id
+    @GeneratedValue(generator = "contestant_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="contestant_id_seq", sequenceName="contestant_id_seq", allocationSize = 1)
     private int id;
 
     @ManyToOne
@@ -29,6 +29,14 @@ public class Contestant {
     @ManyToOne
     @JoinColumn(name = "competition_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "competition_id_fk"))
     private Competition competition;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Client getClient() {
         return client;

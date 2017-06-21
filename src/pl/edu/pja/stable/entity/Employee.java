@@ -10,20 +10,33 @@ import java.util.Date;
 @Table(name = "employee")
 public class Employee extends Person {
 
-    @Id
-    @GeneratedValue(generator = "person_id_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name="person_id_seq", sequenceName="person_id_seq", allocationSize = 1)
     /**
      * Numer (id) użytkownika
      */
+    @Id
+    @GeneratedValue(generator = "person_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="person_id_seq", sequenceName="person_id_seq", allocationSize = 1)
     private int id;
 
-    @Column(name = "HIRE_DATE", nullable = false)
+    /**
+     * Data zatrudnienia
+     */
+    @Column(name = "hire_date", nullable = false)
     private Date hireDate;
 
-    @Column(name = "SALARY", nullable = false)
+    /**
+     * Pensja
+     */
+    @Column(name = "salary", nullable = false)
     private double salary;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Date getHireDate() {
         return hireDate;

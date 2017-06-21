@@ -10,24 +10,13 @@ import java.util.Set;
 @Table(name = "owner")
 public class Owner extends Person { //Client?
 
-    @Id
-    @GeneratedValue(generator = "owner_id_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name="owner_id_seq", sequenceName="owner_id_seq", allocationSize = 1)
     /**
      * Numer (id) właściciela
      */
+    @Id
+    @GeneratedValue(generator = "owner_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="owner_id_seq", sequenceName="owner_id_seq", allocationSize = 1)
     private int id;
-
-    @Column(name = "percentage")
-    private double percentage = 10;
-    /**
-     * Opłata
-     */
-    @Column(name = "charge")
-    private double charge;
-
-    @Column(name = "max_charge")
-    private double maxCharge;
 
     /**
      * Konie, które posiada
@@ -36,28 +25,12 @@ public class Owner extends Person { //Client?
     //@JoinColumn(name="ID") // join column is in table for Order
     private List<Horse> horses;
 
-    public double getPercentage() {
-        return percentage;
+    public int getId() {
+        return id;
     }
 
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
-    }
-
-    public double getCharge() {
-        return charge;
-    }
-
-    public void setCharge(double charge) {
-        this.charge = charge;
-    }
-
-    public double getMaxCharge() {
-        return maxCharge;
-    }
-
-    public void setMaxCharge(double maxCharge) {
-        this.maxCharge = maxCharge;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Horse> getHorses() {

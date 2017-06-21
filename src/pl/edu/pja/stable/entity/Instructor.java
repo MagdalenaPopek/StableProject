@@ -31,15 +31,18 @@ public class Instructor {
     @Column(name = "permission_number")
     private String permissionNumber;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="employee_id_fk"))
 
     /**
      * Referencja do pracowników
      */
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="employee_id_fk"))
     private Employee employee;
 
-    @ManyToOne
+    /**
+     * Szkółka
+     */
+    @OneToOne
     @JoinColumn(name = "riding_school_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="riding_school_id_fk"))
     private RidingSchool ridingSchool;
 

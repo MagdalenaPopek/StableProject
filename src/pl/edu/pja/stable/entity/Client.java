@@ -21,6 +21,9 @@ public class Client extends Person{
      */
     private int id;
 
+    /**
+     * Zawodnicy
+     */
     @OneToMany(mappedBy = "client")
     private List<Contestant> contestants;
 

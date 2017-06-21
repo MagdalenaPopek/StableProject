@@ -1,8 +1,8 @@
 package pl.edu.pja.stable.entityutils;
 
 /**
- * Created by Magdalena on 2017-04-26.
+ * Created by Magdalena on 2017-06-21.
  */
 public enum CompetitionType {
-    Competition, Ogolnopolskie, Regionalne;
+    ShowJumping, EnduranceRiding;
 }

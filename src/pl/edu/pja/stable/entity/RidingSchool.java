@@ -30,14 +30,14 @@ public class RidingSchool {
      * Konie
      */
 //    @ManyToOne
-//    //@Column(name = "horses")
+//    @Column(name = "horses")
 //    private List<Horse> horses;
 
     /**
      * Instruktor prowadzący
      */
-    @OneToMany(mappedBy = "ridingSchool")
-    private List<Instructor> instructors;
+    @OneToOne(mappedBy = "ridingSchool")
+    private Instructor instructor;
 
     public int getId() {
         return id;
@@ -63,11 +63,11 @@ public class RidingSchool {
 //        this.horses = horses;
 //    }
 
-    public List<Instructor> getInstructors() {
-        return instructors;
+    public Instructor getInstructor() {
+        return instructor;
     }
 
-    public void setInstructors(List<Instructor> instructors) {
-        this.instructors = instructors;
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 }

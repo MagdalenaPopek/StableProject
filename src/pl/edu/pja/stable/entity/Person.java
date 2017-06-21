@@ -15,10 +15,10 @@ import java.util.List;
 @MappedSuperclass
 public class Person {
 
-    @Column(name = "name", nullable = false)
     /**
      * Imię
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
@@ -28,16 +28,11 @@ public class Person {
     private String surname;
 
     /**
-     * Data urodzenia
-     */
-//    @Column(name = "birth_date")
-//    private Date birthDate;
-
-    /**
      * Numer telefonu
      */
     @Column(name = "phone_number")
     private String phoneNumber;
+
 
     public String getName() {
         return name;
@@ -54,14 +49,6 @@ public class Person {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
-//    public Date getBirthDate() {
-//        return birthDate;
-//    }
-//
-//    public void setBirthDate(Date birthDate) {
-//        this.birthDate = birthDate;
-//    }
 
     public String getPhoneNumber() {
         return phoneNumber;

@@ -52,16 +52,25 @@ public class Horse {
     @JoinColumn(name = "stall_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "stall_id_fk"))
     private Stall stall;
 
-    /**
-     * Szkółka jeździecka
-     */
+
 //    @OneToMany
 //    @JoinColumn(name = "ridingSchool_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "ridingSchool_id_fk"))
 //    private List<RidingSchool> ridingSchools;
 
+    /**
+     * Szkółka jeździecka
+     */
     @ManyToOne
     @JoinColumn(name = "ridingSchool_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "ridingSchool_id_fk"))
     private RidingSchool ridingSchool;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

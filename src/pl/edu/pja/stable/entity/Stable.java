@@ -3,6 +3,7 @@ package pl.edu.pja.stable.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -40,6 +41,20 @@ public class Stable {
     @JoinColumn(name = "director_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="director_id_fk"))
     private Employee director;
 
+    /**
+     * Boksy
+     */
+    @OneToMany(mappedBy = "stalls")
+    private Set<Stall> stalls = new HashSet<>();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getStableName() {
         return stableName;
     }
@@ -62,5 +77,13 @@ public class Stable {
 
     public void setDirector(Employee director) {
         this.director = director;
+    }
+
+    public Set<Stall> getStalls() {
+        return stalls;
+    }
+
+    public void setStalls(Set<Stall> stalls) {
+        this.stalls = stalls;
     }
 }
