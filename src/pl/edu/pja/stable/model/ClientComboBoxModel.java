@@ -11,26 +11,37 @@ import java.util.List;
  */
 public class ClientComboBoxModel extends AbstractListModel implements ComboBoxModel {
 
-    List<Client> clientList = null;
-    List<String> clientStringList = null;
+    List<Client> clientList = new ArrayList<Client>();
+    List<String> clientStringList = new ArrayList<String>();
 
+    boolean onlyClients = false;
 
     String selection = null;
     int selectIdx = 0;
 
     public ClientComboBoxModel(List<Client> clientList) {
+        this(clientList, false);
+    }
+
+    public ClientComboBoxModel(List<Client> clientList, boolean onlyClients) {
+        this.onlyClients = onlyClients;
         start(clientList);
     }
 
     private void start(List<Client> clientList) {
-        Client client = new Client();
-        client.setName("Nowy");
-        client.setSurname("");
 
-        this.clientList = new ArrayList<Client>();
-        this.clientStringList = new ArrayList<String>();
-        this.clientList.add(client);
-        this.clientList.addAll(1, clientList);
+        if (!onlyClients) {
+            Client client = new Client();
+            client.setName("Nowy");
+            client.setSurname("");
+
+            selection = client.getName();
+
+            this.clientList.add(client);
+            //this.clientList.addAll(1, clientList);
+        }
+
+        this.clientList.addAll(clientList);
 
         /**
          * Tutaj decydujemy co jest wyświetlane i jak w JComboBoxie.
@@ -39,21 +50,18 @@ public class ClientComboBoxModel extends AbstractListModel implements ComboBoxMo
         for (Client c : this.clientList) {
             clientStringList.add(c.getName() + ((c.getSurname().equals("")) ? "" : " " + (c.getSurname())));
         }
-
-        selection = client.getName();
     }
 
+    @Override
+    public Object getSelectedItem() {
+        return selection;
+    }
 
     @Override
     public void setSelectedItem(Object anItem) {
         //System.out.println("setSelected: " + anItem);
         selectIdx = clientStringList.indexOf(anItem);
         selection = (String) anItem;
-    }
-
-    @Override
-    public Object getSelectedItem() {
-        return selection;
     }
 
     @Override
@@ -75,15 +83,15 @@ public class ClientComboBoxModel extends AbstractListModel implements ComboBoxMo
         return clientList.get(selectIdx);
     }
 
-    public void refresh(List<Client> clientList){
+    public void refresh(List<Client> clientList) {
         start(clientList);
     }
 
-    public void addClient(Client c){
+    public void addClient(Client c) {
         clientList.add(c);
         clientStringList.add(c.getName() + ((c.getSurname().equals("")) ? "" : " " + (c.getSurname())));
 
-        selectIdx = clientStringList.size()-1;
+        selectIdx = clientStringList.size() - 1;
         selection = clientStringList.get(selectIdx);
     }
 

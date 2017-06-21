@@ -1,6 +1,7 @@
 package pl.edu.pja.stable.model;
 
 import pl.edu.pja.stable.entity.Owner;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,26 +11,36 @@ import java.util.List;
  */
 public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxModel {
 
-    List<Owner> ownerList = null;
-    List<String> ownerStringList = null;
+    List<Owner> ownerList = new ArrayList<Owner>();
+    List<String> ownerStringList = new ArrayList<String>();
 
+    boolean onlyOwners = false;
 
     String selection = null;
     int selectIdx = 0;
 
     public OwnerComboBoxModel(List<Owner> ownerList) {
+        this(ownerList, false);
+    }
+
+    public OwnerComboBoxModel(List<Owner> ownerList, boolean onlyOwners) {
+        this.onlyOwners = onlyOwners;
         start(ownerList);
     }
 
     private void start(List<Owner> ownerList) {
-        Owner owner = new Owner();
-        owner.setName("Nowy");
-        owner.setSurname("");
 
-        this.ownerList = new ArrayList<Owner>();
-        this.ownerStringList = new ArrayList<String>();
-        this.ownerList.add(owner);
-        this.ownerList.addAll(1, ownerList);
+        if (!onlyOwners) {
+            Owner owner = new Owner();
+            owner.setName("Nowy");
+            owner.setSurname("");
+
+            selection = owner.getName();
+            this.ownerList.add(owner);
+            //this.ownerList.addAll(1, ownerList);
+        }
+
+        this.ownerList.addAll(ownerList);
 
         /**
          * Tutaj decydujemy co jest wyświetlane i jak w JComboBoxie.
@@ -38,8 +49,11 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
         for (Owner c : this.ownerList) {
             ownerStringList.add(c.getName() + ((c.getSurname().equals("")) ? "" : " " + (c.getSurname())));
         }
+    }
 
-        selection = owner.getName();
+    @Override
+    public Object getSelectedItem() {
+        return selection;
     }
 
     @Override
@@ -47,11 +61,6 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
         //System.out.println("setSelected: " + anItem);
         selectIdx = ownerStringList.indexOf(anItem);
         selection = (String) anItem;
-    }
-
-    @Override
-    public Object getSelectedItem() {
-        return selection;
     }
 
     @Override
@@ -73,15 +82,26 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
         return ownerList.get(selectIdx);
     }
 
-    public void refresh(List<Owner> ownerList){
+    public void setSelectedOwner(Owner anItem) {
+        System.out.println("setSelectedOwner: " + anItem);
+        if (anItem == null) {
+            selectIdx = 0;
+            selection = (String) ownerStringList.get(selectIdx);
+            return;
+        }
+        selectIdx = ownerList.indexOf(anItem);
+        selection = (String) ownerStringList.get(selectIdx);
+    }
+
+    public void refresh(List<Owner> ownerList) {
         start(ownerList);
     }
 
-    public void addOwner(Owner c){
+    public void addOwner(Owner c) {
         ownerList.add(c);
         ownerStringList.add(c.getName() + ((c.getSurname().equals("")) ? "" : " " + (c.getSurname())));
 
-        selectIdx = ownerStringList.size()-1;
+        selectIdx = ownerStringList.size() - 1;
         selection = ownerStringList.get(selectIdx);
     }
 

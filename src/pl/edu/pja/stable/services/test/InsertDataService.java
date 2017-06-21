@@ -1,11 +1,8 @@
 package pl.edu.pja.stable.services.test;
 
-import pl.edu.pja.stable.dao.IClientDao;
-import pl.edu.pja.stable.dao.IEmployeeDao;
-import pl.edu.pja.stable.daoimpl.hibernate.HbnClientDao;
-import pl.edu.pja.stable.daoimpl.hibernate.HbnEmployeeDao;
-import pl.edu.pja.stable.entity.Client;
-import pl.edu.pja.stable.entity.Employee;
+import pl.edu.pja.stable.dao.*;
+import pl.edu.pja.stable.daoimpl.hibernate.*;
+import pl.edu.pja.stable.entity.*;
 
 import java.util.Date;
 
@@ -17,39 +14,70 @@ public class InsertDataService {
 
     IEmployeeDao employeeDao;
     IClientDao clientDao;
+    IOwnerDao ownerDao;
+    IStableDao stableDao;
+    IStallDao stallDao;
 
     public InsertDataService() {
         employeeDao = (IEmployeeDao) new HbnEmployeeDao();
         clientDao = (IClientDao) new HbnClientDao();
+        ownerDao = (IOwnerDao) new HbnOwnerDao();
+        stableDao = (IStableDao) new HbnStableDao();
+        stallDao = (IStallDao) new HbnStallDao();
     }
-
-    ;
-
 
     public void insertData() {
       /* Add few employee records in database */
         Employee employee;
         Client client;
+        Owner owner;
+        Stall stall;
+        Stable stable;
 
-        for(int a=1; a<5; a++)
-        {
+        for (int a = 1; a < 5; a++) {
+
+            //EMPLOYEE
             employee = new Employee();
             employee.setName("Marian");
-            employee.setSurname("Pracownik("+a+")");
+            employee.setSurname("Pracownik(" + a + ")");
             employee.setHireDate(new Date());
-            employee.setSalary(500*a);
-
-            System.out.println("Create employee "+a);
+            employee.setSalary(500 * a);
+            System.out.println("Create employee " + a);
             employeeDao.addEntity(employee);
 
-      /* Add few employee records in database */
+            //CLIENT
             client = new Client();
             client.setName("Stefan");
-            client.setSurname("Klient("+a+")");
-            client.setPhoneNumber("+81 "+a+"23-45-"+a+"7");
-
-            System.out.println("Create client "+a);
+            client.setSurname("Klient(" + a + ")");
+            client.setPhoneNumber("+81 " + a + "23-45-" + a + "7");
+            System.out.println("Create client " + a);
             clientDao.addEntity(client);
+
+            //OWNER
+            owner = new Owner();
+            owner.setName("Zbyszek");
+            owner.setSurname("Owner(" + a + ")");
+            owner.setPhoneNumber("+81 " + a + "23-45-" + a + "7");
+            System.out.println("Create owner " + a);
+            ownerDao.addEntity(owner);
+
+            //STABLE
+            stable = new Stable();
+            stable.setStableName("Stajnia nr "+a);
+            stable.setStableAddress("Stajenna "+a);
+            stable.setDirector(employee);
+            System.out.println("Create stable " + a);
+            stableDao.addEntity(stable);
+
+            //STALL IN STABLE
+            for(int b=1; b<11; b++){
+                stall = new Stall();
+                stall.setStable(stable);
+                stall.setStallNumber(b);
+                stall.setArea(50);
+                System.out.println("Create stall " + b);
+                stallDao.addEntity(stall);
+            }
         }
     }
 

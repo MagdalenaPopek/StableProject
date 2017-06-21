@@ -18,24 +18,61 @@ public class MainMenu extends JMenuBar {
 
         JMenu dictionaryMenu = new JMenu("Słowniki");
         JMenu competitionMenu = new JMenu("Zawody");
-        final JMenu aboutMenu = new JMenu("O programie");
+        final JMenu systemMenu = new JMenu("System");
 
-        JMenuItem clientsMnu = new JMenuItem("Klienci");
-        JMenuItem ownersMnu = new JMenuItem("Właściciele");
-        JMenuItem horsesMnu = new JMenuItem("Konie");
-        JMenuItem employeeMnu = new JMenuItem("Pracownicy");
+        JMenuItem clientsMnuItm = new JMenuItem("Klienci");
+        JMenuItem ownersMnuItm = new JMenuItem("Właściciele");
+        JMenuItem horsesMnuItm = new JMenuItem("Konie");
+        JMenuItem employeeMnuItm = new JMenuItem("Pracownicy");
 
-        dictionaryMenu.add(clientsMnu);
-        dictionaryMenu.add(ownersMnu);
-        dictionaryMenu.add(horsesMnu);
+        dictionaryMenu.add(clientsMnuItm);
+        dictionaryMenu.add(ownersMnuItm);
+        dictionaryMenu.add(horsesMnuItm);
         dictionaryMenu.addSeparator();
-        dictionaryMenu.add(employeeMnu);
+        dictionaryMenu.add(employeeMnuItm);
 
-        clientsMnu.addActionListener(new ActionListener() {
+        JMenuItem aboutMnuItm = new JMenuItem("O programie");
+        JMenuItem exitMnuItm = new JMenuItem("Wyjście z systemu");
+        systemMenu.add(aboutMnuItm);
+        systemMenu.addSeparator();
+        systemMenu.add(exitMnuItm);
+
+        clientsMnuItm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainFrame.setContentPane(new ClientPanel(mainFrame));
                 mainFrame.pack();
+            }
+        });
+
+        ownersMnuItm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.setContentPane(new OwnerPanel(mainFrame));
+                mainFrame.pack();
+            }
+        });
+
+        horsesMnuItm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.setContentPane(new HorsePanel(mainFrame));
+                mainFrame.pack();
+            }
+        });
+
+        exitMnuItm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int choose = JOptionPane.showConfirmDialog(mainFrame, "Czy na pewno chcesz opuścić\n"
+                        + "taki fajny i przydatny program?\n"
+                        + "       Jesteś pewien?", "Wyjście", JOptionPane.YES_NO_OPTION);
+
+                if(choose == JOptionPane.YES_OPTION)
+                    System.exit(0);
+                else
+                    return;
             }
         });
 
@@ -46,6 +83,6 @@ public class MainMenu extends JMenuBar {
         //add menu to menubar
         this.add(dictionaryMenu);
         this.add(competitionMenu);
-        this.add(aboutMenu);
+        this.add(systemMenu);
     }
 }

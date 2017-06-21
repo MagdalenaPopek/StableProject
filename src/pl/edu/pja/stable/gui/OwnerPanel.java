@@ -1,9 +1,7 @@
 package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
-import pl.edu.pja.stable.entity.Client;
 import pl.edu.pja.stable.entity.Owner;
-import pl.edu.pja.stable.model.ClientComboBoxModel;
 import pl.edu.pja.stable.model.OwnerComboBoxModel;
 import pl.edu.pja.stable.services.dao.OwnerService;
 
@@ -12,25 +10,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Date;
 
 /**
  * Created by magdalena.popek on 2017-06-16.
  */
 public class OwnerPanel extends JPanel {
 
-    OwnerService service = new OwnerService();
+    JFrame mainFrame;
+    OwnerService ownerService = new OwnerService();
     OwnerComboBoxModel ownerComboBoxModel;
 
-    public OwnerPanel() {
+    public OwnerPanel(JFrame mainFrame) {
         super();
+
+        this.mainFrame = mainFrame;
 
         JComboBox<String> chooseOwnerComboBox;
 
         int columnSize = 32;
         JTextField nameTextField = new JTextField(columnSize);
         JTextField surnameTextField = new JTextField(columnSize);
-        JTextField birthdateTextField = new JTextField(columnSize);
         JTextField phoneTextField = new JTextField(columnSize);
 
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
@@ -48,8 +47,6 @@ public class OwnerPanel extends JPanel {
                     nameTextField.setEnabled(true);
                     surnameTextField.setText("");
                     surnameTextField.setEnabled(true);
-                    birthdateTextField.setText("");
-                    birthdateTextField.setEnabled(true);
                     phoneTextField.setText("");
                     phoneTextField.setEnabled(true);
                     return;
@@ -72,8 +69,6 @@ public class OwnerPanel extends JPanel {
         this.add(nameTextField, "wrap");
         this.add(new JLabel("Nazwisko:"), "");
         this.add(surnameTextField, "wrap");
-        this.add(new JLabel("Data urodzenia:"), "");
-        this.add(birthdateTextField, "wrap");
         this.add(new JLabel("Nr telefonu:"), "");
         this.add(phoneTextField, "wrap 32");
 
@@ -87,24 +82,25 @@ public class OwnerPanel extends JPanel {
         jButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                mainFrame.setContentPane(new AboutPanel());
+                mainFrame.pack();
             }
         });
 
         jButtonCommit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(chooseOwnerComboBox.getSelectedItem().equals("Nowy")) {
+                if (chooseOwnerComboBox.getSelectedItem().equals("Nowy")) {
                     System.out.println("Dodaję nowego właściciela...");
                     Owner o = new Owner();
                     o.setName(nameTextField.getText());
                     o.setSurname(surnameTextField.getText());
                     o.setPhoneNumber(phoneTextField.getText());
-                    service.saveOwner(o);
+                    ownerService.saveOwner(o);
 
                     ownerComboBoxModel.addOwner(o);
                     chooseOwnerComboBox.updateUI();
-                    chooseOwnerComboBox.setSelectedIndex(chooseOwnerComboBox.getItemCount()-1);
+                    chooseOwnerComboBox.setSelectedIndex(chooseOwnerComboBox.getItemCount() - 1);
                 }
             }
         });
@@ -117,7 +113,7 @@ public class OwnerPanel extends JPanel {
     }
 
     private JComboBox<String> chooseOwnerComboBox() {
-        ownerComboBoxModel = new OwnerComboBoxModel(service.getAllOwners());
+        ownerComboBoxModel = new OwnerComboBoxModel(ownerService.getAllOwners());
         JComboBox<String> clients = new JComboBox<>(ownerComboBoxModel);
         return clients;
     }
