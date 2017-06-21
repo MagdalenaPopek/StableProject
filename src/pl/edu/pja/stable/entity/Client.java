@@ -6,6 +6,7 @@ package pl.edu.pja.stable.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,8 +21,9 @@ public class Client extends Person{
      */
     private int id;
 
-    @ManyToOne
-    private Set<Contestant> contestants = new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "contestant_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "contestant_id_fk"))
+    private List<Contestant> contestants;
 
     public int getId() {
         return id;
@@ -31,11 +33,11 @@ public class Client extends Person{
         this.id = id;
     }
 
-    public Set<Contestant> getContestants() {
+    public List<Contestant> getContestants() {
         return contestants;
     }
 
-    public void setContestants(Set<Contestant> contestants) {
+    public void setContestants(List<Contestant> contestants) {
         this.contestants = contestants;
     }
 }

@@ -1,8 +1,7 @@
 package pl.edu.pja.stable.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Magdalena on 2017-06-20.
@@ -11,13 +10,24 @@ import javax.persistence.Table;
 @Table(name = "contestant")
 public class Contestant {
 
-    @OneToMany(mappedBy = "client")
+    @Id
+    @GeneratedValue(generator = "contestant_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="contestant_id_seq", sequenceName="contestant_id_seq", allocationSize = 1)
+    /**
+     * Numer (id)
+     */
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "client_id_fk"))
     private Client client;
 
-    @OneToMany(mappedBy = "horse")
+    @ManyToOne
+    @JoinColumn(name = "horse_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "horse_id_fk"))
     private Horse horse;
 
-    @OneToMany(mappedBy = "competition")
+    @ManyToOne
+    @JoinColumn(name = "competition_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "competition_id_fk"))
     private Competition competition;
 
     public Client getClient() {

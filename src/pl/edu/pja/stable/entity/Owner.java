@@ -3,6 +3,7 @@ package pl.edu.pja.stable.entity;
 import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,12 +32,9 @@ public class Owner extends Person { //Client?
     /**
      * Konie, które posiada
      */
-    /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)
-    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })*/
-    @OneToMany(mappedBy = "horse", orphanRemoval=true)
-    @JoinTable(name = "horses", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = { @JoinColumn(name = "id") })
-    @JoinColumn(name="ID") // join column is in table for Order
-    private Set<Horse> horses = new HashSet<Horse>(0);
+    @OneToMany(mappedBy = "owner", orphanRemoval=true)
+    //@JoinColumn(name="ID") // join column is in table for Order
+    private List<Horse> horses;
 
     public double getPercentage() {
         return percentage;
@@ -62,11 +60,11 @@ public class Owner extends Person { //Client?
         this.maxCharge = maxCharge;
     }
 
-    public Set<Horse> getHorses() {
+    public List<Horse> getHorses() {
         return horses;
     }
 
-    public void setHorses(Set<Horse> horses) {
+    public void setHorses(List<Horse> horses) {
         this.horses = horses;
     }
 

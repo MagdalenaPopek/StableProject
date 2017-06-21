@@ -4,13 +4,20 @@ import pl.edu.pja.stable.entityutils.CompetitionLevel;
 import pl.edu.pja.stable.entityutils.CompetitionType;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by Magdalena on 2017-04-26.
  */
-@MappedSuperclass
+@Entity
 public abstract class Competition {
+
+    /**
+     * Numer (id) zawodów w skokach przez przeszkody
+     */
+    @Id
+    @GeneratedValue(generator = "competition_id_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "competition_id_seq", sequenceName = "competition_id_seq", allocationSize = 1)
+    private int id;
 
     /**
      * Nazwa
@@ -21,7 +28,8 @@ public abstract class Competition {
     /**
      * Klasa
      */
-    @Column(name = "competiton_level", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "comp_level", nullable = false)
     private CompetitionLevel competitionLevel;
 
     /**
@@ -33,7 +41,8 @@ public abstract class Competition {
     /**
      * Rodzaj zawodow
      */
-    @Column(name = "competition_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "comp_type", nullable = false)
     private CompetitionType competitionType;
 
     /**
@@ -41,6 +50,18 @@ public abstract class Competition {
      */
     @Column(name = "prize")
     private double prize;
+
+    /**
+     * Liczba przeszkód
+     */
+    @Column(name = "number_obstacles", nullable = false)
+    private int numberOfObstacles;
+
+    /**
+     * Distance
+     */
+    @Column(name = "distance", nullable = false)
+    private double distance;
 
     public String getCompName() {
         return compName;
@@ -51,8 +72,7 @@ public abstract class Competition {
     }
 
     public CompetitionLevel getCompetitionLevel() {
-        return competitionLevel;
-    }
+        return competitionLevel; }
 
     public void setCompetitionLevel(CompetitionLevel competitionLevel) {
         this.competitionLevel = competitionLevel;
@@ -80,5 +100,21 @@ public abstract class Competition {
 
     public void setPrize(double prize) {
         this.prize = prize;
+    }
+
+    public int getNumberOfObstacles() {
+        return numberOfObstacles;
+    }
+
+    public void setNumberOfObstacles(int numberOfObstacles) {
+        this.numberOfObstacles = numberOfObstacles;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

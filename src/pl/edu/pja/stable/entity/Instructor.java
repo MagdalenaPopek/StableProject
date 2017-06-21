@@ -39,6 +39,10 @@ public class Instructor {
      */
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name = "riding_school_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="riding_school_id_fk"))
+    private RidingSchool ridingSchool;
+
     public int getId() {
         return id;
     }

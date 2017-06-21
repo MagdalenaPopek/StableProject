@@ -34,5 +34,8 @@
         <mapping class="pl.edu.pja.stable.entity.Stable"/>
         <mapping class="pl.edu.pja.stable.entity.Horse"/>
         <mapping class="pl.edu.pja.stable.entity.Instructor"/>
+        <mapping class="pl.edu.pja.stable.entity.Contestant"/>
+        <mapping class="pl.edu.pja.stable.entity.Competition"/>
+        <mapping class="pl.edu.pja.stable.entity.RidingSchool"/>
     </session-factory>
 </hibernate-configuration>

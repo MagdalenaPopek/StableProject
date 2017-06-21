@@ -56,14 +56,12 @@ public class OwnerPanel extends JPanel {
                 }
 
                 //System.out.println(e.getItem().toString());
-                Owner c = ownerComboBoxModel.getSelectedOwner();
-                nameTextField.setText(c.getName());
+                Owner o = ownerComboBoxModel.getSelectedOwner();
+                nameTextField.setText(o.getName());
                 nameTextField.setEnabled(false);
-                surnameTextField.setText(c.getSurname());
+                surnameTextField.setText(o.getSurname());
                 surnameTextField.setEnabled(false);
-                birthdateTextField.setText((c.getBirthDate() == null ) ? "" : c.getBirthDate().toString());
-                birthdateTextField.setEnabled(false);
-                phoneTextField.setText(c.getPhoneNumber());
+                phoneTextField.setText(o.getPhoneNumber());
                 phoneTextField.setEnabled(false);
 
             }
@@ -101,7 +99,6 @@ public class OwnerPanel extends JPanel {
                     Owner o = new Owner();
                     o.setName(nameTextField.getText());
                     o.setSurname(surnameTextField.getText());
-                    o.setBirthDate(new Date());
                     o.setPhoneNumber(phoneTextField.getText());
                     service.saveOwner(o);
 

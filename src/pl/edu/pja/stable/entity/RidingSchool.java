@@ -2,6 +2,8 @@ package pl.edu.pja.stable.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Magdalena on 2017-05-08.
@@ -27,16 +29,15 @@ public class RidingSchool {
     /**
      * Konie
      */
-    @ManyToOne
-    @Column(name = "horses")
-    private ArrayList<Horse> horses = new ArrayList<>();
+//    @ManyToOne
+//    //@Column(name = "horses")
+//    private List<Horse> horses;
 
     /**
      * Instruktor prowadzący
      */
-    @OneToMany(mappedBy = "instructor")
-    @Column(name = "instructor")
-    private Instructor instructor;
+    @OneToMany(mappedBy = "ridingSchool")
+    private List<Instructor> instructors;
 
     public int getId() {
         return id;
@@ -54,19 +55,19 @@ public class RidingSchool {
         this.name = name;
     }
 
-    public ArrayList<Horse> getHorses() {
-        return horses;
+//    public Horse getHorses() {
+//        return horses;
+//    }
+//
+//    public void setHorses(List<Horse> horses) {
+//        this.horses = horses;
+//    }
+
+    public List<Instructor> getInstructors() {
+        return instructors;
     }
 
-    public void setHorses(ArrayList<Horse> horses) {
-        this.horses = horses;
-    }
-
-    public Instructor getInstructor() {
-        return instructor;
-    }
-
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
+    public void setInstructors(List<Instructor> instructors) {
+        this.instructors = instructors;
     }
 }

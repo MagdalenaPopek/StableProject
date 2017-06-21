@@ -4,6 +4,7 @@ import pl.edu.pja.stable.entityutils.HorseGender;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "horse",
@@ -15,7 +16,7 @@ public class Horse {
      */
     @Id
     @GeneratedValue(generator = "horse_id_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name="horse_id_seq", sequenceName="horse_id_seq")
+    @SequenceGenerator(name = "horse_id_seq", sequenceName = "horse_id_seq")
     private int id;
 
     /**
@@ -23,12 +24,6 @@ public class Horse {
      */
     @Column(name = "name")
     private String name;
-
-    /**
-     * Data urodzenia
-     */
-//    @Column(name = "birth_date")
-//    private Date birthDate;
 
     /**
      * Numer paszportu
@@ -39,31 +34,33 @@ public class Horse {
     /**
      * Płeć
      */
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private HorseGender gender;
 
     /**
      * Właściciel
      */
-    //@ManyToOne
-    //@JoinColumn(name = "id", nullable = false)
-    @JoinColumn(name = "owner_id", referencedColumnName = "id", foreignKey=@ForeignKey(name="owner_id_fk"))
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "owner_id_fk"))
     private Owner owner;
 
     /**
      * Boks
      */
     @OneToOne
-    @JoinColumn(name="stall_id",foreignKey=@ForeignKey(name="stall_id_fk"))
+    @JoinColumn(name = "stall_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "stall_id_fk"))
     private Stall stall;
-
-    //private Boolean isShowHorse;
 
     /**
      * Szkółka jeździecka
      */
-    @OneToMany(mappedBy = "ridingSchool")
-    @JoinColumn(name="ridingSchool_id",foreignKey=@ForeignKey(name="ridingSchool_id_fk"))
+//    @OneToMany
+//    @JoinColumn(name = "ridingSchool_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "ridingSchool_id_fk"))
+//    private List<RidingSchool> ridingSchools;
+
+    @ManyToOne
+    @JoinColumn(name = "ridingSchool_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "ridingSchool_id_fk"))
     private RidingSchool ridingSchool;
 
     public String getName() {
@@ -74,13 +71,13 @@ public class Horse {
         this.name = name;
     }
 
-    /*public Date getBirthDate() {
-        return birthDate;
+    public RidingSchool getRidingSchool() {
+        return ridingSchool;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }*/
+    public void setRidingSchool(RidingSchool ridingSchool) {
+        this.ridingSchool = ridingSchool;
+    }
 
     public String getPassportNumber() {
         return passportNumber;
@@ -98,7 +95,6 @@ public class Horse {
         this.gender = gender;
     }
 
-
     public Stall getStall() {
         return stall;
     }
@@ -107,8 +103,6 @@ public class Horse {
         this.stall = stall;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ID", nullable = false)
     public Owner getOwner() {
         return owner;
     }
