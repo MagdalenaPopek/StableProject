@@ -9,9 +9,9 @@ import java.util.List;
 /**
  * Created by Magdalena on 2017-06-16.
  */
-public class ClientAndHorseService {
+public class ClientService {
 
-    public ClientAndHorseService() {
+    public ClientService() {
     }
 
     /**

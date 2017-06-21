@@ -16,85 +16,35 @@ public class MainMenu extends JMenuBar{
 
         menuBar = this;
         //create menus
-        JMenu fileMenu = new JMenu("File");
-        JMenu editMenu = new JMenu("Edit");
-        final JMenu aboutMenu = new JMenu("About");
+        JMenu dictionaryMenu = new JMenu("Słowniki");
+        JMenu competitionMenu = new JMenu("Zawody");
+        final JMenu aboutMenu = new JMenu("O programie");
 
-        //create menu items
-        JMenu newMenu = new JMenu("New");
-        newMenu.setMnemonic(KeyEvent.VK_N);
-        //newMenu.setActionCommand("New");
+        JMenuItem clientsMnu = new JMenuItem("Klienci");
+        JMenuItem ownersMnu = new JMenuItem("Właściciele");
+        JMenuItem horsesMnu = new JMenuItem("Konie");
+        JMenuItem employeeMnu = new JMenuItem("Pracownicy");
 
-        JMenuItem existingUserMI = new JMenuItem("Existing user");
-        JMenu newUserMI = new JMenu("New user");
-        JMenuItem withHorseMI = new JMenuItem("With Horse");
-        newMenu.setActionCommand("?");
-        JMenuItem noHorseMI = new JMenuItem("Without Horse");
-        newMenu.setActionCommand("?");
-        newMenu.add(existingUserMI);
-        newMenu.add(newUserMI);
-        newUserMI.add(withHorseMI);
-        newUserMI.add(noHorseMI);
+        dictionaryMenu.add(clientsMnu);
+        dictionaryMenu.add(ownersMnu);
+        dictionaryMenu.add(horsesMnu);
+        dictionaryMenu.addSeparator();
+        dictionaryMenu.add(employeeMnu);
 
-
-        JMenuItem openMenuItem = new JMenuItem("Open");
-        openMenuItem.setActionCommand("Open");
-
-        JMenuItem saveMenuItem = new JMenuItem("Save");
-        saveMenuItem.setActionCommand("Save");
-
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        exitMenuItem.setActionCommand("Exit");
-
-        JMenuItem cutMenuItem = new JMenuItem("Cut");
-        cutMenuItem.setActionCommand("Cut");
-
-        JMenuItem copyMenuItem = new JMenuItem("Copy");
-        copyMenuItem.setActionCommand("Copy");
-
-        JMenuItem pasteMenuItem = new JMenuItem("Paste");
-        pasteMenuItem.setActionCommand("Paste");
-
-        MainMenu.MenuItemListener menuItemListener = new MainMenu.MenuItemListener();
-
-        newMenu.addActionListener(menuItemListener);
-        openMenuItem.addActionListener(menuItemListener);
-        saveMenuItem.addActionListener(menuItemListener);
-        exitMenuItem.addActionListener(menuItemListener);
-        cutMenuItem.addActionListener(menuItemListener);
-        copyMenuItem.addActionListener(menuItemListener);
-        pasteMenuItem.addActionListener(menuItemListener);
-
-        final JCheckBoxMenuItem showWindowMenu = new JCheckBoxMenuItem(
-                "Show About", true);
-        showWindowMenu.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-
-                if(showWindowMenu.getState()){
-                    menuBar.add(aboutMenu);
-                } else {
-                    menuBar.remove(aboutMenu);
-                }
+        clientsMnu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Klienci MNU");
             }
         });
 
-        //add menu items to menus
-        fileMenu.add(newMenu);
-        fileMenu.add(openMenuItem);
-        fileMenu.add(saveMenuItem);
-        fileMenu.addSeparator();
-        fileMenu.add(showWindowMenu);
 
-        fileMenu.addSeparator();
-        fileMenu.add(exitMenuItem);
-
-        editMenu.add(cutMenuItem);
-        editMenu.add(copyMenuItem);
-        editMenu.add(pasteMenuItem);
+        JMenuItem addToCompetitionMnu = new JMenuItem("Dodaj do zawodów");
+        competitionMenu.add(addToCompetitionMnu);
 
         //add menu to menubar
-        this.add(fileMenu);
-        this.add(editMenu);
+        this.add(dictionaryMenu);
+        this.add(competitionMenu);
         this.add(aboutMenu);
     }
 

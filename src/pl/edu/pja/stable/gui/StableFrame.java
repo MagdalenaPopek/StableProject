@@ -3,15 +3,8 @@ package pl.edu.pja.stable.gui;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-
-import net.miginfocom.swing.MigLayout;
+import java.io.IOException;
 
 
 /**
@@ -20,6 +13,9 @@ import net.miginfocom.swing.MigLayout;
 public class StableFrame extends JFrame
 {
     JFrame mainFrame;
+    JTextArea defaultTextArea;
+    JScrollPane scrollPane;
+
 
     public StableFrame() {
         super("MyStable");
@@ -34,16 +30,44 @@ public class StableFrame extends JFrame
 
         //add menubar to the frame
         setJMenuBar(new MainMenu());
-        setVisible(true);
-        add(addClientAndHorsePanel());
+        setContentPane(createContentPane());
 
-        pack();
+        //add(addClientAndHorsePanel());
+
         setLocationRelativeTo(null);
+        pack();
+        setVisible(true);
     }
 
 
+    public Container createContentPane() {
+        //Create the content-pane-to-be.
+        JPanel contentPane = new JPanel(new BorderLayout());
+        contentPane.setOpaque(true);
+
+        JEditorPane jep = new JEditorPane();
+        jep.setEditable(false);
+
+        //TODO
+        //Należy stworzyć prostą stronę w HTML'u !!!! jako stronę wyświetlającą informacje o programie
+        try {
+            jep.setPage("http://www.99lime.com/_bak/topics/html-is-easy/");
+        }catch (IOException e) {
+            jep.setContentType("text/html");
+            jep.setText("<html>Could not load</html>");
+        }
+        scrollPane = new JScrollPane(jep);
+
+        //Add the text area to the content pane.
+        contentPane.add(scrollPane);
+
+        return contentPane;
+    }
+
+
+
     private JPanel addClientAndHorsePanel() {
-        return new ClientAndHorsePanel();
+        return new ClientPanel();
     }
 
     public static void main(String args[]) {

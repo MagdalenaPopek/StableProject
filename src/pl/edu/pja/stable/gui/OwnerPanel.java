@@ -2,8 +2,10 @@ package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pja.stable.entity.Client;
+import pl.edu.pja.stable.entity.Owner;
 import pl.edu.pja.stable.model.ClientComboBoxModel;
-import pl.edu.pja.stable.services.dao.ClientAndHorseService;
+import pl.edu.pja.stable.model.OwnerComboBoxModel;
+import pl.edu.pja.stable.services.dao.OwnerService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,21 +13,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 /**
- * Created by Magdalena on 2017-06-16.
+ * Created by magdalena.popek on 2017-06-16.
  */
-public class ClientAndHorsePanel extends JPanel {
+public class OwnerPanel extends JPanel {
 
-    ClientAndHorseService service = new ClientAndHorseService();
-    ClientComboBoxModel clientComboBoxModel;
+    OwnerService service = new OwnerService();
+    OwnerComboBoxModel ownerComboBoxModel;
 
-    public ClientAndHorsePanel() {
+    public OwnerPanel() {
         super();
 
-        JComboBox<String> chooseClientComboBox;
+        JComboBox<String> chooseOwnerComboBox;
 
         int columnSize = 32;
         JTextField nameTextField = new JTextField(columnSize);
@@ -36,11 +36,11 @@ public class ClientAndHorsePanel extends JPanel {
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
         this.setLayout(layout);
 
-        this.add(new JLabel("Wybierz klienta"), "");
-        chooseClientComboBox = chooseClientComboBox();
-        this.add(chooseClientComboBox, "wrap 32");
+        this.add(new JLabel("Wybierz właściciela"), "");
+        chooseOwnerComboBox = chooseOwnerComboBox();
+        this.add(chooseOwnerComboBox, "wrap 32");
 
-        chooseClientComboBox.addItemListener(new ItemListener() {
+        chooseOwnerComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getItem().equals("Nowy")) {
@@ -48,21 +48,21 @@ public class ClientAndHorsePanel extends JPanel {
                     nameTextField.setEnabled(true);
                     surnameTextField.setText("");
                     surnameTextField.setEnabled(true);
-//                    birthdateTextField.setText("");
-//                    birthdateTextField.setEnabled(true);
+                    birthdateTextField.setText("");
+                    birthdateTextField.setEnabled(true);
                     phoneTextField.setText("");
                     phoneTextField.setEnabled(true);
                     return;
                 }
 
                 //System.out.println(e.getItem().toString());
-                Client c = clientComboBoxModel.getSelectedClient();
+                Owner c = ownerComboBoxModel.getSelectedOwner();
                 nameTextField.setText(c.getName());
                 nameTextField.setEnabled(false);
                 surnameTextField.setText(c.getSurname());
                 surnameTextField.setEnabled(false);
-//                birthdateTextField.setText((c.getBirthDate() == null ) ? "" : c.getBirthDate().toString());
-//                birthdateTextField.setEnabled(false);
+                birthdateTextField.setText((c.getBirthDate() == null ) ? "" : c.getBirthDate().toString());
+                birthdateTextField.setEnabled(false);
                 phoneTextField.setText(c.getPhoneNumber());
                 phoneTextField.setEnabled(false);
 
@@ -74,10 +74,13 @@ public class ClientAndHorsePanel extends JPanel {
         this.add(nameTextField, "wrap");
         this.add(new JLabel("Nazwisko:"), "");
         this.add(surnameTextField, "wrap");
-//        this.add(new JLabel("Data urodzenia:"), "");
-//        this.add(birthdateTextField, "wrap");
+        this.add(new JLabel("Data urodzenia:"), "");
+        this.add(birthdateTextField, "wrap");
         this.add(new JLabel("Nr telefonu:"), "");
         this.add(phoneTextField, "wrap 32");
+
+        //TODO
+        // Brakuje innych pól z Entity Owner
 
         JPanel buttonPanel = new JPanel();
         JButton jButtonCommit = new JButton("Zatwierdź");
@@ -93,18 +96,18 @@ public class ClientAndHorsePanel extends JPanel {
         jButtonCommit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(chooseClientComboBox.getSelectedItem().equals("Nowy")) {
-                    System.out.println("Dodaję nowego klienta...");
-                    Client c = new Client();
-                    c.setName(nameTextField.getText());
-                    c.setSurname(surnameTextField.getText());
-//                    c.setBirthDate(new Date());
-                    c.setPhoneNumber(phoneTextField.getText());
-                    service.saveClient(c);
+                if(chooseOwnerComboBox.getSelectedItem().equals("Nowy")) {
+                    System.out.println("Dodaję nowego właściciela...");
+                    Owner o = new Owner();
+                    o.setName(nameTextField.getText());
+                    o.setSurname(surnameTextField.getText());
+                    o.setBirthDate(new Date());
+                    o.setPhoneNumber(phoneTextField.getText());
+                    service.saveOwner(o);
 
-                    clientComboBoxModel.addClient(c);
-                    chooseClientComboBox.updateUI();
-                    chooseClientComboBox.setSelectedIndex(chooseClientComboBox.getItemCount()-1);
+                    ownerComboBoxModel.addOwner(o);
+                    chooseOwnerComboBox.updateUI();
+                    chooseOwnerComboBox.setSelectedIndex(chooseOwnerComboBox.getItemCount()-1);
                 }
             }
         });
@@ -116,9 +119,9 @@ public class ClientAndHorsePanel extends JPanel {
         this.add(buttonPanel);
     }
 
-    private JComboBox<String> chooseClientComboBox() {
-        clientComboBoxModel = new ClientComboBoxModel(service.getAllClients());
-        JComboBox<String> clients = new JComboBox<>(clientComboBoxModel);
+    private JComboBox<String> chooseOwnerComboBox() {
+        ownerComboBoxModel = new OwnerComboBoxModel(service.getAllOwners());
+        JComboBox<String> clients = new JComboBox<>(ownerComboBoxModel);
         return clients;
     }
 }
