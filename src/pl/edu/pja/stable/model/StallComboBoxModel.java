@@ -90,14 +90,18 @@ public class StallComboBoxModel extends AbstractListModel implements ComboBoxMod
             selection = (String) stallStringList.get(selectIdx);
             return;
         }
-        //selectIdx = stallList.indexOf(anItem);
-        //selection = (String) stallStringList.get(selectIdx);
+
         selectIdx = stallStringList.indexOf(((anItem.getStable() == null) ? "" : anItem.getStable().getStableName() + " - ") + anItem.getStallNumber());
         selection = (String) stallStringList.get(selectIdx);
 
     }
 
     public void refresh(List<Stall> stallList) {
+        stallList = new ArrayList<Stall>();
+        stallStringList = new ArrayList<String>();
+        selection = null;
+        selectIdx = 0;
+
         start(stallList);
     }
 

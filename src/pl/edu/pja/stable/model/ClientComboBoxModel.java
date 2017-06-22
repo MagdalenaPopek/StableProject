@@ -13,19 +13,24 @@ public class ClientComboBoxModel extends AbstractListModel implements ComboBoxMo
 
     List<Client> clientList = new ArrayList<Client>();
     List<String> clientStringList = new ArrayList<String>();
-
     boolean onlyClients = false;
-
     String selection = null;
     int selectIdx = 0;
 
     public ClientComboBoxModel(List<Client> clientList) {
         this(clientList, false);
     }
-
     public ClientComboBoxModel(List<Client> clientList, boolean onlyClients) {
         this.onlyClients = onlyClients;
         start(clientList);
+    }
+
+    public boolean isOnlyClients() {
+        return onlyClients;
+    }
+
+    public void setOnlyClients(boolean onlyClients) {
+        this.onlyClients = onlyClients;
     }
 
     private void start(List<Client> clientList) {
@@ -84,6 +89,11 @@ public class ClientComboBoxModel extends AbstractListModel implements ComboBoxMo
     }
 
     public void refresh(List<Client> clientList) {
+        clientList = new ArrayList<Client>();
+        clientStringList = new ArrayList<String>();
+        selection = null;
+        selectIdx = 0;
+
         start(clientList);
     }
 

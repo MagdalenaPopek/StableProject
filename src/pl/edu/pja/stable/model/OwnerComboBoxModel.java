@@ -88,13 +88,16 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
             selection = (String) ownerStringList.get(selectIdx);
             return;
         }
-        //selectIdx = ownerList.indexOf(anItem);
-        //selection = (String) ownerStringList.get(selectIdx);
         selectIdx = ownerStringList.indexOf(anItem.getName() + ((anItem.getSurname().equals("")) ? "" : " " + (anItem.getSurname())));
         selection = (String) ownerStringList.get(selectIdx);
     }
 
     public void refresh(List<Owner> ownerList) {
+        ownerList = new ArrayList<Owner>();
+        ownerStringList = new ArrayList<String>();
+        selection = null;
+        selectIdx = 0;
+
         start(ownerList);
     }
 
