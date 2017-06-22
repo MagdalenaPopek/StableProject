@@ -2,9 +2,11 @@ package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pja.stable.entity.Client;
+import pl.edu.pja.stable.entity.Contestant;
 import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.model.ClientComboBoxModel;
 import pl.edu.pja.stable.model.ClientCompComboBoxModel;
+import pl.edu.pja.stable.model.CompetitionComboBoxModel;
 import pl.edu.pja.stable.model.HorseComboBoxModel;
 import pl.edu.pja.stable.services.dao.ClientService;
 import pl.edu.pja.stable.services.dao.CompetitionService;
@@ -28,6 +30,9 @@ public class ClientHorseCompPanel extends JPanel{
     HorseService horseService = new HorseService();
     HorseComboBoxModel horseComboBoxModel;
 
+    CompetitionService competitionService;
+    CompetitionComboBoxModel competitionComboBoxModel;
+
 
 
     public ClientHorseCompPanel(JFrame mainFrame) {
@@ -36,12 +41,10 @@ public class ClientHorseCompPanel extends JPanel{
         this.mainFrame = mainFrame;
 
         JComboBox<String> chooseClientComboBox;
+        JComboBox<String> chooseHorseComboBox;
+        JComboBox<String> chooseCompetitionComboBox;
 
         int columnSize = 32;
-        JTextField nameTextField = new JTextField(columnSize);
-        JTextField surnameTextField = new JTextField(columnSize);
-        JTextField birthdateTextField = new JTextField(columnSize);
-        JTextField phoneTextField = new JTextField(columnSize);
 
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
         this.setLayout(layout);
@@ -50,17 +53,30 @@ public class ClientHorseCompPanel extends JPanel{
         chooseClientComboBox = chooseClientComboBox();
         this.add(chooseClientComboBox, "wrap 32");
 
-/*        this.add(new JLabel("Wybierz klienta"), "");
-        chooseHorseComboBox = chooseClientComboBox();
-        this.add(chooseClientComboBox, "wrap 32");
+        this.add(new JLabel("Wybierz konia"), "");
+        chooseHorseComboBox = chooseHorseComboBox();
+        this.add(chooseHorseComboBox, "wrap 32");
 
-        this.add(new JLabel("Wybierz klienta"), "");
-        chooseCompetitionComboBox = chooseClientComboBox();
-        this.add(chooseClientComboBox, "wrap 32");*/
+        this.add(new JLabel("Wybierz zawody"), "");
+        chooseCompetitionComboBox = chooseCompetitionComboBox();
+        this.add(chooseCompetitionComboBox, "wrap 32");
 
         JPanel buttonPanel = new JPanel();
         JButton jButtonCommit = new JButton("Zatwierdź");
         JButton jButtonExit = new JButton("Wyjdź");
+
+        jButtonCommit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Contestant c = new Contestant();
+                c.setClient(clientCompComboBoxModel.getSelectedClient());
+                c.setHorse(horseComboBoxModel.getSelectedHorse());
+                c.setCompetition(competitionComboBoxModel.getSelectedCompetition());
+               // c.setContestantNumber();
+
+            }
+        });
+
 
         jButtonExit.addActionListener(new ActionListener() {
             @Override
@@ -69,24 +85,6 @@ public class ClientHorseCompPanel extends JPanel{
                 mainFrame.pack();
             }
         });
-
-/*        jButtonCommit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(chooseClientComboBox.getSelectedItem().equals("Nowy")) {
-                    System.out.println("Dodaję nowego klienta...");
-                    Client c = new Client();
-                    c.setName(nameTextField.getText());
-                    c.setSurname(surnameTextField.getText());
-                    c.setPhoneNumber(phoneTextField.getText());
-                    clientService.saveClient(c);
-
-                    clientComboBoxModel.addClient(c);
-                    chooseClientComboBox.updateUI();
-                    chooseClientComboBox.setSelectedIndex(chooseClientComboBox.getItemCount()-1);
-                }
-            }
-        });*/
 
         buttonPanel.add(jButtonCommit);
         buttonPanel.add(jButtonExit);
@@ -97,6 +95,18 @@ public class ClientHorseCompPanel extends JPanel{
 
     private JComboBox<String> chooseClientComboBox() {
         clientCompComboBoxModel = new ClientCompComboBoxModel(clientService.getAllClients());
+        JComboBox<String> clients = new JComboBox<>(clientCompComboBoxModel);
+        return clients;
+    }
+
+    private JComboBox<String> chooseHorseComboBox() {
+        horseComboBoxModel = new HorseComboBoxModel(horseService.getAllHorses());
+        JComboBox<String> clients = new JComboBox<>(clientCompComboBoxModel);
+        return clients;
+    }
+
+    private JComboBox<String> chooseCompetitionComboBox() {
+        competitionComboBoxModel = new CompetitionComboBoxModel(competitionService.getAllCompetitions());
         JComboBox<String> clients = new JComboBox<>(clientCompComboBoxModel);
         return clients;
     }

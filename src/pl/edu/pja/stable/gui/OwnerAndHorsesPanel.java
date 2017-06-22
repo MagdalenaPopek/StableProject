@@ -50,73 +50,74 @@ public class OwnerAndHorsesPanel extends JPanel {
         chooseOwnerComboBox = chooseOwnerComboBox();
         this.add(chooseOwnerComboBox, "wrap 32");
 
-        this.add(new JLabel("Wybierz konia"), "");
-        horseComboBox = chooseHorseComboBox();
-        this.add(horseComboBox, "wrap 32");
-
-        chooseOwnerComboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                Owner o = ownerComboBoxModel.getSelectedOwner();
-                ownerJComboBox.updateUI();
-            }
-        });
-
-        horseComboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                Horse h = horseComboBoxModel.getSelectedHorse();
-                nameTextField.setText(h.getName());
-                nameTextField.setEnabled(false);
-                passportNumberTextField.setText(h.getPassportNumber());
-                passportNumberTextField.setEnabled(false);
-
-                ownerComboBoxModel.setSelectedOwner(h.getOwner());
-                ownerJComboBox.updateUI();
-                ownerJComboBox.setEnabled(false);
-
-                ownerJComboBox.updateUI();
-
-            }
-        });
+//        if (chooseOwnerComboBox.getSelectedItem() != null) {
+            this.add(new JLabel("Wybierz konia"), "");
+            horseComboBox = chooseHorseComboBox();
+            this.add(horseComboBox, "wrap 32");
 
 
-        this.add(new JLabel("Nazwa:"), "");
-        this.add(nameTextField, "wrap");
-        this.add(new JLabel("Numer paszportu:"), "");
-        this.add(passportNumberTextField, "wrap");
-        this.add(new JLabel("Właściciel:"), "");
-        this.add(ownerJComboBox, "wrap 32");
+            //TUTAJ Z KLIKNIĘTEGO KONIA WYBIERAM DANE DO PÓL
+            horseComboBox.addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    Horse h = horseComboBoxModel.getSelectedHorse();
+                    nameTextField.setText(h.getName());
+                    nameTextField.setEnabled(false);
+                    passportNumberTextField.setText(h.getPassportNumber());
+                    passportNumberTextField.setEnabled(false);
+
+                    //  ownerComboBoxModel.setSelectedOwner(h.getOwner());
+                    ownerComboBoxModel.getSelectedOwner();
+                    ownerJComboBox.updateUI();
+                    ownerJComboBox.setEnabled(false);
+
+                    ownerJComboBox.updateUI();
+
+                }
+            });
 
 
-        JPanel buttonPanel = new JPanel();
-        JButton jButtonExit = new JButton("Wyjdź");
+            this.add(new JLabel("Nazwa:"), "");
+            this.add(nameTextField, "wrap");
+            this.add(new JLabel("Numer paszportu:"), "");
+            this.add(passportNumberTextField, "wrap");
+            this.add(new JLabel("Właściciel:"), "");
+            this.add(ownerJComboBox, "wrap 32");
 
-        jButtonExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.setContentPane(new AboutPanel());
-                mainFrame.pack();
-            }
-        });
 
-        buttonPanel.add(jButtonExit);
+            JPanel buttonPanel = new JPanel();
+            JButton jButtonExit = new JButton("Wyjdź");
 
-        this.add(new JTextArea());
-        this.add(buttonPanel);
-    }
+            jButtonExit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    mainFrame.setContentPane(new AboutPanel());
+                    mainFrame.pack();
+                }
+            });
 
-    private JComboBox<String> chooseHorseComboBox() {
-        horseComboBoxModel = new HorseComboBoxModel(horseService.getAllHorses());
-        JComboBox<String> horses = new JComboBox<>(horseComboBoxModel);
-        return horses;
-    }
+            buttonPanel.add(jButtonExit);
+
+            this.add(new JTextArea());
+            this.add(buttonPanel);
+        }
+
+
 
     private JComboBox<String> chooseOwnerComboBox() {
         ownerComboBoxModel = new OwnerComboBoxModel(ownerService.getAllOwners(), true);
         JComboBox<String> owner = new JComboBox<>(ownerComboBoxModel);
         return owner;
     }
+
+    private JComboBox<String> chooseHorseComboBox() {
+//        ownerComboBoxModel.getSelectedOwner().getHorses();
+        horseComboBoxModel = new HorseComboBoxModel(ownerComboBoxModel.getSelectedOwner().getHorses());
+//        horseComboBoxModel = new HorseComboBoxModel(horseService.getAllHorses());
+        JComboBox<String> horses = new JComboBox<>(horseComboBoxModel);
+        return horses;
+    }
+
 
 
 }

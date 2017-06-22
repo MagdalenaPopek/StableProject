@@ -130,7 +130,11 @@ public class HorsePanel extends JPanel {
                     h.setName(nameTextField.getText());
                     h.setPassportNumber(passportNumberTextField.getText());
                     h.setGender((HorseGender) horseGenderJComboBox.getSelectedItem());
-                    h.setOwner(ownerComboBoxModel.getSelectedOwner());
+                    if(ownerComboBoxModel.getSelectedOwner() == null) {
+                        h.setOwner(null);
+                    }else{
+                        h.setOwner(ownerComboBoxModel.getSelectedOwner());
+                    }
                     h.setStall(stallComboBoxModel.getSelectedStall());
 
                     horseService.saveHorse(h);

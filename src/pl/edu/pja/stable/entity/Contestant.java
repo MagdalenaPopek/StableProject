@@ -30,6 +30,9 @@ public class Contestant {
     @JoinColumn(name = "competition_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "competition_id_fk"))
     private Competition competition;
 
+    @Column(name = "contestant_number")
+    private int contestantNumber;
+
     public int getId() {
         return id;
     }
@@ -60,5 +63,13 @@ public class Contestant {
 
     public void setCompetition(Competition competition) {
         this.competition = competition;
+    }
+
+    public int getContestantNumber() {
+        return contestantNumber;
+    }
+
+    public void setContestantNumber(int contestantNumber) {
+        this.contestantNumber = contestantNumber;
     }
 }
