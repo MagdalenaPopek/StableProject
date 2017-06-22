@@ -3,6 +3,7 @@ package pl.edu.pja.stable.services.test;
 import pl.edu.pja.stable.dao.*;
 import pl.edu.pja.stable.daoimpl.hibernate.*;
 import pl.edu.pja.stable.entity.*;
+import pl.edu.pja.stable.entityutils.HorseGender;
 
 import java.util.Date;
 
@@ -14,6 +15,7 @@ public class InsertDataService {
 
     IEmployeeDao employeeDao;
     IClientDao clientDao;
+    IHorseDao horseDao;
     IOwnerDao ownerDao;
     IStableDao stableDao;
     IStallDao stallDao;
@@ -22,17 +24,27 @@ public class InsertDataService {
         employeeDao = (IEmployeeDao) new HbnEmployeeDao();
         clientDao = (IClientDao) new HbnClientDao();
         ownerDao = (IOwnerDao) new HbnOwnerDao();
+        horseDao = (IHorseDao) new HbnHorseDao();
         stableDao = (IStableDao) new HbnStableDao();
         stallDao = (IStallDao) new HbnStallDao();
     }
 
     public void insertData() {
       /* Add few employee records in database */
-       /* Employee employee;
+        Employee employee;
         Client client;
         Owner owner;
+        Horse horse;
         Stall stall;
         Stable stable;
+
+        //HORSES
+        horse = new Horse();
+        horse.setName("Kon(" + 1 + ")");
+        horse.setPassportNumber("PL" + 11111);
+        horse.setGender(HorseGender.Klacz);
+        horse.setStall(new Stall());
+        horse.setOwner(new Owner());
 
         for (int a = 1; a < 5; a++) {
 
@@ -61,6 +73,8 @@ public class InsertDataService {
             System.out.println("Create owner " + a);
             ownerDao.addEntity(owner);
 
+
+
             //STABLE
             stable = new Stable();
             stable.setStableName("Stajnia nr "+a);
@@ -78,7 +92,9 @@ public class InsertDataService {
                 System.out.println("Create stall " + b);
                 stallDao.addEntity(stall);
             }
-        }*/
+
+
+        }
     }
 
     public void test() {
