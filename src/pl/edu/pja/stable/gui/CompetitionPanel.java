@@ -38,6 +38,9 @@ public class CompetitionPanel extends JPanel {
         super();
         this.mainFrame = mainFrame;
 
+        MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
+        this.setLayout(layout);
+
         NumberFormat format = NumberFormat.getInstance();
         NumberFormatter formatter = new NumberFormatter(format);
         formatter.setValueClass(Integer.class);
@@ -75,8 +78,7 @@ public class CompetitionPanel extends JPanel {
         competitionCategoryJComboBox.setSelectedItem(null);
         competitionTypeJComboBox.setSelectedItem(null);
 
-        MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]20[]");
-        this.setLayout(layout);
+
 
         this.add(new JLabel("Wybierz zawody"), "");
         chooseCompetitionComboBox = chooseCompetitionComboBox();
@@ -121,16 +123,22 @@ public class CompetitionPanel extends JPanel {
             competitionTypeJComboBox.setEnabled(false);
         });
 
-        this.add(new JLabel("Nazwa:"), "");
-        this.add(nameTextField, "wrap");
+        JTextField nameTextField1 = new JTextField("");
+        this.add(new JLabel("Nazwa:"),"");
+        this.add(nameTextField1, "wrap");
+
+        //nameTextField = new JTextField("");
+        //this.add(new JLabel("Nazwa:"),"");
+        //this.add(nameTextField, "wrap");
+
         this.add(new JLabel("Poziom:"), "");
-        this.add(competitionLevelJComboBox, "wrap ");
+        this.add(competitionLevelJComboBox, "wrap");
         this.add(new JLabel("Kategoria:"), "");
-        this.add(competitionCategoryJComboBox, "wrap ");
+        this.add(competitionCategoryJComboBox, "wrap");
         this.add(new JLabel("Nagroda:"), "");
         this.add(nameTextField, "wrap");
         this.add(new JLabel("Rodzaj zawodów:"), "");
-        this.add(competitionTypeJComboBox, "wrap ");
+        this.add(competitionTypeJComboBox, "wrap");
 
         JPanel buttonPanel = new JPanel();
         JButton jButtonCommit = new JButton("Zatwierdź");
@@ -162,7 +170,7 @@ public class CompetitionPanel extends JPanel {
         buttonPanel.add(jButtonCommit);
         buttonPanel.add(jButtonExit);
 
-//        this.add(new JTextArea());
+        this.add(new JTextArea());
         this.add(buttonPanel);
     }
 
