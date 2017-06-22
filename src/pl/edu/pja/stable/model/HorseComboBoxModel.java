@@ -57,7 +57,6 @@ public class HorseComboBoxModel extends AbstractListModel implements ComboBoxMod
 
     @Override
     public void setSelectedItem(Object anItem) {
-        //System.out.println("setSelected: " + anItem);
         selectIdx = horseStringList.indexOf(anItem);
         selection = (String) anItem;
     }

@@ -10,7 +10,8 @@ import javax.persistence.*;
  * Created by Magdalena on 2017-04-26.
  */
 @Entity
-public abstract class Competition {
+@Table(name = "competition")
+public class Competition {
 
     /**
      * Numer (id) zawodów
@@ -32,12 +33,6 @@ public abstract class Competition {
     @Enumerated(EnumType.STRING)
     @Column(name = "comp_level", nullable = false)
     private CompetitionLevel competitionLevel;
-
-    /**
-     * Data
-     */
-//    @Column(name = "date", nullable = false)
-//    private Date date;
 
     /**
      * Kategoria zawodow
@@ -62,13 +57,13 @@ public abstract class Competition {
     /**
      * Liczba przeszkód
      */
-    @Column(name = "number_obstacles", nullable = false)
+    @Column(name = "number_obstacles")
     private int numberOfObstacles;
 
     /**
      * Distance
      */
-    @Column(name = "distance", nullable = false)
+    @Column(name = "distance")
     private double distance;
 
     public int getId() {
