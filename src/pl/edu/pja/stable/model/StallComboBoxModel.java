@@ -84,14 +84,17 @@ public class StallComboBoxModel extends AbstractListModel implements ComboBoxMod
 
     public void setSelectedStall(Stall anItem) {
         //System.out.println("setSelected: " + anItem);
-        System.out.println("setSelectedStall: " + anItem);
+        //System.out.println("setSelectedStall: " + anItem);
         if (anItem == null) {
             selectIdx = 0;
             selection = (String) stallStringList.get(selectIdx);
             return;
         }
-        selectIdx = stallList.indexOf(anItem);
+        //selectIdx = stallList.indexOf(anItem);
+        //selection = (String) stallStringList.get(selectIdx);
+        selectIdx = stallStringList.indexOf(((anItem.getStable() == null) ? "" : anItem.getStable().getStableName() + " - ") + anItem.getStallNumber());
         selection = (String) stallStringList.get(selectIdx);
+
     }
 
     public void refresh(List<Stall> stallList) {
@@ -105,5 +108,4 @@ public class StallComboBoxModel extends AbstractListModel implements ComboBoxMod
         selectIdx = stallStringList.size() - 1;
         selection = stallStringList.get(selectIdx);
     }
-
 }

@@ -37,10 +37,10 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
 
             selection = owner.getName();
             this.ownerList.add(owner);
-            //this.ownerList.addAll(1, ownerList);
+            this.ownerList.addAll(1, ownerList);
         }
-
-        this.ownerList.addAll(ownerList);
+        else
+            this.ownerList.addAll(ownerList);
 
         /**
          * Tutaj decydujemy co jest wyświetlane i jak w JComboBoxie.
@@ -83,13 +83,15 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
     }
 
     public void setSelectedOwner(Owner anItem) {
-        System.out.println("setSelectedOwner: " + anItem);
+        //System.out.println("setSelectedOwner: " + anItem.getSurname());
         if (anItem == null) {
             selectIdx = 0;
             selection = (String) ownerStringList.get(selectIdx);
             return;
         }
-        selectIdx = ownerList.indexOf(anItem);
+        //selectIdx = ownerList.indexOf(anItem);
+        //selection = (String) ownerStringList.get(selectIdx);
+        selectIdx = ownerStringList.indexOf(anItem.getName() + ((anItem.getSurname().equals("")) ? "" : " " + (anItem.getSurname())));
         selection = (String) ownerStringList.get(selectIdx);
     }
 
