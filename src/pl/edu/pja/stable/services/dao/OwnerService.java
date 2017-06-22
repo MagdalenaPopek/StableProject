@@ -1,5 +1,6 @@
 package pl.edu.pja.stable.services.dao;
 
+import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.entity.Owner;
 import pl.edu.pja.stable.managers.SessionManager;
 
@@ -20,6 +21,15 @@ public class OwnerService {
      */
     public List<Owner> getAllOwners() {
         return SessionManager.getOwnerDao().getAll();
+    }
+
+    /**
+     * Zwraca listę koni klienta
+     *
+     * @return List<Horse>
+     */
+    public List<Horse> getHorses() {
+        return SessionManager.getOwnerDao().getHorses();
     }
 
     public void saveOwner(Owner o) {

@@ -3,6 +3,7 @@ package pl.edu.pja.stable.daoimpl.hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pl.edu.pja.stable.dao.IOwnerDao;
+import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.entity.Owner;
 
 import javax.persistence.Query;
@@ -72,5 +73,10 @@ public class HbnOwnerDao implements IOwnerDao {
     @Override
     public void updateEntity(Owner entity) {
 
+    }
+
+    @Override
+    public List<Horse> getHorses() {
+        return session.createQuery("Horses from Owner").list();
     }
 }
