@@ -13,19 +13,24 @@ public class HorseComboBoxModel extends AbstractListModel implements ComboBoxMod
 
     List<Horse> horseList = new ArrayList<Horse>();
     List<String> horseStringList = new ArrayList<String>();
-
     boolean onlyHorse = false;
-
     String selection = null;
     int selectIdx = 0;
 
     public HorseComboBoxModel(List<Horse> horseList) {
         this(horseList, false);
     }
-
     public HorseComboBoxModel(List<Horse> horseList, boolean onlyHorse) {
         this.onlyHorse = onlyHorse;
         start(horseList);
+    }
+
+    public boolean isOnlyHorse() {
+        return onlyHorse;
+    }
+
+    public void setOnlyHorse(boolean onlyHorse) {
+        this.onlyHorse = onlyHorse;
     }
 
     private void start(List<Horse> horseList) {
@@ -81,6 +86,11 @@ public class HorseComboBoxModel extends AbstractListModel implements ComboBoxMod
     }
 
     public void refresh(List<Horse> horseList) {
+        horseList = new ArrayList<Horse>();
+        horseStringList = new ArrayList<String>();
+        selection = null;
+        selectIdx = 0;
+
         start(horseList);
     }
 

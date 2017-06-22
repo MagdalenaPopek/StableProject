@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxModel {
 
-    List<Owner> ownerList = new ArrayList<Owner>();
-    List<String> ownerStringList = new ArrayList<String>();
+    private List<Owner> ownerList = new ArrayList<Owner>();
+    private List<String> ownerStringList = new ArrayList<String>();
 
-    boolean onlyOwner = false;
+    private boolean onlyOwner = false;
 
-    String selection = null;
-    int selectIdx = 0;
+    private String selection = null;
+    private int selectIdx = 0;
 
     public OwnerComboBoxModel(List<Owner> ownerList) {
         this(ownerList, false);
@@ -29,7 +29,6 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
     }
 
     private void start(List<Owner> ownerList) {
-
         if (!onlyOwner) {
             Owner owner = new Owner();
             owner.setName("Nowy");
@@ -38,8 +37,7 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
             selection = owner.getName();
             this.ownerList.add(owner);
             this.ownerList.addAll(1, ownerList);
-        }
-        else
+        } else
             this.ownerList.addAll(ownerList);
 
         /**
@@ -58,7 +56,7 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
 
     @Override
     public void setSelectedItem(Object anItem) {
-        //System.out.println("setSelected: " + anItem);
+        //System.out.println("setSelectedItem: " + anItem);
         selectIdx = ownerStringList.indexOf(anItem);
         selection = (String) anItem;
     }
@@ -79,11 +77,12 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
     }
 
     public Owner getSelectedOwner() {
+        //System.out.println("getSelectedOwner() Idx: " + selectIdx);
         return ownerList.get(selectIdx);
     }
 
     public void setSelectedOwner(Owner anItem) {
-        //System.out.println("setSelectedOwner: " + anItem.getSurname());
+        //System.out.println("setSelectedOwner(Owner anItem): " + anItem.getSurname());
         if (anItem == null) {
             selectIdx = 0;
             selection = (String) ownerStringList.get(selectIdx);
@@ -105,6 +104,14 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
 
         selectIdx = ownerStringList.size() - 1;
         selection = ownerStringList.get(selectIdx);
+    }
+
+    public boolean isOnlyOwner() {
+        return onlyOwner;
+    }
+
+    public void setOnlyOwner(boolean onlyOwner) {
+        this.onlyOwner = onlyOwner;
     }
 
 }

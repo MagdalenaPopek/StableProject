@@ -3,22 +3,16 @@ package pl.edu.pja.stable.gui;
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.entity.Owner;
-import pl.edu.pja.stable.entityutils.CompetitionLevel;
-import pl.edu.pja.stable.entityutils.HorseGender;
 import pl.edu.pja.stable.model.HorseComboBoxModel;
 import pl.edu.pja.stable.model.OwnerComboBoxModel;
-import pl.edu.pja.stable.model.StallComboBoxModel;
 import pl.edu.pja.stable.services.dao.HorseService;
 import pl.edu.pja.stable.services.dao.OwnerService;
-import pl.edu.pja.stable.services.dao.StallService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.EnumSet;
-import java.util.Set;
 
 /**
  * Created by Magdalena on 2017-06-22.
@@ -31,77 +25,118 @@ public class OwnerAndHorsesPanel extends JPanel {
     HorseComboBoxModel horseComboBoxModel;
     OwnerComboBoxModel ownerComboBoxModel;
 
+    JComboBox<String> chooseOwnerComboBox = chooseOwnerComboBox();
+    JComboBox<String> chooseHorseComboBox = new JComboBox<String>();
+
+
     public OwnerAndHorsesPanel(JFrame mainFrame) {
         super();
         this.mainFrame = mainFrame;
 
-        JComboBox<String> chooseOwnerComboBox;
-        JComboBox<String> horseComboBox;
-
-        int columnSize = 32;
-        JTextField nameTextField = new JTextField(columnSize);
-        JTextField passportNumberTextField = new JTextField(columnSize);
-        JComboBox<String> ownerJComboBox = chooseOwnerComboBox();
-
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
         this.setLayout(layout);
 
+        int columnSize = 32;
+
+        JTextArea horsesTextArea = new JTextArea(5, columnSize);
+        JTextField nameTextField = new JTextField(columnSize);
+        JTextField passportNumberTextField = new JTextField(columnSize);
+        JTextField ownerTextField = new JTextField(columnSize);
+        nameTextField.setEnabled(false);
+        passportNumberTextField.setEnabled(false);
+        ownerTextField.setEnabled(false);
+        horsesTextArea.setFont(horsesTextArea.getFont().deriveFont(12f));
+
         this.add(new JLabel("Wybierz właściciela"), "");
-        chooseOwnerComboBox = chooseOwnerComboBox();
         this.add(chooseOwnerComboBox, "wrap 32");
+        this.add(new JLabel("Lista posiadanych koni:"), "");
+        this.add(horsesTextArea, "wrap 32");
 
 //        if (chooseOwnerComboBox.getSelectedItem() != null) {
-            this.add(new JLabel("Wybierz konia"), "");
-            horseComboBox = chooseHorseComboBox();
-            this.add(horseComboBox, "wrap 32");
+        this.add(new JLabel("Wybierz konia"), "");
+        this.add(chooseHorseComboBox, "wrap 32");
+        chooseHorseComboBox.setSelectedItem(null);
+
+        //Wybieram właściciela
+        chooseOwnerComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Owner o = ownerComboBoxModel.getSelectedOwner();
+                ownerTextField.setText(o.getName()+" "+o.getSurname());
+
+                horsesTextArea.setText("");
+                horsesTextArea.setRows(ownerComboBoxModel.getSelectedOwner().getHorses().size());
+                for(Horse h : ownerComboBoxModel.getSelectedOwner().getHorses())
+                    horsesTextArea.append("Nazwa:\t"+h.getName()+"\t Płeć: "+h.getGender()+"\tPaszport nr: "+h.getPassportNumber()+"\n");
 
 
-            //TUTAJ Z KLIKNIĘTEGO KONIA WYBIERAM DANE DO PÓL
-            horseComboBox.addItemListener(new ItemListener() {
-                @Override
-                public void itemStateChanged(ItemEvent e) {
-                    Horse h = horseComboBoxModel.getSelectedHorse();
-                    nameTextField.setText(h.getName());
-                    nameTextField.setEnabled(false);
-                    passportNumberTextField.setText(h.getPassportNumber());
-                    passportNumberTextField.setEnabled(false);
+//                nameTextField.setText(h.getName());
+//                nameTextField.setEnabled(false);
+//                passportNumberTextField.setText(h.getPassportNumber());
+//                passportNumberTextField.setEnabled(false);
 
-                    //  ownerComboBoxModel.setSelectedOwner(h.getOwner());
-                    ownerComboBoxModel.getSelectedOwner();
-                    ownerJComboBox.updateUI();
-                    ownerJComboBox.setEnabled(false);
-
-                    ownerJComboBox.updateUI();
-
-                }
-            });
+                //  ownerComboBoxModel.setSelectedOwner(h.getOwner());
+                //refreshHorseComboBox();
+                chooseHorseComboBox = chooseHorseComboBox();
+                chooseHorseComboBox.updateUI();
+                chooseHorseComboBox.revalidate();
+                mainFrame.validate();
+                mainFrame.pack();
 
 
-            this.add(new JLabel("Nazwa:"), "");
-            this.add(nameTextField, "wrap");
-            this.add(new JLabel("Numer paszportu:"), "");
-            this.add(passportNumberTextField, "wrap");
-            this.add(new JLabel("Właściciel:"), "");
-            this.add(ownerJComboBox, "wrap 32");
+                System.out.println("Ilość koni na liście: "+chooseHorseComboBox.getItemCount());
+
+                //chooseOwnerComboBox.updateUI();
+
+                //ownerComboBoxModel.getSelectedOwner();
+                //ownerJComboBox.updateUI();
+                //ownerJComboBox.setEnabled(false);
+            }
+        });
 
 
-            JPanel buttonPanel = new JPanel();
-            JButton jButtonExit = new JButton("Wyjdź");
+        //TUTAJ Z KLIKNIĘTEGO KONIA WYBIERAM DANE DO PÓL
+        chooseHorseComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Horse h = horseComboBoxModel.getSelectedHorse();
+                nameTextField.setText(h.getName());
+                //nameTextField.setEnabled(false);
+                passportNumberTextField.setText(h.getPassportNumber());
+                //passportNumberTextField.setEnabled(false);
 
-            jButtonExit.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    mainFrame.setContentPane(new AboutPanel());
-                    mainFrame.pack();
-                }
-            });
+                //ownerComboBoxModel.setSelectedOwner(h.getOwner());
+                //ownerComboBoxModel.getSelectedOwner();
+                //ownerJComboBox.updateUI();
+                //ownerJComboBox.setEnabled(false);
+            }
+        });
 
-            buttonPanel.add(jButtonExit);
 
-            this.add(new JTextArea());
-            this.add(buttonPanel);
-        }
+        this.add(new JLabel("Nazwa:"), "");
+        this.add(nameTextField, "wrap");
+        this.add(new JLabel("Numer paszportu:"), "");
+        this.add(passportNumberTextField, "wrap");
+        this.add(new JLabel("Właściciel:"), "");
+        this.add(ownerTextField, "wrap 32");
 
+
+        JPanel buttonPanel = new JPanel();
+        JButton jButtonExit = new JButton("Wyjdź");
+
+        jButtonExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.setContentPane(new AboutPanel());
+                mainFrame.pack();
+            }
+        });
+
+        buttonPanel.add(jButtonExit);
+
+        this.add(new JTextArea());
+        this.add(buttonPanel);
+    }
 
 
     private JComboBox<String> chooseOwnerComboBox() {
@@ -111,13 +146,17 @@ public class OwnerAndHorsesPanel extends JPanel {
     }
 
     private JComboBox<String> chooseHorseComboBox() {
-//        ownerComboBoxModel.getSelectedOwner().getHorses();
-        horseComboBoxModel = new HorseComboBoxModel(ownerComboBoxModel.getSelectedOwner().getHorses());
+        System.out.println("Liczba koni: "+ownerComboBoxModel.getSelectedOwner().getHorses().size());
+        horseComboBoxModel = new HorseComboBoxModel(ownerComboBoxModel.getSelectedOwner().getHorses(), true);
 //        horseComboBoxModel = new HorseComboBoxModel(horseService.getAllHorses());
         JComboBox<String> horses = new JComboBox<>(horseComboBoxModel);
         return horses;
     }
 
-
-
+    private void refreshHorseComboBox() {
+        System.out.println("Liczba koni: "+ownerComboBoxModel.getSelectedOwner().getHorses().size());
+        System.out.println("Koń (0): "+ownerComboBoxModel.getSelectedOwner().getHorses().get(0).getName());
+        horseComboBoxModel.setOnlyHorse(true);
+        horseComboBoxModel.refresh(ownerComboBoxModel.getSelectedOwner().getHorses());
+    }
 }

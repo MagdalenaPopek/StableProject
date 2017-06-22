@@ -2,8 +2,6 @@ package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
 import pl.edu.pja.stable.entity.Horse;
-import pl.edu.pja.stable.entity.Owner;
-import pl.edu.pja.stable.entity.Stall;
 import pl.edu.pja.stable.entityutils.HorseGender;
 import pl.edu.pja.stable.model.HorseComboBoxModel;
 import pl.edu.pja.stable.model.OwnerComboBoxModel;
@@ -46,8 +44,8 @@ public class HorsePanel extends JPanel {
         JComboBox<String> ownerJComboBox = chooseOwnerComboBox();
         JComboBox<String> stallTextField = chooseStallComboBox();
 
-        EnumSet<HorseGender> allHorseGender = EnumSet.allOf( HorseGender.class );
-        for(HorseGender hg : allHorseGender) {
+        EnumSet<HorseGender> allHorseGender = EnumSet.allOf(HorseGender.class);
+        for (HorseGender hg : allHorseGender) {
             horseGenderJComboBox.addItem(hg);
         }
 
@@ -86,8 +84,12 @@ public class HorsePanel extends JPanel {
                 horseGenderJComboBox.setSelectedItem(h.getGender());
                 horseGenderJComboBox.setEnabled(false);
 
-                ownerComboBoxModel.setSelectedOwner(h.getOwner());
-                ownerJComboBox.updateUI();
+                if (h.getOwner() != null) {
+                    ownerComboBoxModel.setSelectedOwner(h.getOwner());
+                    ownerJComboBox.updateUI();
+                } else
+                    ownerJComboBox.setSelectedItem(null);
+
                 ownerJComboBox.setEnabled(false);
 
                 stallComboBoxModel.setSelectedStall(h.getStall());
@@ -116,23 +118,23 @@ public class HorsePanel extends JPanel {
         jButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               mainFrame.setContentPane(new AboutPanel());
-               mainFrame.pack();
+                mainFrame.setContentPane(new AboutPanel());
+                mainFrame.pack();
             }
         });
 
         jButtonCommit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(chooseHorseComboBox.getSelectedItem().equals("Nowy")) {
+                if (chooseHorseComboBox.getSelectedItem().equals("Nowy")) {
                     System.out.println("Dodaję nowego konia...");
                     Horse h = new Horse();
                     h.setName(nameTextField.getText());
                     h.setPassportNumber(passportNumberTextField.getText());
                     h.setGender((HorseGender) horseGenderJComboBox.getSelectedItem());
-                    if(ownerComboBoxModel.getSelectedItem() == null) {
+                    if (ownerComboBoxModel.getSelectedItem() == null) {
                         h.setOwner(null);
-                    }else{
+                    } else {
                         h.setOwner(ownerComboBoxModel.getSelectedOwner());
                     }
                     h.setStall(stallComboBoxModel.getSelectedStall());
@@ -141,7 +143,7 @@ public class HorsePanel extends JPanel {
 
                     horseComboBoxModel.addHorse(h);
                     chooseHorseComboBox.updateUI();
-                    chooseHorseComboBox.setSelectedIndex(chooseHorseComboBox.getItemCount()-1);
+                    chooseHorseComboBox.setSelectedIndex(chooseHorseComboBox.getItemCount() - 1);
                 }
             }
         });
@@ -167,7 +169,7 @@ public class HorsePanel extends JPanel {
 
     private JComboBox<String> chooseStallComboBox() {
         stallComboBoxModel = new StallComboBoxModel(stallService.getAllStalls(), true);
-        JComboBox<String>  stall = new JComboBox<>(stallComboBoxModel);
+        JComboBox<String> stall = new JComboBox<>(stallComboBoxModel);
         return stall;
     }
 

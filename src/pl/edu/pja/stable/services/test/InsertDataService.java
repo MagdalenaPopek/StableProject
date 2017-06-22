@@ -1,5 +1,6 @@
 package pl.edu.pja.stable.services.test;
 
+import org.hibernate.Session;
 import pl.edu.pja.stable.dao.*;
 import pl.edu.pja.stable.daoimpl.hibernate.*;
 import pl.edu.pja.stable.entity.*;
