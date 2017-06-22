@@ -14,7 +14,7 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
     List<Owner> ownerList = new ArrayList<Owner>();
     List<String> ownerStringList = new ArrayList<String>();
 
-    boolean onlyOwners = false;
+    boolean onlyOwner = false;
 
     String selection = null;
     int selectIdx = 0;
@@ -23,14 +23,14 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
         this(ownerList, false);
     }
 
-    public OwnerComboBoxModel(List<Owner> ownerList, boolean onlyOwners) {
-        this.onlyOwners = onlyOwners;
+    public OwnerComboBoxModel(List<Owner> ownerList, boolean onlyOwner) {
+        this.onlyOwner = onlyOwner;
         start(ownerList);
     }
 
     private void start(List<Owner> ownerList) {
 
-        if (!onlyOwners) {
+        if (!onlyOwner) {
             Owner owner = new Owner();
             owner.setName("Nowy");
             owner.setSurname("");

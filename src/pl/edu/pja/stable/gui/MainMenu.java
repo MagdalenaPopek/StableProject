@@ -27,6 +27,8 @@ public class MainMenu extends JMenuBar {
         JMenuItem horsesMnuItm = new JMenuItem("Konie");
         JMenuItem competitionMnuItm = new JMenuItem("Zawody");
         JMenuItem employeeMnuItm = new JMenuItem("Pracownicy");
+        JMenu showListMnu = new JMenu("Wyświetl powiązania");
+        JMenuItem showOwnersAndHorsesMnuItem = new JMenuItem("Właściciele i konie");
 
         dictionaryMenu.add(clientsMnuItm);
         dictionaryMenu.add(ownersMnuItm);
@@ -34,15 +36,18 @@ public class MainMenu extends JMenuBar {
         dictionaryMenu.add(competitionMnuItm);
         dictionaryMenu.addSeparator();
         dictionaryMenu.add(employeeMnuItm);
+        dictionaryMenu.addSeparator();
+        dictionaryMenu.add(showListMnu);
+        showListMnu.add(showOwnersAndHorsesMnuItem);
 
         //Podmenu Zawody
         JMenu addToCompetitionMnu = new JMenu("Dodaj do zawodów");
-        JMenuItem addOwnerToCompetitionMnu = new JMenuItem("Właściciela");
-        JMenuItem addClientToCompetitionMnu = new JMenuItem("Klienta");
+        JMenuItem addOwnerToCompetitionMnuItm = new JMenuItem("Właściciela");
+        JMenuItem addClientToCompetitionMnuItm = new JMenuItem("Klienta");
 
         competitionMenu.add(addToCompetitionMnu);
-        addToCompetitionMnu.add(addOwnerToCompetitionMnu);
-        addToCompetitionMnu.add(addClientToCompetitionMnu);
+        addToCompetitionMnu.add(addOwnerToCompetitionMnuItm);
+        addToCompetitionMnu.add(addClientToCompetitionMnuItm);
 
         //Podmenu O programie
         JMenuItem aboutMnuItm = new JMenuItem("O programie");
@@ -95,6 +100,30 @@ public class MainMenu extends JMenuBar {
             }
         });
 
+        /**
+         * Przejdź do wyświetlania klientów i koni
+         */
+        showOwnersAndHorsesMnuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.setContentPane(new OwnerAndHorsesPanel(mainFrame));
+                mainFrame.pack();
+            }
+        });
+
+
+        /**
+         * Przejdź do dodawania klienta do zawodów
+         */
+        addClientToCompetitionMnuItm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.setContentPane(new ClientHorseCompPanel(mainFrame));
+                mainFrame.pack();
+            }
+        });
+
+
         exitMnuItm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,15 +138,6 @@ public class MainMenu extends JMenuBar {
                     return;
             }
         });
-
-        addClientToCompetitionMnu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.setContentPane(new ClientCompPanel(mainFrame));
-                mainFrame.pack();
-            }
-        });
-
 
         //add menu to menubar
         this.add(dictionaryMenu);

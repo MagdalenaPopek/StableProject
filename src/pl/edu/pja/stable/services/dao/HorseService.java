@@ -14,7 +14,7 @@ public class HorseService {
     }
 
     /**
-     * Zwraca listę klientów
+     * Zwraca listę koni
      *
      * @return List<Horse>
      */

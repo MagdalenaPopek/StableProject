@@ -15,9 +15,9 @@ public class OwnerService {
     }
 
     /**
-     * Zwraca listę klientów
+     * Zwraca listę właścicieli
      *
-     * @return List<Client>
+     * @return List<Owner>
      */
     public List<Owner> getAllOwners() {
         return SessionManager.getOwnerDao().getAll();

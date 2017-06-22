@@ -41,12 +41,12 @@ public class CompetitionPanel extends JPanel {
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
         this.setLayout(layout);
 
-        NumberFormat format = NumberFormat.getInstance();
-        NumberFormatter formatter = new NumberFormatter(format);
-        formatter.setValueClass(Integer.class);
-        formatter.setMinimum(0);
-        formatter.setAllowsInvalid(false);
-        formatter.setCommitsOnValidEdit(true);
+//        NumberFormat format = NumberFormat.getInstance();
+//        NumberFormatter formatter = new NumberFormatter(format);
+//        formatter.setValueClass(Integer.class);
+//        formatter.setMinimum(0);
+//        formatter.setAllowsInvalid(false);
+//        formatter.setCommitsOnValidEdit(true);
 
         JComboBox<String> chooseCompetitionComboBox;
 
@@ -54,9 +54,9 @@ public class CompetitionPanel extends JPanel {
         JTextField nameTextField = new JTextField(columnSize);
         JComboBox<CompetitionLevel> competitionLevelJComboBox = new JComboBox<CompetitionLevel>();
         JComboBox<CompetitionCategory> competitionCategoryJComboBox = new JComboBox<CompetitionCategory>();
-//        JTextField prizeTextField = new JTextField(columnSize);
-        JFormattedTextField prizeTextField = new JFormattedTextField(formatter);
-        prizeTextField.setColumns(columnSize);
+        JTextField prizeTextField = new JTextField(columnSize);
+//        JFormattedTextField prizeTextField = new JFormattedTextField(formatter);
+//        prizeTextField.setColumns(columnSize);
         JComboBox<CompetitionType> competitionTypeJComboBox = new JComboBox<CompetitionType>();
 
         EnumSet<CompetitionLevel> allCompetitionLevels = EnumSet.allOf(CompetitionLevel.class );
@@ -78,8 +78,6 @@ public class CompetitionPanel extends JPanel {
         competitionCategoryJComboBox.setSelectedItem(null);
         competitionTypeJComboBox.setSelectedItem(null);
 
-
-
         this.add(new JLabel("Wybierz zawody"), "");
         chooseCompetitionComboBox = chooseCompetitionComboBox();
         this.add(chooseCompetitionComboBox, "wrap 32");
@@ -87,53 +85,46 @@ public class CompetitionPanel extends JPanel {
         chooseCompetitionComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (e.getItem().equals("Nowy")) {
+            if (e.getItem().equals("Nowy")) {
 
-                    nameTextField.setText("");
-                    nameTextField.setEnabled(true);
+                nameTextField.setText("");
+                nameTextField.setEnabled(true);
 
-                    competitionLevelJComboBox.setSelectedItem(null);
-                    competitionLevelJComboBox.setEnabled(true);
+                competitionLevelJComboBox.setSelectedItem(null);
+                competitionLevelJComboBox.setEnabled(true);
 
-                    competitionCategoryJComboBox.setSelectedItem(null);
-                    competitionCategoryJComboBox.setEnabled(true);
+                competitionCategoryJComboBox.setSelectedItem(null);
+                competitionCategoryJComboBox.setEnabled(true);
 
-                    prizeTextField.setText("");
-                    prizeTextField.setEnabled(true);
+                prizeTextField.setText("");
+                prizeTextField.setEnabled(true);
 
-                    competitionTypeJComboBox.setSelectedItem(null);
-                    competitionTypeJComboBox.setEnabled(true);
-                    return;
-                }
-
-                //System.out.println(e.getItem().toString());
-                Competition c = competitionComboBoxModel.getSelectedCompetition();
-
-                nameTextField.setText(c.getCompName());
-                nameTextField.setEnabled(false);
-
-                competitionLevelJComboBox.setSelectedItem(c.getCompetitionLevel());
-                competitionLevelJComboBox.setEnabled(false);
-
-                competitionCategoryJComboBox.setSelectedItem(c.getCompetitionCategory());
-                competitionCategoryJComboBox.setEnabled(false);
-
-                prizeTextField.setText(String.valueOf(c.getPrize()));
-                prizeTextField.setEnabled(false);
-
-                competitionTypeJComboBox.setSelectedItem(c.getCompetitionType());
-                competitionTypeJComboBox.setEnabled(false);
+                competitionTypeJComboBox.setSelectedItem(null);
+                competitionTypeJComboBox.setEnabled(true);
+                return;
             }
-        });
 
-        nameTextField.setText("To jest test");
-        //JTextField nameTextField1 = new JTextField("");
+            //System.out.println(e.getItem().toString());
+            Competition c = competitionComboBoxModel.getSelectedCompetition();
+
+            nameTextField.setText(c.getCompName());
+            nameTextField.setEnabled(false);
+
+            competitionLevelJComboBox.setSelectedItem(c.getCompetitionLevel());
+            competitionLevelJComboBox.setEnabled(false);
+
+            competitionCategoryJComboBox.setSelectedItem(c.getCompetitionCategory());
+            competitionCategoryJComboBox.setEnabled(false);
+
+            prizeTextField.setText(String.valueOf(c.getPrize()));
+            prizeTextField.setEnabled(false);
+
+            competitionTypeJComboBox.setSelectedItem(c.getCompetitionType());
+            competitionTypeJComboBox.setEnabled(false);
+        }});
+
         this.add(new JLabel("Nazwa:"),"");
         this.add(nameTextField, "wrap");
-
-        //nameTextField = new JTextField("");
-        //this.add(new JLabel("Nazwa:"),"");
-        //this.add(nameTextField, "wrap");
 
         this.add(new JLabel("Poziom:"), "");
         this.add(competitionLevelJComboBox, "wrap");
@@ -148,31 +139,32 @@ public class CompetitionPanel extends JPanel {
         JButton jButtonCommit = new JButton("Zatwierdź");
         JButton jButtonExit = new JButton("Wyjdź");
 
-        jButtonExit.addActionListener(e -> {
+        jButtonExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
             mainFrame.setContentPane(new AboutPanel());
             mainFrame.pack();
-        });
+        }});
 
         jButtonCommit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (chooseCompetitionComboBox.getSelectedItem().equals("Nowy")) {
-                    System.out.println("Dodaję nowe zawody...");
-                    Competition c = new Competition();
-                    c.setCompName(nameTextField.getText());
-                    c.setCompetitionLevel((CompetitionLevel) competitionLevelJComboBox.getSelectedItem());
-                    c.setCompetitionCategory((CompetitionCategory) competitionCategoryJComboBox.getSelectedItem());
-                    c.setPrize(Double.parseDouble(prizeTextField.getText()));
-                    c.setCompetitionType((CompetitionType) competitionTypeJComboBox.getSelectedItem());
+            if(chooseCompetitionComboBox.getSelectedItem().equals("Nowy")) {
+                System.out.println("Dodaję nowe zawody...");
+                Competition c = new Competition();
+                c.setCompName(nameTextField.getText());
+                c.setCompetitionLevel((CompetitionLevel) competitionLevelJComboBox.getSelectedItem());
+                c.setCompetitionCategory((CompetitionCategory) competitionCategoryJComboBox.getSelectedItem());
+                c.setPrize(Double.parseDouble(prizeTextField.getText()));
+                c.setCompetitionType((CompetitionType) competitionTypeJComboBox.getSelectedItem());
 
-                    competitionService.saveCompetition(c);
+                competitionService.saveCompetition(c);
 
-                    competitionComboBoxModel.addCompetition(c);
-                    chooseCompetitionComboBox.updateUI();
-                    chooseCompetitionComboBox.setSelectedIndex(chooseCompetitionComboBox.getItemCount() - 1);
-                }
+                competitionComboBoxModel.addCompetition(c);
+                chooseCompetitionComboBox.updateUI();
+                chooseCompetitionComboBox.setSelectedIndex(chooseCompetitionComboBox.getItemCount()-1);
             }
-        });
+        }});
 
         buttonPanel.add(jButtonCommit);
         buttonPanel.add(jButtonExit);

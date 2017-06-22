@@ -19,7 +19,7 @@ import java.awt.event.ItemListener;
 /**
  * Created by Magdalena on 2017-06-22.
  */
-public class ClientCompPanel extends JPanel{
+public class ClientHorseCompPanel extends JPanel{
 
     JFrame mainFrame;
     ClientService clientService = new ClientService();
@@ -30,7 +30,7 @@ public class ClientCompPanel extends JPanel{
 
 
 
-    public ClientCompPanel(JFrame mainFrame) {
+    public ClientHorseCompPanel(JFrame mainFrame) {
         super();
 
         this.mainFrame = mainFrame;
@@ -50,44 +50,13 @@ public class ClientCompPanel extends JPanel{
         chooseClientComboBox = chooseClientComboBox();
         this.add(chooseClientComboBox, "wrap 32");
 
-        /*chooseClientComboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getItem().equals("Nowy")) {
-                    nameTextField.setText("");
-                    nameTextField.setEnabled(true);
-                    surnameTextField.setText("");
-                    surnameTextField.setEnabled(true);
-//                    birthdateTextField.setText("");
-//                    birthdateTextField.setEnabled(true);
-                    phoneTextField.setText("");
-                    phoneTextField.setEnabled(true);
-                    return;
-                }
+/*        this.add(new JLabel("Wybierz klienta"), "");
+        chooseHorseComboBox = chooseClientComboBox();
+        this.add(chooseClientComboBox, "wrap 32");
 
-                //System.out.println(e.getItem().toString());
-                Client c = clientComboBoxModel.getSelectedClient();
-                nameTextField.setText(c.getName());
-                nameTextField.setEnabled(false);
-                surnameTextField.setText(c.getSurname());
-                surnameTextField.setEnabled(false);
-//                birthdateTextField.setText((c.getBirthDate() == null ) ? "" : c.getBirthDate().toString());
-//                birthdateTextField.setEnabled(false);
-                phoneTextField.setText(c.getPhoneNumber());
-                phoneTextField.setEnabled(false);
-
-            }
-        });*/
-
-
-       /* this.add(new JLabel("Imię:"), "");
-        this.add(nameTextField, "wrap");
-        this.add(new JLabel("Nazwisko:"), "");
-        this.add(surnameTextField, "wrap");
-//        this.add(new JLabel("Data urodzenia:"), "");
-//        this.add(birthdateTextField, "wrap");
-        this.add(new JLabel("Nr telefonu:"), "");
-        this.add(phoneTextField, "wrap 32");*/
+        this.add(new JLabel("Wybierz klienta"), "");
+        chooseCompetitionComboBox = chooseClientComboBox();
+        this.add(chooseClientComboBox, "wrap 32");*/
 
         JPanel buttonPanel = new JPanel();
         JButton jButtonCommit = new JButton("Zatwierdź");

@@ -28,7 +28,7 @@ public class InsertDataService {
 
     public void insertData() {
       /* Add few employee records in database */
-        Employee employee;
+       /* Employee employee;
         Client client;
         Owner owner;
         Stall stall;
@@ -78,7 +78,7 @@ public class InsertDataService {
                 System.out.println("Create stall " + b);
                 stallDao.addEntity(stall);
             }
-        }
+        }*/
     }
 
     public void test() {
