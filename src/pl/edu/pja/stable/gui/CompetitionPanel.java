@@ -153,7 +153,7 @@ public class CompetitionPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (chooseCompetitionComboBox.getSelectedItem().equals("Nowy")) {
                     try {
-                        System.out.println("Dodaję nowe zawody...");
+//                        System.out.println("Dodaję nowe zawody...");
                         Competition c = new Competition();
                         c.setCompName(nameTextField.getText());
                         c.setCompetitionLevel((CompetitionLevel) competitionLevelJComboBox.getSelectedItem());
