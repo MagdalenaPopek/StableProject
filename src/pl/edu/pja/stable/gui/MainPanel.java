@@ -14,15 +14,18 @@ public class MainPanel extends JPanel {
         super(new BorderLayout());
         setOpaque(true);
 
+
         JEditorPane jep = new JEditorPane();
+        jep.setForeground(Color.PINK);
         jep.setEditable(false);
 
         // http://www.kurshtml.edu.pl/html/zielony.html
         StringBuffer sb = new StringBuffer();
         sb.append("<br><br><br>");
-        sb.append("<b><p align='center'><font size='7' face='Verdana, Arial'>My Stable ver. 1.2</font></p></b>");
+        sb.append("<b><p align='center'><font size='7' face='Verdana, Arial'>Projekt MAS</font></p></b>");
         sb.append("<br>");
         sb.append("<b><p align='center'><font size='5' face='Verdana, Arial'>Magdalena Popek</font></p></b>");
+        sb.append("<b><p align='center'><font size='4' face='Verdana, Arial'>s12988</font></p></b>");
         sb.append("<br><br><br>");
         jep.setContentType("text/html");
         jep.setText(sb.toString());
