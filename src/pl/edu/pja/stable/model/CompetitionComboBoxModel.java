@@ -1,6 +1,5 @@
 package pl.edu.pja.stable.model;
 
-import pl.edu.pja.stable.entity.Client;
 import pl.edu.pja.stable.entity.Competition;
 
 import javax.swing.*;
@@ -12,9 +11,19 @@ import java.util.List;
  */
 public class CompetitionComboBoxModel extends AbstractListModel implements ComboBoxModel {
 
+    /**
+     * Lista obiektów Competition
+     */
     List<Competition> competitionList = new ArrayList<Competition>();
+
+    /**
+     * Lista wyświetlanych Stringów w ComboBoxie
+     */
     List<String> competitionStringList = new ArrayList<String>();
 
+    /**
+     * Nie dodajemy pierwszego pola "Nowy", tylko faktyczne dane
+     */
     boolean onlyCompetitions = false;
 
     String selection = null;
@@ -44,7 +53,6 @@ public class CompetitionComboBoxModel extends AbstractListModel implements Combo
 
         /**
          * Tutaj decydujemy co jest wyświetlane i jak w JComboBoxie.
-         * Aktualnie Imię[SPACE]Nazwisko
          */
         for (Competition c : this.competitionList) {
             competitionStringList.add(c.getCompName());

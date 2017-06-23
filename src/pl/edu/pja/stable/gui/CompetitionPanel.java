@@ -41,13 +41,7 @@ public class CompetitionPanel extends JPanel {
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
         this.setLayout(layout);
 
-//        NumberFormat format = NumberFormat.getInstance();
-//        NumberFormatter formatter = new NumberFormatter(format);
-//        formatter.setValueClass(Integer.class);
-//        formatter.setMinimum(0);
-//        formatter.setAllowsInvalid(false);
-//        formatter.setCommitsOnValidEdit(true);
-
+        //DODAJĘ POLA
         JComboBox<String> chooseCompetitionComboBox;
 
         int columnSize = 32;
@@ -55,10 +49,10 @@ public class CompetitionPanel extends JPanel {
         JComboBox<CompetitionLevel> competitionLevelJComboBox = new JComboBox<CompetitionLevel>();
         JComboBox<CompetitionCategory> competitionCategoryJComboBox = new JComboBox<CompetitionCategory>();
         JTextField prizeTextField = new JTextField(columnSize);
-//        JFormattedTextField prizeTextField = new JFormattedTextField(formatter);
-//        prizeTextField.setColumns(columnSize);
         JComboBox<CompetitionType> competitionTypeJComboBox = new JComboBox<CompetitionType>();
+        JCheckBox competitionTookPlaceCheckBox = new JCheckBox();
 
+        //UZUPELNIAM ENUM
         EnumSet<CompetitionLevel> allCompetitionLevels = EnumSet.allOf(CompetitionLevel.class);
         for (CompetitionLevel cl : allCompetitionLevels) {
             competitionLevelJComboBox.addItem(cl);
@@ -74,10 +68,12 @@ public class CompetitionPanel extends JPanel {
             competitionTypeJComboBox.addItem(ct);
         }
 
+        //USTAWIAM SELECTED ITEM W COMBOBOXACH ENUMÓW NA NULL
         competitionLevelJComboBox.setSelectedItem(null);
         competitionCategoryJComboBox.setSelectedItem(null);
         competitionTypeJComboBox.setSelectedItem(null);
 
+        //
         this.add(new JLabel("Wybierz zawody"), "");
         chooseCompetitionComboBox = chooseCompetitionComboBox();
         this.add(chooseCompetitionComboBox, "wrap 32");
@@ -101,6 +97,9 @@ public class CompetitionPanel extends JPanel {
 
                     competitionTypeJComboBox.setSelectedItem(null);
                     competitionTypeJComboBox.setEnabled(true);
+
+                    competitionTookPlaceCheckBox.setSelected(false);
+                    competitionTookPlaceCheckBox.setEnabled(false);
                     return;
                 }
 
@@ -121,6 +120,13 @@ public class CompetitionPanel extends JPanel {
 
                 competitionTypeJComboBox.setSelectedItem(c.getCompetitionType());
                 competitionTypeJComboBox.setEnabled(false);
+
+                if(c.isTookPlace()) {
+                    competitionTookPlaceCheckBox.setSelected(true);
+                }else{
+                    competitionTookPlaceCheckBox.setSelected(false);
+                }
+                competitionTookPlaceCheckBox.setEnabled(false);
             }
         });
 
@@ -135,6 +141,8 @@ public class CompetitionPanel extends JPanel {
         this.add(prizeTextField, "wrap");
         this.add(new JLabel("Rodzaj zawodów:"), "");
         this.add(competitionTypeJComboBox, "wrap");
+        this.add(new JLabel("Czy się odbyły:"), "");
+        this.add(competitionTookPlaceCheckBox, "wrap");
 
         JPanel buttonPanel = new JPanel();
         JButton jButtonCommit = new JButton("Zatwierdź");
@@ -161,6 +169,7 @@ public class CompetitionPanel extends JPanel {
 
                         c.setPrize(Double.parseDouble(prizeTextField.getText()));
                         c.setCompetitionType((CompetitionType) competitionTypeJComboBox.getSelectedItem());
+                        c.setTookPlace(false);
 
                         competitionService.saveCompetition(c);
 

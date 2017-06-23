@@ -1,6 +1,8 @@
 package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
+import org.eclipse.swt.internal.ole.win32.COM;
+import pl.edu.pja.stable.entity.Competition;
 import pl.edu.pja.stable.entity.Contestant;
 import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.model.ClientComboBoxModel;
@@ -165,10 +167,17 @@ public class ClientHorseCompPanel extends JPanel{
     }
 
     private JComboBox<String> chooseCompetitionComboBox() {
-        if(competitionService.getAllCompetitions().isEmpty() ){
+        List<Competition> compList = competitionService.getAllCompetitions();
+        List<Competition> validCompList = new ArrayList<>();
+        for(Competition c : compList){
+            if(!c.isTookPlace()){
+                validCompList.add(c);
+            }
+        }
+        if(validCompList.isEmpty() ){
             JOptionPane.showMessageDialog(mainFrame, "Brak zaplanowanych zawodów. Dodaj zawody w Słowniki > Zawody");
-        }else {
-            competitionComboBoxModel = new CompetitionComboBoxModel(competitionService.getAllCompetitions());
+        }else{
+            competitionComboBoxModel = new CompetitionComboBoxModel(validCompList);
         }
         JComboBox<String> competitions = new JComboBox<>(competitionComboBoxModel);
         return competitions;

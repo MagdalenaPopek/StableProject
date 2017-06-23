@@ -55,16 +55,11 @@ public class Competition {
     private CompetitionType competitionType;
 
     /**
-     * Liczba przeszkód
+     * Czy już się odbyły
+     * @return
      */
-    @Column(name = "number_obstacles")
-    private int numberOfObstacles;
-
-    /**
-     * Distance
-     */
-    @Column(name = "distance")
-    private double distance;
+    @Column(name = "took_place")
+    private boolean tookPlace;
 
     public int getId() {
         return id;
@@ -114,19 +109,11 @@ public class Competition {
         this.competitionType = competitionType;
     }
 
-    public int getNumberOfObstacles() {
-        return numberOfObstacles;
+    public boolean isTookPlace() {
+        return tookPlace;
     }
 
-    public void setNumberOfObstacles(int numberOfObstacles) {
-        this.numberOfObstacles = numberOfObstacles;
-    }
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
+    public void setTookPlace(boolean tookPlace) {
+        this.tookPlace = tookPlace;
     }
 }

@@ -30,8 +30,6 @@ public class HorsePanel extends JPanel {
     OwnerComboBoxModel ownerComboBoxModel;
     StallComboBoxModel stallComboBoxModel;
 
-    ScrolledPane sp = new ScrolledPane();
-
     public HorsePanel(JFrame mainFrame) {
         super();
 
@@ -54,7 +52,7 @@ public class HorsePanel extends JPanel {
         horseGenderJComboBox.setSelectedItem(null);
 
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
-        this.setLayout(layout);
+        this.setLayout(layout);;
 
         this.add(new JLabel("Wybierz konia"), "");
         chooseHorseComboBox = chooseHorseComboBox();

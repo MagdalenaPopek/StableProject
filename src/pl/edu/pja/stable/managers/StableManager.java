@@ -1,6 +1,5 @@
 package pl.edu.pja.stable.managers;
 
-import pl.edu.pja.stable.services.dao.StableService;
 import pl.edu.pja.stable.services.test.InsertDataService;
 
 /**
@@ -10,10 +9,6 @@ import pl.edu.pja.stable.services.test.InsertDataService;
 public class StableManager {
 
     public StableManager() {
-    }
-
-    public void insertData() {
-
     }
 
     public void test() {

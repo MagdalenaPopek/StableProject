@@ -4,6 +4,9 @@ import org.hibernate.Session;
 import pl.edu.pja.stable.dao.*;
 import pl.edu.pja.stable.daoimpl.hibernate.*;
 import pl.edu.pja.stable.entity.*;
+import pl.edu.pja.stable.entityutils.CompetitionCategory;
+import pl.edu.pja.stable.entityutils.CompetitionLevel;
+import pl.edu.pja.stable.entityutils.CompetitionType;
 import pl.edu.pja.stable.entityutils.HorseGender;
 
 import java.util.Date;
@@ -20,6 +23,7 @@ public class InsertDataService {
     IOwnerDao ownerDao;
     IStableDao stableDao;
     IStallDao stallDao;
+    ICompetitionDao competitionDao;
 
     public InsertDataService() {
         employeeDao = (IEmployeeDao) new HbnEmployeeDao();
@@ -28,6 +32,8 @@ public class InsertDataService {
         horseDao = (IHorseDao) new HbnHorseDao();
         stableDao = (IStableDao) new HbnStableDao();
         stallDao = (IStallDao) new HbnStallDao();
+        competitionDao = (ICompetitionDao) new HbnCompetitionDao();
+
     }
 
     public void insertData() {
@@ -36,10 +42,24 @@ public class InsertDataService {
         Owner owner;
         Stall stall;
         Stable stable;
+        Competition competition;
 
 
 
         for (int a = 1; a < 5; a++) {
+            //COMPETITION
+            competition = new Competition();
+            competition.setCompName("Zawody("+a+")");
+            competition.setCompetitionLevel(CompetitionLevel.C);
+            competition.setCompetitionCategory(CompetitionCategory.Ogolnopolskie);
+            competition.setPrize((double) 10*a);
+            competition.setCompetitionType(CompetitionType.ShowJumping);
+            if(a%2==0){
+                competition.setTookPlace(true);
+            }else{
+                competition.setTookPlace(false);
+            }
+            competitionDao.addEntity(competition);
 
             //EMPLOYEE
             employee = new Employee();
@@ -84,7 +104,9 @@ public class InsertDataService {
                 System.out.println("Create stall " + b);
                 stallDao.addEntity(stall);
             }
-            stableDao.deleteEntity(stable);
+//            stableDao.deleteEntity(stable);
+
+
 
 
 

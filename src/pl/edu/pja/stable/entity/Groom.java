@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "groom")
-public class Groom {
+public class Groom extends Employee{
 
     /**
      * Numer (id) stajennego

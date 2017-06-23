@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "owner")
-public class Owner extends Person { //Client?
+public class Owner extends Person {
 
     /**
      * Numer (id) właściciela
