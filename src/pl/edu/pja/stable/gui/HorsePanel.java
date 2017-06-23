@@ -30,6 +30,8 @@ public class HorsePanel extends JPanel {
     OwnerComboBoxModel ownerComboBoxModel;
     StallComboBoxModel stallComboBoxModel;
 
+    ScrolledPane sp = new ScrolledPane();
+
     public HorsePanel(JFrame mainFrame) {
         super();
 

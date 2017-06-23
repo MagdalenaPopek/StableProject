@@ -12,7 +12,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- * Created by magdalena.popek on 2017-06-16.
+ * Created by Magdalena on 2017-06-16.
  */
 public class OwnerPanel extends JPanel {
 

@@ -3,7 +3,7 @@ package pl.edu.pja.stable.entity;
 import javax.persistence.*;
 
 /**
- * Created by magdalena.popek on 2017-04-21.
+ * Created by Magdalena on 2017-04-21.
  */
 
 @Entity
@@ -41,7 +41,7 @@ public class Stall {
      * Koń
      * @return
      */
-    @OneToOne(mappedBy = "stall")
+    @OneToOne(mappedBy = "stall", cascade=CascadeType.REMOVE)
     @JoinColumn(name = "horse_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "horse_id_fk"), unique = true)
     private Horse horse;
 

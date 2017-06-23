@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by artur.popek on 2017-06-17.
+ * Created by Magdalena on 2017-06-17.
  */
 public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxModel {
 

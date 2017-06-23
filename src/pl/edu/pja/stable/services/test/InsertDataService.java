@@ -34,7 +34,6 @@ public class InsertDataService {
         Employee employee;
         Client client;
         Owner owner;
-        Horse horse;
         Stall stall;
         Stable stable;
 
@@ -75,6 +74,7 @@ public class InsertDataService {
             System.out.println("Create stable " + a);
             stableDao.addEntity(stable);
 
+
             //STALL IN STABLE
             for(int b=1; b<11; b++){
                 stall = new Stall();
@@ -84,9 +84,15 @@ public class InsertDataService {
                 System.out.println("Create stall " + b);
                 stallDao.addEntity(stall);
             }
+            stableDao.deleteEntity(stable);
+
 
 
         }
+    }
+
+    public void removeData(){
+
     }
 
     public void test() {

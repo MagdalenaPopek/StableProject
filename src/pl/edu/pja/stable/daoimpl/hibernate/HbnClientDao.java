@@ -5,6 +5,7 @@ import org.hibernate.Transaction;
 import pl.edu.pja.stable.dao.IClientDao;
 import pl.edu.pja.stable.entity.Client;
 
+import javax.persistence.Entity;
 import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +68,6 @@ public class HbnClientDao implements IClientDao{
 
     @Override
     public void deleteEntity(Client entity) {
-
     }
 
     @Override

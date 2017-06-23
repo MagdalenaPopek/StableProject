@@ -104,11 +104,12 @@ public class ClientHorseCompPanel extends JPanel{
                 }
                 if (horseComboBoxModel.getSelectedItem().equals("Nowy")){
                     JOptionPane.showMessageDialog(mainFrame, "Nie znaleziono konia. Wprowadź innego albo zarejestruj konia w Słowniki > Konie");
-                }else {
+                }else{
                     Contestant c = new Contestant();
                     c.setClient(clientComboBoxModel.getSelectedClient());
                     c.setHorse(horseComboBoxModel.getSelectedHorse());
                     c.setCompetition(competitionComboBoxModel.getSelectedCompetition());
+                    c.setContestantNumber();
 
                     contestantService.saveContestant(c);
 

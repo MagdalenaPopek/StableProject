@@ -1,5 +1,7 @@
 package pl.edu.pja.stable.entity;
 
+import pl.edu.pja.stable.services.dao.ContestantService;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * Created by Magdalena on 2017-06-20.
  */
 @Entity
-@Table(name = "contestant", uniqueConstraints = @UniqueConstraint(columnNames = "client_id"))
+@Table(name = "contestant", uniqueConstraints = @UniqueConstraint(columnNames = "contestant_number"))
 public class Contestant {
 
     /**
@@ -30,8 +32,6 @@ public class Contestant {
     @JoinColumn(name = "competition_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "competition_id_fk"))
     private Competition competition;
 
-    @GeneratedValue(generator = "contestant_nr_seq", strategy = GenerationType.TABLE)
-    @SequenceGenerator(name="contestant_nr_seq", sequenceName="contestant_nr_seq", allocationSize = 1)
     @Column(name = "contestant_number")
     private int contestantNumber;
 
@@ -73,5 +73,10 @@ public class Contestant {
 
     public void setContestantNumber(int contestantNumber) {
         this.contestantNumber = contestantNumber;
+    }
+
+    public void setContestantNumber() {
+        ContestantService cs = new ContestantService();
+        this.contestantNumber = cs.getAllContestants().size()+1;
     }
 }

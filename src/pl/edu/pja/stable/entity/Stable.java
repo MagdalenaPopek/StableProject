@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.*;
 
 /**
- * Created by Magdalena Popek on 2017-04-21.
+ * Created by Magdalena on 2017-04-21.
  */
 
 @Entity
@@ -41,7 +41,7 @@ public class Stable {
     /**
      * Boksy
      */
-    @OneToMany(mappedBy = "stable")
+    @OneToMany(mappedBy = "stable", orphanRemoval=true)
     private List<Stall> stalls;
 
     public int getId() {

@@ -66,7 +66,7 @@ public class HbnStableDao implements IStableDao {
 
     @Override
     public void deleteEntity(Stable entity) {
-
+        Query query = session.createQuery("delete from Stable where id = :entity.id");
     }
 
     @Override
