@@ -6,11 +6,11 @@ import java.awt.*;
 /**
  * Created by Magdalena on 2017-06-21.
  */
-public class AboutPanel extends JPanel {
+public class MainPanel extends JPanel {
 
     JScrollPane scrollPane;
 
-    public AboutPanel() {
+    public MainPanel() {
         super(new BorderLayout());
         setOpaque(true);
 

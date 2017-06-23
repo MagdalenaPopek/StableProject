@@ -26,7 +26,6 @@ public class MainMenu extends JMenuBar {
         JMenuItem ownersMnuItm = new JMenuItem("Właściciele");
         JMenuItem horsesMnuItm = new JMenuItem("Konie");
         JMenuItem competitionMnuItm = new JMenuItem("Zawody");
-        JMenuItem employeeMnuItm = new JMenuItem("Pracownicy");
         JMenu showListMnu = new JMenu("Wyświetl powiązania");
         JMenuItem showOwnersAndHorsesMnuItem = new JMenuItem("Właściciele i konie");
 
@@ -35,25 +34,18 @@ public class MainMenu extends JMenuBar {
         dictionaryMenu.add(horsesMnuItm);
         dictionaryMenu.add(competitionMnuItm);
         dictionaryMenu.addSeparator();
-        dictionaryMenu.add(employeeMnuItm);
-        dictionaryMenu.addSeparator();
         dictionaryMenu.add(showListMnu);
         showListMnu.add(showOwnersAndHorsesMnuItem);
 
         //Podmenu Zawody
         JMenu addToCompetitionMnu = new JMenu("Dodaj do zawodów");
-        JMenuItem addOwnerToCompetitionMnuItm = new JMenuItem("Właściciela");
         JMenuItem addClientToCompetitionMnuItm = new JMenuItem("Klienta");
 
         competitionMenu.add(addToCompetitionMnu);
-        addToCompetitionMnu.add(addOwnerToCompetitionMnuItm);
         addToCompetitionMnu.add(addClientToCompetitionMnuItm);
 
         //Podmenu O programie
-        JMenuItem aboutMnuItm = new JMenuItem("O programie");
         JMenuItem exitMnuItm = new JMenuItem("Wyjście z systemu");
-        systemMenu.add(aboutMnuItm);
-        systemMenu.addSeparator();
         systemMenu.add(exitMnuItm);
 
         /**

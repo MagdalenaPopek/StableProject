@@ -1,28 +1,19 @@
 package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
+import org.hibernate.PropertyValueException;
 import pl.edu.pja.stable.entity.Competition;
-import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.entityutils.CompetitionCategory;
 import pl.edu.pja.stable.entityutils.CompetitionLevel;
 import pl.edu.pja.stable.entityutils.CompetitionType;
-import pl.edu.pja.stable.entityutils.HorseGender;
 import pl.edu.pja.stable.model.CompetitionComboBoxModel;
-import pl.edu.pja.stable.model.HorseComboBoxModel;
-import pl.edu.pja.stable.model.OwnerComboBoxModel;
-import pl.edu.pja.stable.model.StallComboBoxModel;
 import pl.edu.pja.stable.services.dao.CompetitionService;
-import pl.edu.pja.stable.services.dao.HorseService;
-import pl.edu.pja.stable.services.dao.OwnerService;
-import pl.edu.pja.stable.services.dao.StallService;
 
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.text.NumberFormat;
 import java.util.EnumSet;
 
 /**
@@ -51,6 +42,7 @@ public class CompetitionPanel extends JPanel {
         JTextField prizeTextField = new JTextField(columnSize);
         JComboBox<CompetitionType> competitionTypeJComboBox = new JComboBox<CompetitionType>();
         JCheckBox competitionTookPlaceCheckBox = new JCheckBox();
+        competitionTookPlaceCheckBox.setEnabled(false);
 
         //UZUPELNIAM ENUM
         EnumSet<CompetitionLevel> allCompetitionLevels = EnumSet.allOf(CompetitionLevel.class);
@@ -151,7 +143,7 @@ public class CompetitionPanel extends JPanel {
         jButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.setContentPane(new AboutPanel());
+                mainFrame.setContentPane(new MainPanel());
                 mainFrame.pack();
             }
         });
@@ -178,6 +170,8 @@ public class CompetitionPanel extends JPanel {
                         chooseCompetitionComboBox.setSelectedIndex(chooseCompetitionComboBox.getItemCount() - 1);
                     } catch (NumberFormatException n) {
                         JOptionPane.showMessageDialog(mainFrame, "Nagroda musi przyjmować wartość liczbową");
+                    }catch (PropertyValueException p){
+                        JOptionPane.showMessageDialog(mainFrame, "Wszystkie pola muszą zostać wypełnione");
                     }
 
                 }

@@ -1,12 +1,10 @@
 package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
-import org.eclipse.swt.internal.ole.win32.COM;
 import pl.edu.pja.stable.entity.Competition;
 import pl.edu.pja.stable.entity.Contestant;
 import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.model.ClientComboBoxModel;
-import pl.edu.pja.stable.model.ClientCompComboBoxModel;
 import pl.edu.pja.stable.model.CompetitionComboBoxModel;
 import pl.edu.pja.stable.model.HorseComboBoxModel;
 import pl.edu.pja.stable.services.dao.ClientService;
@@ -135,7 +133,7 @@ public class ClientHorseCompPanel extends JPanel{
         jButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.setContentPane(new AboutPanel());
+                mainFrame.setContentPane(new MainPanel());
                 mainFrame.pack();
             }
         });

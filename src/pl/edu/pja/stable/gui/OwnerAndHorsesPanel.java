@@ -73,6 +73,7 @@ public class OwnerAndHorsesPanel extends JPanel {
 
                 nameTextField.setText("");
                 passportNumberTextField.setText("");
+                ownerTextField.setText("");
             }
         });
 
@@ -103,7 +104,7 @@ public class OwnerAndHorsesPanel extends JPanel {
         jButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.setContentPane(new AboutPanel());
+                mainFrame.setContentPane(new MainPanel());
                 mainFrame.pack();
             }
         });

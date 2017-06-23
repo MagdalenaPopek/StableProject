@@ -15,44 +15,9 @@ import java.util.List;
  */
 public class HbnClientDao implements IClientDao{
 
-
     Session session = HibernateSessionManager.getSession();
 
     public HbnClientDao(){}
-
-    /*public List <Client> findByName(String name) {
-        Query query = session.createQuery("from Client e where e.name like ':name' ");
-        query.setParameter("name", name);
-        return query.getResultList();
-    }
-
-    @Override
-    public List <Client> findByString(String searchColumnName, String searchText) {
-        Query query = session.createQuery("from Client e where e."+searchColumnName
-                                                                                    +" like '"+searchText+"' ");
-        return query.getResultList();
-    }
-
-    @Override
-    public List <Client> findByDate(String searchColumnName, Date searchText) {
-        Query query = session.createQuery("from Client e where e."+searchColumnName
-                +" = '"+searchText+"' ");
-        return query.getResultList();
-    }
-
-    @Override
-    public List <Client> findByInteger(String searchColumnName, Integer searchText) {
-        Query query = session.createQuery("from Client e where e."+searchColumnName
-                +" = '"+searchText+"' ");
-        return query.getResultList();
-    }
-
-    @Override
-    public List <Client> findByBoolean(String searchColumnName, Boolean searchText) {
-        Query query = session.createQuery("from Client e where e."+searchColumnName
-                +" = '"+searchText+"' ");
-        return query.getResultList();
-    }*/
 
     @Override
     public List<Client> getAll() {

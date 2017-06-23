@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Date;
 
 /**
  * Created by Magdalena on 2017-06-16.
@@ -87,7 +86,7 @@ public class ClientPanel extends JPanel {
         jButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               mainFrame.setContentPane(new AboutPanel());
+               mainFrame.setContentPane(new MainPanel());
                mainFrame.pack();
             }
         });

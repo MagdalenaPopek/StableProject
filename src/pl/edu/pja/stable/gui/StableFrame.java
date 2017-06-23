@@ -26,7 +26,7 @@ public class StableFrame extends JFrame {
 
         //add menubar to the frame
         setJMenuBar(new MainMenu(this));
-        setContentPane(new AboutPanel());
+        setContentPane(new MainPanel());
 
         setLocationRelativeTo(null);
         pack();
