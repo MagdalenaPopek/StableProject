@@ -77,12 +77,10 @@ public class OwnerComboBoxModel extends AbstractListModel implements ComboBoxMod
     }
 
     public Owner getSelectedOwner() {
-        //System.out.println("getSelectedOwner() Idx: " + selectIdx);
         return ownerList.get(selectIdx);
     }
 
     public void setSelectedOwner(Owner anItem) {
-        //System.out.println("setSelectedOwner(Owner anItem): " + anItem.getSurname());
         if (anItem == null) {
             selectIdx = 0;
             selection = (String) ownerStringList.get(selectIdx);

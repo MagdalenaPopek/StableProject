@@ -33,6 +33,7 @@ public class Owner extends Person { //Client?
         this.id = id;
     }
 
+    @OneToMany(mappedBy = "horse")
     public List<Horse> getHorses() {
         return horses;
     }

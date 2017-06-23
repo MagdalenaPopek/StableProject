@@ -48,14 +48,9 @@ public class Horse {
     /**
      * Boks
      */
-    @OneToOne
-    @JoinColumn(name = "stall_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "stall_id_fk"))
+    @OneToOne//(mappedBy = "horse")
+    @JoinColumn(name = "stall_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "stall_id_fk"), nullable = false)
     private Stall stall;
-
-
-//    @OneToMany
-//    @JoinColumn(name = "ridingSchool_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "ridingSchool_id_fk"))
-//    private List<RidingSchool> ridingSchools;
 
     /**
      * Szkółka jeździecka

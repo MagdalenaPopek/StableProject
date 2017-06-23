@@ -19,7 +19,7 @@ public class HbnCompetitionDao implements ICompetitionDao {
 
     public HbnCompetitionDao(){}
 
-    public List<Competition> findByName(String compName) {
+ /*   public List<Competition> findByName(String compName) {
         Query query = session.createQuery("from Competition c where c.compName like ':comp_name' ");
         query.setParameter("comp_name", compName);
         return query.getResultList();
@@ -51,7 +51,7 @@ public class HbnCompetitionDao implements ICompetitionDao {
         Query query = session.createQuery("from Competition e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<Competition> getAll() {

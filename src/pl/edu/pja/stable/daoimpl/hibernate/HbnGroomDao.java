@@ -18,7 +18,7 @@ public class HbnGroomDao implements IGroomDao {
 
     public HbnGroomDao(){}
 
-    public List<Groom> findByName(String name) {
+   /* public List<Groom> findByName(String name) {
         Query query = session.createQuery("from Groom c where c.compName like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
@@ -50,7 +50,7 @@ public class HbnGroomDao implements IGroomDao {
         Query query = session.createQuery("from Groom e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<Groom> getAll() {

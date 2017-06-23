@@ -18,7 +18,7 @@ public class HbnEmployeeDao implements IEmployeeDao{
     Session session = HibernateSessionManager.getSession();
 
     public HbnEmployeeDao() {}
-
+/*
     public List <Employee> findByName(String name) {
         Query query = session.createQuery("from Employee e where e.name like ':name' ");
         query.setParameter("name", name);
@@ -51,7 +51,7 @@ public class HbnEmployeeDao implements IEmployeeDao{
         Query query = session.createQuery("from Employee e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<Employee> getAll() {

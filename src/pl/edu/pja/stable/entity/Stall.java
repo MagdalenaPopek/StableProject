@@ -37,6 +37,14 @@ public class Stall {
     @Column(name = "area")
     private double area;
 
+    /**
+     * Koń
+     * @return
+     */
+    @OneToOne(mappedBy = "stall")
+    @JoinColumn(name = "horse_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "horse_id_fk"), unique = true)
+    private Horse horse;
+
     public int getId() {
         return id;
     }
@@ -67,5 +75,13 @@ public class Stall {
 
     public void setArea(double area) {
         this.area = area;
+    }
+
+    public Horse getHorse() {
+        return horse;
+    }
+
+    public void setHorse(Horse horse) {
+        this.horse = horse;
     }
 }

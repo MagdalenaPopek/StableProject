@@ -59,18 +59,18 @@ public class CompetitionPanel extends JPanel {
 //        prizeTextField.setColumns(columnSize);
         JComboBox<CompetitionType> competitionTypeJComboBox = new JComboBox<CompetitionType>();
 
-        EnumSet<CompetitionLevel> allCompetitionLevels = EnumSet.allOf(CompetitionLevel.class );
-        for(CompetitionLevel cl : allCompetitionLevels) {
+        EnumSet<CompetitionLevel> allCompetitionLevels = EnumSet.allOf(CompetitionLevel.class);
+        for (CompetitionLevel cl : allCompetitionLevels) {
             competitionLevelJComboBox.addItem(cl);
         }
 
-        EnumSet<CompetitionCategory> allCompetitionCategories = EnumSet.allOf(CompetitionCategory.class );
-        for(CompetitionCategory cc : allCompetitionCategories) {
+        EnumSet<CompetitionCategory> allCompetitionCategories = EnumSet.allOf(CompetitionCategory.class);
+        for (CompetitionCategory cc : allCompetitionCategories) {
             competitionCategoryJComboBox.addItem(cc);
         }
 
-        EnumSet<CompetitionType> allCompetitionTypes = EnumSet.allOf(CompetitionType.class );
-        for(CompetitionType ct : allCompetitionTypes) {
+        EnumSet<CompetitionType> allCompetitionTypes = EnumSet.allOf(CompetitionType.class);
+        for (CompetitionType ct : allCompetitionTypes) {
             competitionTypeJComboBox.addItem(ct);
         }
 
@@ -85,45 +85,46 @@ public class CompetitionPanel extends JPanel {
         chooseCompetitionComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-            if (e.getItem().equals("Nowy")) {
+                if (e.getItem().equals("Nowy")) {
 
-                nameTextField.setText("");
-                nameTextField.setEnabled(true);
+                    nameTextField.setText("");
+                    nameTextField.setEnabled(true);
 
-                competitionLevelJComboBox.setSelectedItem(null);
-                competitionLevelJComboBox.setEnabled(true);
+                    competitionLevelJComboBox.setSelectedItem(null);
+                    competitionLevelJComboBox.setEnabled(true);
 
-                competitionCategoryJComboBox.setSelectedItem(null);
-                competitionCategoryJComboBox.setEnabled(true);
+                    competitionCategoryJComboBox.setSelectedItem(null);
+                    competitionCategoryJComboBox.setEnabled(true);
 
-                prizeTextField.setText("");
-                prizeTextField.setEnabled(true);
+                    prizeTextField.setText("");
+                    prizeTextField.setEnabled(true);
 
-                competitionTypeJComboBox.setSelectedItem(null);
-                competitionTypeJComboBox.setEnabled(true);
-                return;
+                    competitionTypeJComboBox.setSelectedItem(null);
+                    competitionTypeJComboBox.setEnabled(true);
+                    return;
+                }
+
+                //System.out.println(e.getItem().toString());
+                Competition c = competitionComboBoxModel.getSelectedCompetition();
+
+                nameTextField.setText(c.getCompName());
+                nameTextField.setEnabled(false);
+
+                competitionLevelJComboBox.setSelectedItem(c.getCompetitionLevel());
+                competitionLevelJComboBox.setEnabled(false);
+
+                competitionCategoryJComboBox.setSelectedItem(c.getCompetitionCategory());
+                competitionCategoryJComboBox.setEnabled(false);
+
+                prizeTextField.setText(String.valueOf(c.getPrize()));
+                prizeTextField.setEnabled(false);
+
+                competitionTypeJComboBox.setSelectedItem(c.getCompetitionType());
+                competitionTypeJComboBox.setEnabled(false);
             }
+        });
 
-            //System.out.println(e.getItem().toString());
-            Competition c = competitionComboBoxModel.getSelectedCompetition();
-
-            nameTextField.setText(c.getCompName());
-            nameTextField.setEnabled(false);
-
-            competitionLevelJComboBox.setSelectedItem(c.getCompetitionLevel());
-            competitionLevelJComboBox.setEnabled(false);
-
-            competitionCategoryJComboBox.setSelectedItem(c.getCompetitionCategory());
-            competitionCategoryJComboBox.setEnabled(false);
-
-            prizeTextField.setText(String.valueOf(c.getPrize()));
-            prizeTextField.setEnabled(false);
-
-            competitionTypeJComboBox.setSelectedItem(c.getCompetitionType());
-            competitionTypeJComboBox.setEnabled(false);
-        }});
-
-        this.add(new JLabel("Nazwa:"),"");
+        this.add(new JLabel("Nazwa:"), "");
         this.add(nameTextField, "wrap");
 
         this.add(new JLabel("Poziom:"), "");
@@ -142,29 +143,37 @@ public class CompetitionPanel extends JPanel {
         jButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            mainFrame.setContentPane(new AboutPanel());
-            mainFrame.pack();
-        }});
+                mainFrame.setContentPane(new AboutPanel());
+                mainFrame.pack();
+            }
+        });
 
         jButtonCommit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            if(chooseCompetitionComboBox.getSelectedItem().equals("Nowy")) {
-                System.out.println("Dodaję nowe zawody...");
-                Competition c = new Competition();
-                c.setCompName(nameTextField.getText());
-                c.setCompetitionLevel((CompetitionLevel) competitionLevelJComboBox.getSelectedItem());
-                c.setCompetitionCategory((CompetitionCategory) competitionCategoryJComboBox.getSelectedItem());
-                c.setPrize(Double.parseDouble(prizeTextField.getText()));
-                c.setCompetitionType((CompetitionType) competitionTypeJComboBox.getSelectedItem());
+                if (chooseCompetitionComboBox.getSelectedItem().equals("Nowy")) {
+                    try {
+                        System.out.println("Dodaję nowe zawody...");
+                        Competition c = new Competition();
+                        c.setCompName(nameTextField.getText());
+                        c.setCompetitionLevel((CompetitionLevel) competitionLevelJComboBox.getSelectedItem());
+                        c.setCompetitionCategory((CompetitionCategory) competitionCategoryJComboBox.getSelectedItem());
 
-                competitionService.saveCompetition(c);
+                        c.setPrize(Double.parseDouble(prizeTextField.getText()));
+                        c.setCompetitionType((CompetitionType) competitionTypeJComboBox.getSelectedItem());
 
-                competitionComboBoxModel.addCompetition(c);
-                chooseCompetitionComboBox.updateUI();
-                chooseCompetitionComboBox.setSelectedIndex(chooseCompetitionComboBox.getItemCount()-1);
+                        competitionService.saveCompetition(c);
+
+                        competitionComboBoxModel.addCompetition(c);
+                        chooseCompetitionComboBox.updateUI();
+                        chooseCompetitionComboBox.setSelectedIndex(chooseCompetitionComboBox.getItemCount() - 1);
+                    } catch (NumberFormatException n) {
+                        JOptionPane.showMessageDialog(mainFrame, "Nagroda musi przyjmować wartość liczbową");
+                    }
+
+                }
             }
-        }});
+        });
 
         buttonPanel.add(jButtonCommit);
         buttonPanel.add(jButtonExit);

@@ -19,7 +19,7 @@ public class HbnHorseDao implements IHorseDao {
 
     public HbnHorseDao(){}
 
-    public List<Horse> findByName(String name) {
+    /*public List<Horse> findByName(String name) {
         Query query = session.createQuery("from Horse c where c.compName like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
@@ -51,7 +51,7 @@ public class HbnHorseDao implements IHorseDao {
         Query query = session.createQuery("from Horse e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<Horse> getAll() {

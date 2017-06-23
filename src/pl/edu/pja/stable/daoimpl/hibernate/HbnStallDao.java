@@ -18,7 +18,7 @@ public class HbnStallDao implements IStallDao {
 
     public HbnStallDao(){}
 
-    public List<Stall> findByName(String name) {
+    /*public List<Stall> findByName(String name) {
         Query query = session.createQuery("from Stall c where c.compName like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
@@ -50,7 +50,7 @@ public class HbnStallDao implements IStallDao {
         Query query = session.createQuery("from Stall e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<Stall> getAll() {

@@ -5,6 +5,8 @@ import pl.edu.pja.stable.daoimpl.hibernate.HbnCompetitionDao;
 import pl.edu.pja.stable.entity.Competition;
 import pl.edu.pja.stable.managers.SessionManager;
 
+import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +31,8 @@ public class CompetitionService {
         SessionManager.getCompetitionDao().addEntity(c);
     }
 
+    /*public int setContestantNumber(int contestantNumber){
 
+    }*/
 
 }

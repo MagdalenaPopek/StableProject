@@ -18,7 +18,7 @@ public class HbnInstructorDao implements IInstructorDao {
 
     public HbnInstructorDao(){}
 
-    public List<Instructor> findByName(String name) {
+   /* public List<Instructor> findByName(String name) {
         Query query = session.createQuery("from Instructor c where c.compName like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
@@ -50,7 +50,7 @@ public class HbnInstructorDao implements IInstructorDao {
         Query query = session.createQuery("from Instructor e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<Instructor> getAll() {

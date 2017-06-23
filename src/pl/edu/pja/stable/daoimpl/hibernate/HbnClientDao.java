@@ -19,7 +19,7 @@ public class HbnClientDao implements IClientDao{
 
     public HbnClientDao(){}
 
-    public List <Client> findByName(String name) {
+    /*public List <Client> findByName(String name) {
         Query query = session.createQuery("from Client e where e.name like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
@@ -51,7 +51,7 @@ public class HbnClientDao implements IClientDao{
         Query query = session.createQuery("from Client e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<Client> getAll() {

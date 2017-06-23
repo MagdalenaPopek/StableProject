@@ -8,13 +8,13 @@ import java.util.List;
  */
 public interface IEntityDao <T> {
 
-    List<T> findByString(String searchColumnName, String searchText);
+    /*List<T> findByString(String searchColumnName, String searchText);
 
     List<T> findByDate(String searchColumnName, Date searchText);
 
     List<T> findByInteger(String searchColumnName, Integer searchText);
 
-    List<T> findByBoolean(String searchColumnName, Boolean searchText);
+    List<T> findByBoolean(String searchColumnName, Boolean searchText);*/
 
     List<T> getAll();
 

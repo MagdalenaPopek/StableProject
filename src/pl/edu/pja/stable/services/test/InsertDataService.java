@@ -31,7 +31,6 @@ public class InsertDataService {
     }
 
     public void insertData() {
-      /* Add few employee records in database */
         Employee employee;
         Client client;
         Owner owner;
@@ -39,13 +38,7 @@ public class InsertDataService {
         Stall stall;
         Stable stable;
 
-        //HORSES
-        horse = new Horse();
-        horse.setName("Kon(" + 1 + ")");
-        horse.setPassportNumber("PL" + 11111);
-        horse.setGender(HorseGender.Klacz);
-        horse.setStall(new Stall());
-        horse.setOwner(new Owner());
+
 
         for (int a = 1; a < 5; a++) {
 
@@ -73,8 +66,6 @@ public class InsertDataService {
             owner.setPhoneNumber("+81 " + a + "23-45-" + a + "7");
             System.out.println("Create owner " + a);
             ownerDao.addEntity(owner);
-
-
 
             //STABLE
             stable = new Stable();

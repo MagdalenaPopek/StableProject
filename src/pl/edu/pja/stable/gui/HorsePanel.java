@@ -127,6 +127,7 @@ public class HorsePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (chooseHorseComboBox.getSelectedItem().equals("Nowy")) {
+                    if(stallComboBoxModel.getSelectedStall().getHorse() == null) {
                     System.out.println("Dodaję nowego konia...");
                     Horse h = new Horse();
                     h.setName(nameTextField.getText());
@@ -137,13 +138,18 @@ public class HorsePanel extends JPanel {
                     } else {
                         h.setOwner(ownerComboBoxModel.getSelectedOwner());
                     }
-                    h.setStall(stallComboBoxModel.getSelectedStall());
+
+                        h.setStall(stallComboBoxModel.getSelectedStall());
+                        stallComboBoxModel.getSelectedStall().setHorse(h);
 
                     horseService.saveHorse(h);
 
                     horseComboBoxModel.addHorse(h);
                     chooseHorseComboBox.updateUI();
                     chooseHorseComboBox.setSelectedIndex(chooseHorseComboBox.getItemCount() - 1);
+                    }else{
+                        JOptionPane.showMessageDialog(mainFrame, "Ten boks jest zajęty, wybierz inny");
+                    }
                 }
             }
         });

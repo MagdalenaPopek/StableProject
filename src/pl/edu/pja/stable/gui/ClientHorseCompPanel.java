@@ -10,6 +10,7 @@ import pl.edu.pja.stable.model.CompetitionComboBoxModel;
 import pl.edu.pja.stable.model.HorseComboBoxModel;
 import pl.edu.pja.stable.services.dao.ClientService;
 import pl.edu.pja.stable.services.dao.CompetitionService;
+import pl.edu.pja.stable.services.dao.ContestantService;
 import pl.edu.pja.stable.services.dao.HorseService;
 
 import javax.swing.*;
@@ -17,6 +18,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Magdalena on 2017-06-22.
@@ -24,13 +27,16 @@ import java.awt.event.ItemListener;
 public class ClientHorseCompPanel extends JPanel{
 
     JFrame mainFrame;
+
+    ContestantService contestantService = new ContestantService();
+
     ClientService clientService = new ClientService();
     ClientCompComboBoxModel clientCompComboBoxModel;
 
     HorseService horseService = new HorseService();
     HorseComboBoxModel horseComboBoxModel;
 
-    CompetitionService competitionService;
+    CompetitionService competitionService = new CompetitionService();
     CompetitionComboBoxModel competitionComboBoxModel;
 
 
@@ -40,11 +46,18 @@ public class ClientHorseCompPanel extends JPanel{
 
         this.mainFrame = mainFrame;
 
+        int columnSize = 32;
+
         JComboBox<String> chooseClientComboBox;
         JComboBox<String> chooseHorseComboBox;
         JComboBox<String> chooseCompetitionComboBox;
 
-        int columnSize = 32;
+        JTextField clientNameTextField = new JTextField(columnSize);
+        JTextField clientSurnameTextField = new JTextField(columnSize);
+        JTextField horseNameTextField = new JTextField(columnSize);
+        JTextField competitionNameTextField = new JTextField(columnSize);
+        JTextField contestantNumberTextField = new JTextField(columnSize);
+
 
         MigLayout layout = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
         this.setLayout(layout);
@@ -61,6 +74,27 @@ public class ClientHorseCompPanel extends JPanel{
         chooseCompetitionComboBox = chooseCompetitionComboBox();
         this.add(chooseCompetitionComboBox, "wrap 32");
 
+        this.add(new JLabel("Imię:"), "");
+        this.add(clientNameTextField, "wrap");
+        clientNameTextField.setEnabled(false);
+
+        this.add(new JLabel("Nazwisko:"), "");
+        this.add(clientSurnameTextField, "wrap");
+        clientSurnameTextField.setEnabled(false);
+
+        this.add(new JLabel("Koń:"), "");
+        this.add(horseNameTextField, "wrap");
+        horseNameTextField.setEnabled(false);
+
+        this.add(new JLabel("Zawody:"), "");
+        this.add(competitionNameTextField, "wrap 32");
+        competitionNameTextField.setEnabled(false);
+
+        this.add(new JLabel("Numer zawodnika:"), "");
+        this.add(contestantNumberTextField, "wrap 32");
+        contestantNumberTextField.setEnabled(false);
+
+
         JPanel buttonPanel = new JPanel();
         JButton jButtonCommit = new JButton("Zatwierdź");
         JButton jButtonExit = new JButton("Wyjdź");
@@ -68,11 +102,25 @@ public class ClientHorseCompPanel extends JPanel{
         jButtonCommit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Contestant c = new Contestant();
-                c.setClient(clientCompComboBoxModel.getSelectedClient());
-                c.setHorse(horseComboBoxModel.getSelectedHorse());
-                c.setCompetition(competitionComboBoxModel.getSelectedCompetition());
-               // c.setContestantNumber();
+//                if(!contestantService.getAllContestants().contains(clientCompComboBoxModel.getSelectedClient().getId())) {
+                    Contestant c = new Contestant();
+                    c.setClient(clientCompComboBoxModel.getSelectedClient());
+                    c.setHorse(horseComboBoxModel.getSelectedHorse());
+                    c.setCompetition(competitionComboBoxModel.getSelectedCompetition());
+
+                    contestantService.saveContestant(c);
+
+                    JOptionPane.showMessageDialog(mainFrame, "Zapisano zawodnika");
+
+
+                    clientNameTextField.setText(c.getClient().getName());
+                    clientSurnameTextField.setText(c.getClient().getSurname());
+                    horseNameTextField.setText(c.getHorse().getName());
+                    competitionNameTextField.setText(c.getCompetition().getCompName());
+                    contestantNumberTextField.setText(Integer.toString(c.getContestantNumber()));
+ /*               }else{
+                    JOptionPane.showMessageDialog(mainFrame, "Zawodnik został już zapisany na zawody");
+                }*/
 
             }
         });
@@ -100,15 +148,22 @@ public class ClientHorseCompPanel extends JPanel{
     }
 
     private JComboBox<String> chooseHorseComboBox() {
-        horseComboBoxModel = new HorseComboBoxModel(horseService.getAllHorses());
-        JComboBox<String> clients = new JComboBox<>(clientCompComboBoxModel);
-        return clients;
+        List<Horse> allHorseList = horseService.getAllHorses();
+        List<Horse> horsesWithNoOwner = new ArrayList<>();
+        for(Horse h : allHorseList){
+            if(h.getOwner() == null){
+                horsesWithNoOwner.add(h);
+            }
+        }
+        horseComboBoxModel = new HorseComboBoxModel(horsesWithNoOwner);
+        JComboBox<String> horses = new JComboBox<>(horseComboBoxModel);
+        return horses;
     }
 
     private JComboBox<String> chooseCompetitionComboBox() {
         competitionComboBoxModel = new CompetitionComboBoxModel(competitionService.getAllCompetitions());
-        JComboBox<String> clients = new JComboBox<>(clientCompComboBoxModel);
-        return clients;
+        JComboBox<String> competitions = new JComboBox<>(competitionComboBoxModel);
+        return competitions;
     }
 
 }

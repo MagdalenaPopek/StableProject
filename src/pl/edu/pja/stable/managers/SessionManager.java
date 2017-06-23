@@ -10,6 +10,7 @@ public class SessionManager {
 
     private static IClientDao clientDao = (IClientDao) new HbnClientDao();
     private static ICompetitionDao competitionDao = (ICompetitionDao) new HbnCompetitionDao();
+    private static IContestantDao contestantDao = (IContestantDao) new HbnContestantDao();
     private static IEmployeeDao employeeDao = (IEmployeeDao) new HbnEmployeeDao();
     private static IGroomDao groomDao = (IGroomDao) new HbnGroomDao();
     private static IHorseDao horseDao = (IHorseDao) new HbnHorseDao();
@@ -26,6 +27,10 @@ public class SessionManager {
 
     public static ICompetitionDao getCompetitionDao() {
         return competitionDao;
+    }
+
+    public static IContestantDao getContestantDao() {
+        return contestantDao;
     }
 
     public static IEmployeeDao getEmployeeDao() {

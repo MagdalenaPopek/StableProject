@@ -18,7 +18,7 @@ public class HbnStableDao implements IStableDao {
 
     public HbnStableDao(){}
 
-    public List<Stable> findByName(String compName) {
+ /*   public List<Stable> findByName(String compName) {
         Query query = session.createQuery("from Stable c where c.compName like ':name' ");
         query.setParameter("compName", compName);
         return query.getResultList();
@@ -50,7 +50,7 @@ public class HbnStableDao implements IStableDao {
         Query query = session.createQuery("from Stable e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<Stable> getAll() {

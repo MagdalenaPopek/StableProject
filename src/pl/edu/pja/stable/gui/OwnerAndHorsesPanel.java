@@ -61,13 +61,13 @@ public class OwnerAndHorsesPanel extends JPanel {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 Owner o = ownerComboBoxModel.getSelectedOwner();
-                ownerTextField.setText(o.getName() + " " + o.getSurname());
+              //  ownerTextField.setText(o.getName() + " " + o.getSurname());
 
                 horsesTextArea.setText("");
                 horsesTextArea.setRows(ownerComboBoxModel.getSelectedOwner().getHorses().size());
-                for (Horse h : ownerComboBoxModel.getSelectedOwner().getHorses())
+                for (Horse h : ownerComboBoxModel.getSelectedOwner().getHorses()) {
                     horsesTextArea.append("Nazwa:\t" + h.getName() + "\t Płeć: " + h.getGender() + "\tPaszport nr: " + h.getPassportNumber() + "\n");
-
+                }
                 horseComboBoxModel = new HorseComboBoxModel(ownerComboBoxModel.getSelectedOwner().getHorses(), true);
                 chooseHorseComboBox.setModel(horseComboBoxModel);
 
@@ -84,6 +84,7 @@ public class OwnerAndHorsesPanel extends JPanel {
                 Horse h = horseComboBoxModel.getSelectedHorse();
                 nameTextField.setText(h.getName());
                 passportNumberTextField.setText(h.getPassportNumber());
+                ownerTextField.setText(h.getOwner().getName() + " " + h.getOwner().getSurname());
             }
         });
 

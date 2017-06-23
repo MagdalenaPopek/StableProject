@@ -19,7 +19,7 @@ public class HbnOwnerDao implements IOwnerDao {
 
     public HbnOwnerDao(){}
 
-    public List<Owner> findByName(String name) {
+   /* public List<Owner> findByName(String name) {
         Query query = session.createQuery("from Owner c where c.compName like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
@@ -52,7 +52,7 @@ public class HbnOwnerDao implements IOwnerDao {
                 +" = '"+searchText+"' ");
         return query.getResultList();
     }
-
+*/
     @Override
     public List<Owner> getAll() {
         return session.createQuery("from Owner").list();

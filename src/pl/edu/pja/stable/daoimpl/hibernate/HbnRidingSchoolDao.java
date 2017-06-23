@@ -18,7 +18,7 @@ public class HbnRidingSchoolDao implements IRidingSchoolDao {
 
     public HbnRidingSchoolDao(){}
 
-    public List<RidingSchool> findByName(String name) {
+    /*public List<RidingSchool> findByName(String name) {
         Query query = session.createQuery("from RidingSchool c where c.compName like ':name' ");
         query.setParameter("name", name);
         return query.getResultList();
@@ -50,7 +50,7 @@ public class HbnRidingSchoolDao implements IRidingSchoolDao {
         Query query = session.createQuery("from RidingSchool e where e."+searchColumnName
                 +" = '"+searchText+"' ");
         return query.getResultList();
-    }
+    }*/
 
     @Override
     public List<RidingSchool> getAll() {

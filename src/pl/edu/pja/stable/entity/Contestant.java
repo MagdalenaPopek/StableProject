@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Magdalena on 2017-06-20.
  */
 @Entity
-@Table(name = "contestant")
+@Table(name = "contestant", uniqueConstraints = @UniqueConstraint(columnNames = "client_id"))
 public class Contestant {
 
     /**
@@ -19,7 +19,7 @@ public class Contestant {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "client_id_fk"))
+    @JoinColumn(name = "client_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "client_id_fk"), unique = true)
     private Client client;
 
     @ManyToOne
@@ -30,8 +30,9 @@ public class Contestant {
     @JoinColumn(name = "competition_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "competition_id_fk"))
     private Competition competition;
 
-//    @Column(name = "contestant_number")
-//    private int contestantNumber;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "contestant_number")
+    private int contestantNumber;
 
     public int getId() {
         return id;
@@ -65,11 +66,11 @@ public class Contestant {
         this.competition = competition;
     }
 
-//    public int getContestantNumber() {
-//        return contestantNumber;
-//    }
-//
-//    public void setContestantNumber(int contestantNumber) {
-//        this.contestantNumber = contestantNumber;
-//    }
+    public int getContestantNumber() {
+        return contestantNumber;
+    }
+
+    public void setContestantNumber(int contestantNumber) {
+        this.contestantNumber = contestantNumber;
+    }
 }
