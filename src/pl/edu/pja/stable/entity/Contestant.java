@@ -30,7 +30,8 @@ public class Contestant {
     @JoinColumn(name = "competition_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "competition_id_fk"))
     private Competition competition;
 
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(generator = "contestant_nr_seq", strategy = GenerationType.TABLE)
+    @SequenceGenerator(name="contestant_nr_seq", sequenceName="contestant_nr_seq", allocationSize = 1)
     @Column(name = "contestant_number")
     private int contestantNumber;
 

@@ -1,7 +1,6 @@
 package pl.edu.pja.stable.gui;
 
 import net.miginfocom.swing.MigLayout;
-import pl.edu.pja.stable.entity.Client;
 import pl.edu.pja.stable.entity.Contestant;
 import pl.edu.pja.stable.entity.Horse;
 import pl.edu.pja.stable.model.ClientComboBoxModel;
@@ -16,8 +15,6 @@ import pl.edu.pja.stable.services.dao.HorseService;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +28,7 @@ public class ClientHorseCompPanel extends JPanel{
     ContestantService contestantService = new ContestantService();
 
     ClientService clientService = new ClientService();
-    ClientCompComboBoxModel clientCompComboBoxModel;
+    ClientComboBoxModel clientComboBoxModel;
 
     HorseService horseService = new HorseService();
     HorseComboBoxModel horseComboBoxModel;
@@ -102,9 +99,14 @@ public class ClientHorseCompPanel extends JPanel{
         jButtonCommit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                if(!contestantService.getAllContestants().contains(clientCompComboBoxModel.getSelectedClient().getId())) {
+                if (clientComboBoxModel.getSelectedItem().equals("Nowy")) {
+                    JOptionPane.showMessageDialog(mainFrame, "Nie znaleziono klienta. Wprowadź innego albo zarejestruj klienta w Słowniki > Klienci");
+                }
+                if (horseComboBoxModel.getSelectedItem().equals("Nowy")){
+                    JOptionPane.showMessageDialog(mainFrame, "Nie znaleziono konia. Wprowadź innego albo zarejestruj konia w Słowniki > Konie");
+                }else {
                     Contestant c = new Contestant();
-                    c.setClient(clientCompComboBoxModel.getSelectedClient());
+                    c.setClient(clientComboBoxModel.getSelectedClient());
                     c.setHorse(horseComboBoxModel.getSelectedHorse());
                     c.setCompetition(competitionComboBoxModel.getSelectedCompetition());
 
@@ -122,6 +124,7 @@ public class ClientHorseCompPanel extends JPanel{
                     JOptionPane.showMessageDialog(mainFrame, "Zawodnik został już zapisany na zawody");
                 }*/
 
+                }
             }
         });
 
@@ -142,8 +145,8 @@ public class ClientHorseCompPanel extends JPanel{
     }
 
     private JComboBox<String> chooseClientComboBox() {
-        clientCompComboBoxModel = new ClientCompComboBoxModel(clientService.getAllClients());
-        JComboBox<String> clients = new JComboBox<>(clientCompComboBoxModel);
+        clientComboBoxModel = new ClientComboBoxModel(clientService.getAllClients());
+        JComboBox<String> clients = new JComboBox<>(clientComboBoxModel);
         return clients;
     }
 
@@ -161,7 +164,11 @@ public class ClientHorseCompPanel extends JPanel{
     }
 
     private JComboBox<String> chooseCompetitionComboBox() {
-        competitionComboBoxModel = new CompetitionComboBoxModel(competitionService.getAllCompetitions());
+        if(competitionService.getAllCompetitions().isEmpty() ){
+            JOptionPane.showMessageDialog(mainFrame, "Brak zaplanowanych zawodów. Dodaj zawody w Słowniki > Zawody");
+        }else {
+            competitionComboBoxModel = new CompetitionComboBoxModel(competitionService.getAllCompetitions());
+        }
         JComboBox<String> competitions = new JComboBox<>(competitionComboBoxModel);
         return competitions;
     }
