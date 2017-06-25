@@ -38,19 +38,19 @@ public class OwnerAndHorsesPanel extends JPanel {
 
         int columnSize = 32;
 
-        JTextArea horsesTextArea = new JTextArea(5, columnSize);
+//        JTextArea horsesTextArea = new JTextArea(5, columnSize);
         JTextField nameTextField = new JTextField(columnSize);
         JTextField passportNumberTextField = new JTextField(columnSize);
         JTextField ownerTextField = new JTextField(columnSize);
         nameTextField.setEnabled(false);
         passportNumberTextField.setEnabled(false);
         ownerTextField.setEnabled(false);
-        horsesTextArea.setFont(horsesTextArea.getFont().deriveFont(12f));
+/*        horsesTextArea.setFont(horsesTextArea.getFont().deriveFont(12f));*/
 
         this.add(new JLabel("Wybierz właściciela"), "");
         this.add(chooseOwnerComboBox, "wrap 32");
-        this.add(new JLabel("Lista posiadanych koni:"), "");
-        this.add(horsesTextArea, "wrap 32");
+/*        this.add(new JLabel("Lista posiadanych koni:"), "");
+        this.add(horsesTextArea, "wrap 32");*/
 
         this.add(new JLabel("Wybierz konia"), "");
         this.add(chooseHorseComboBox, "wrap 32");
@@ -63,17 +63,18 @@ public class OwnerAndHorsesPanel extends JPanel {
                 Owner o = ownerComboBoxModel.getSelectedOwner();
               //  ownerTextField.setText(o.getName() + " " + o.getSurname());
 
-                horsesTextArea.setText("");
+/*                horsesTextArea.setText("");
                 horsesTextArea.setRows(ownerComboBoxModel.getSelectedOwner().getHorses().size());
                 for (Horse h : ownerComboBoxModel.getSelectedOwner().getHorses()) {
                     horsesTextArea.append("Nazwa:\t" + h.getName() + "\t Płeć: " + h.getGender() + "\tPaszport nr: " + h.getPassportNumber() + "\n");
-                }
-                horseComboBoxModel = new HorseComboBoxModel(ownerComboBoxModel.getSelectedOwner().getHorses(), true);
+                }*/
+                horseComboBoxModel = new HorseComboBoxModel(o.getHorses(), true);
                 chooseHorseComboBox.setModel(horseComboBoxModel);
 
                 nameTextField.setText("");
                 passportNumberTextField.setText("");
                 ownerTextField.setText("");
+                ownerTextField.setEnabled(false);
             }
         });
 

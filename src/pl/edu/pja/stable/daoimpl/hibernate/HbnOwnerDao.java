@@ -19,40 +19,6 @@ public class HbnOwnerDao implements IOwnerDao {
 
     public HbnOwnerDao(){}
 
-   /* public List<Owner> findByName(String name) {
-        Query query = session.createQuery("from Owner c where c.compName like ':name' ");
-        query.setParameter("name", name);
-        return query.getResultList();
-    }
-
-    @Override
-    public List <Owner> findByString(String searchColumnName, String searchText) {
-        Query query = session.createQuery("from Owner e where e."+searchColumnName
-                +" like '"+searchText+"' ");
-        return query.getResultList();
-    }
-
-    @Override
-    public List <Owner> findByDate(String searchColumnName, Date searchText) {
-        Query query = session.createQuery("from Owner e where e."+searchColumnName
-                +" = '"+searchText+"' ");
-        return query.getResultList();
-    }
-
-    @Override
-    public List <Owner> findByInteger(String searchColumnName, Integer searchText) {
-        Query query = session.createQuery("from Owner e where e."+searchColumnName
-                +" = '"+searchText+"' ");
-        return query.getResultList();
-    }
-
-    @Override
-    public List <Owner> findByBoolean(String searchColumnName, Boolean searchText) {
-        Query query = session.createQuery("from Owner e where e."+searchColumnName
-                +" = '"+searchText+"' ");
-        return query.getResultList();
-    }
-*/
     @Override
     public List<Owner> getAll() {
         return session.createQuery("from Owner").list();

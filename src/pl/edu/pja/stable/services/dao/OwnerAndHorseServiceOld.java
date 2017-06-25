@@ -9,9 +9,9 @@ import java.util.List;
 /**
  * Created by Magdalena on 2017-06-20.
  */
-public class OwnerAndHorseService {
+public class OwnerAndHorseServiceOld {
 
-    public OwnerAndHorseService() {
+    public OwnerAndHorseServiceOld() {
     }
 
     /**

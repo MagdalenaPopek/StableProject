@@ -12,6 +12,6 @@ public class StableManager {
     }
 
     public void test() {
-        new InsertDataService().insertData();
+        new InsertDataService();//.insertData();
     }
 }
